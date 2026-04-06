@@ -1078,7 +1078,7 @@ export function NewProposal() {
                   {!generationDone && <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />}
                 </div>
                 {generationDone && (
-                  <div className="mt-4 flex justify-center animate-in fade-in slide-in-from-bottom-2 duration-500">
+                  <div className="mt-4 flex flex-wrap justify-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
                     <Button
                       variant="accent"
                       size="lg"
@@ -1093,6 +1093,35 @@ export function NewProposal() {
                     >
                       <Eye className="h-4 w-4 mr-2" />
                       View Proposal
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => setShowSendModal(true)}
+                    >
+                      <Send className="h-4 w-4 mr-2" />
+                      Send to Client
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      onClick={() => {
+                        showToast({ title: 'PDF download coming soon!' })
+                      }}
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download PDF
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="lg"
+                      onClick={() => {
+                        showToast({ title: 'Draft saved!' })
+                        navigate('/proposals')
+                      }}
+                    >
+                      <Save className="h-4 w-4 mr-2" />
+                      Save as Draft
                     </Button>
                   </div>
                 )}
@@ -1123,6 +1152,133 @@ export function NewProposal() {
                 <ArrowRight className="h-4 w-4" />
               </Button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Send/Share Modal */}
+      {showSendModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center animate-in fade-in duration-200"
+          onClick={() => setShowSendModal(false)}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/50" />
+
+          {/* Modal */}
+          <div
+            className="glass relative w-full sm:w-[440px] sm:rounded-2xl rounded-t-2xl p-6 space-y-5 animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={() => setShowSendModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {/* Title */}
+            <div>
+              <h2 className="text-lg font-heading font-bold text-navy">
+                Send Proposal to {form.clientName || 'Client'}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">Choose how to deliver this proposal.</p>
+            </div>
+
+            <Separator />
+
+            {/* Email option */}
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
+                  <Mail className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-navy">Send via Email</p>
+                  <p className="text-xs text-gray-500 mt-0.5 truncate">{form.clientEmail || 'No email provided'}</p>
+                </div>
+                <Button
+                  variant="accent"
+                  size="sm"
+                  disabled={!form.clientEmail}
+                  onClick={() => {
+                    showToast({ title: `Proposal sent to ${form.clientEmail}!` })
+                    setShowSendModal(false)
+                  }}
+                >
+                  <Send className="h-3.5 w-3.5 mr-1.5" />
+                  Send
+                </Button>
+              </div>
+
+              {/* Copy link option */}
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
+                  <Link2 className="h-5 w-5 text-blue-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-navy">Copy Proposal Link</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Share a direct link to view the proposal</p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const url = generatedId
+                      ? `${window.location.origin}/proposals/${generatedId}`
+                      : `${window.location.origin}/proposals`
+                    navigator.clipboard.writeText(url).then(() => {
+                      showToast({ title: 'Link copied to clipboard!' })
+                    }).catch(() => {
+                      showToast({ title: 'Failed to copy link', variant: 'destructive' })
+                    })
+                  }}
+                >
+                  <Copy className="h-3.5 w-3.5 mr-1.5" />
+                  Copy
+                </Button>
+              </div>
+
+              {/* Share option */}
+              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
+                <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
+                  <Share2 className="h-5 w-5 text-green-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-navy">Share</p>
+                  <p className="text-xs text-gray-500 mt-0.5">Use your device&apos;s share options</p>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const url = generatedId
+                      ? `${window.location.origin}/proposals/${generatedId}`
+                      : `${window.location.origin}/proposals`
+                    if (navigator.share) {
+                      navigator.share({
+                        title: `Proposal for ${form.clientName || 'Client'}`,
+                        text: `Professional proposal for ${form.clientName || 'your project'}`,
+                        url,
+                      }).catch(() => {
+                        // User cancelled share
+                      })
+                    } else {
+                      navigator.clipboard.writeText(url).then(() => {
+                        showToast({ title: 'Link copied (share not supported on this device)' })
+                      }).catch(() => {
+                        showToast({ title: 'Share not supported', variant: 'destructive' })
+                      })
+                    }
+                  }}
+                >
+                  <Share2 className="h-3.5 w-3.5 mr-1.5" />
+                  Share
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       )}
