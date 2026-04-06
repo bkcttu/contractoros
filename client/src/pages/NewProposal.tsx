@@ -20,6 +20,16 @@ import {
   Shield,
   FileText,
   CreditCard,
+  Package,
+  ExternalLink,
+  X,
+  Plus,
+  Download,
+  Send,
+  Copy,
+  Share2,
+  Save,
+  Link2,
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -30,6 +40,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { api } from '@/lib/api'
+import { showToast } from '@/components/Toaster'
 import type { PaymentTerms, TradeType } from '@/types'
 
 const STEPS = [
@@ -65,7 +76,7 @@ function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
 }
 
-function getDemoProposalText(trade: TradeType, clientName: string, description: string): string {
+function getDemoProposalText(trade: TradeType, clientName: string, description: string, products?: Array<{ name: string; url: string; imageUrl: string; price: string; description: string }>): string {
   const tradeName = TRADE_LABELS[trade] || 'General Contracting'
   return `PROFESSIONAL ${tradeName.toUpperCase()} PROPOSAL
 
@@ -86,7 +97,13 @@ Our approach includes:
 - Thorough cleanup and final inspection upon completion
 - Post-project walkthrough to ensure your complete satisfaction
 
-QUALITY ASSURANCE
+${products && products.length > 0 ? `MATERIALS & PRODUCTS
+
+The following materials and products will be used for this project:
+
+${products.map((p) => `- ${p.name}${p.price ? ` — $${parseFloat(p.price).toFixed(2)}` : ''}${p.description ? ` (${p.description})` : ''}${p.url ? `\n  Product link: ${p.url}` : ''}`).join('\n')}
+
+` : ''}QUALITY ASSURANCE
 
 All work will be performed in accordance with local building codes and industry standards. Our team maintains current licenses and certifications, and we carry comprehensive liability insurance for your protection.
 
@@ -111,6 +128,7 @@ export function NewProposal() {
   const [error, setError] = useState('')
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({})
   const [generatedId, setGeneratedId] = useState<string | null>(null)
+  const [showSendModal, setShowSendModal] = useState(false)
 
   const [form, setForm] = useState({
     clientName: '',
@@ -127,6 +145,37 @@ export function NewProposal() {
     specialNotes: '',
     expirationDate: getDefaultExpiration(),
   })
+
+  const [products, setProducts] = useState<Array<{
+    id: string
+    name: string
+    url: string
+    imageUrl: string
+    price: string
+    description: string
+  }>>([])
+  const [showProductForm, setShowProductForm] = useState(false)
+  const [productForm, setProductForm] = useState({
+    name: '',
+    url: '',
+    imageUrl: '',
+    price: '',
+    description: '',
+  })
+
+  const addProduct = () => {
+    if (!productForm.name.trim()) return
+    setProducts((prev) => [
+      ...prev,
+      { ...productForm, id: Date.now().toString() },
+    ])
+    setProductForm({ name: '', url: '', imageUrl: '', price: '', description: '' })
+    setShowProductForm(false)
+  }
+
+  const removeProduct = (id: string) => {
+    setProducts((prev) => prev.filter((p) => p.id !== id))
+  }
 
   const updateField = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -200,7 +249,7 @@ export function NewProposal() {
   }
 
   const simulateStreaming = useCallback(async () => {
-    const text = getDemoProposalText(form.tradeType, form.clientName, form.jobDescription)
+    const text = getDemoProposalText(form.tradeType, form.clientName, form.jobDescription, products)
     const words = text.split(/(\s+)/)
     let accumulated = ''
 
@@ -213,7 +262,7 @@ export function NewProposal() {
     }
 
     setGenerationDone(true)
-  }, [form.tradeType, form.clientName, form.jobDescription])
+  }, [form.tradeType, form.clientName, form.jobDescription, products])
 
   const handleGenerate = async () => {
     setError('')
@@ -223,9 +272,18 @@ export function NewProposal() {
 
     try {
       const { proposal } = await api.createProposal({
-        ...form,
+        clientName: form.clientName,
+        clientEmail: form.clientEmail,
+        clientPhone: form.clientPhone,
+        jobAddress: form.jobAddress,
+        jobDescription: form.jobDescription + (products.length > 0 ? '\n\nSpecified Products/Materials:\n' + products.map(p => `- ${p.name}${p.price ? ` ($${p.price})` : ''}${p.url ? ` - ${p.url}` : ''}${p.description ? ` — ${p.description}` : ''}`).join('\n') : ''),
         materialsCost: Number(form.materialsCost),
         laborCost: Number(form.laborCost),
+        projectDuration: form.projectDuration,
+        paymentTerms: form.paymentTerms,
+        warranty: form.warranty,
+        specialNotes: form.specialNotes,
+        expirationDate: form.expirationDate,
       })
 
       setGeneratedId(proposal.id)
@@ -597,6 +655,171 @@ export function NewProposal() {
                   onChange={(e) => updateField('specialNotes', e.target.value)}
                 />
               </div>
+
+              <Separator />
+
+              {/* Products & Materials */}
+              <div className="space-y-4">
+                <h4 className="text-sm font-heading font-semibold text-navy flex items-center gap-2">
+                  <Package className="h-4 w-4 text-accent" />
+                  Products &amp; Materials <span className="text-gray-400 text-xs font-normal">(Optional)</span>
+                </h4>
+
+                {/* Product list */}
+                {products.length > 0 && (
+                  <div className="space-y-3">
+                    {products.map((product) => (
+                      <Card key={product.id} className="border border-gray-200">
+                        <CardContent className="p-4">
+                          <div className="flex items-start gap-4">
+                            {/* Thumbnail */}
+                            {product.imageUrl ? (
+                              <img
+                                src={product.imageUrl}
+                                alt={product.name}
+                                className="w-[60px] h-[60px] rounded-lg object-cover shrink-0 bg-gray-100"
+                              />
+                            ) : (
+                              <div className="w-[60px] h-[60px] rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
+                                <Package className="h-6 w-6 text-gray-400" />
+                              </div>
+                            )}
+                            {/* Details */}
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-semibold text-navy">{product.name}</p>
+                              {product.price && (
+                                <p className="text-sm font-mono text-accent mt-0.5">
+                                  ${parseFloat(product.price).toFixed(2)}
+                                </p>
+                              )}
+                              {product.description && (
+                                <p className="text-xs text-gray-500 mt-1">{product.description}</p>
+                              )}
+                              {product.url && (
+                                <a
+                                  href={product.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1"
+                                >
+                                  <ExternalLink className="h-3 w-3" />
+                                  View Product
+                                </a>
+                              )}
+                            </div>
+                            {/* Remove */}
+                            <button
+                              type="button"
+                              onClick={() => removeProduct(product.id)}
+                              className="text-gray-400 hover:text-red-500 transition-colors shrink-0"
+                            >
+                              <X className="h-4 w-4" />
+                            </button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+
+                {/* Add product inline form */}
+                {showProductForm && (
+                  <div className="border border-gray-200 rounded-lg p-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="space-y-2">
+                      <Label htmlFor="productName">
+                        Product Name <span className="text-red-400">*</span>
+                      </Label>
+                      <Input
+                        id="productName"
+                        placeholder='e.g. Carrier 24ACC636A003 3-Ton AC Unit'
+                        value={productForm.name}
+                        onChange={(e) => setProductForm((prev) => ({ ...prev, name: e.target.value }))}
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="productUrl">Product URL/Link</Label>
+                        <Input
+                          id="productUrl"
+                          placeholder="https://..."
+                          value={productForm.url}
+                          onChange={(e) => setProductForm((prev) => ({ ...prev, url: e.target.value }))}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="productImageUrl">Product Image URL</Label>
+                        <Input
+                          id="productImageUrl"
+                          placeholder="https://..."
+                          value={productForm.imageUrl}
+                          onChange={(e) => setProductForm((prev) => ({ ...prev, imageUrl: e.target.value }))}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="productPrice">Price</Label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
+                          <Input
+                            id="productPrice"
+                            type="number"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00"
+                            value={productForm.price}
+                            onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
+                            className="pl-7 font-mono"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="productDescription">Brief Description</Label>
+                        <Input
+                          id="productDescription"
+                          placeholder='e.g. 16 SEER2 efficiency rating'
+                          value={productForm.description}
+                          onChange={(e) => setProductForm((prev) => ({ ...prev, description: e.target.value }))}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant="accent"
+                        size="sm"
+                        onClick={addProduct}
+                        disabled={!productForm.name.trim()}
+                      >
+                        Add
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => {
+                          setShowProductForm(false)
+                          setProductForm({ name: '', url: '', imageUrl: '', price: '', description: '' })
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Add Product button */}
+                {!showProductForm && (
+                  <button
+                    type="button"
+                    onClick={() => setShowProductForm(true)}
+                    className="w-full border-2 border-dashed border-gray-300 hover:border-accent/50 rounded-lg p-4 flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors"
+                  >
+                    <Plus className="h-4 w-4" />
+                    Add Product
+                  </button>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
@@ -744,6 +967,55 @@ export function NewProposal() {
                     {form.specialNotes}
                   </p>
                 </div>
+              )}
+
+              {products.length > 0 && (
+                <>
+                  <Separator className="my-4" />
+                  <div>
+                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                      Products &amp; Materials
+                    </h4>
+                    <div className="space-y-2">
+                      {products.map((product) => (
+                        <div key={product.id} className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
+                          {product.imageUrl ? (
+                            <img
+                              src={product.imageUrl}
+                              alt={product.name}
+                              className="w-[40px] h-[40px] rounded object-cover shrink-0 bg-gray-200"
+                            />
+                          ) : (
+                            <div className="w-[40px] h-[40px] rounded bg-gray-200 flex items-center justify-center shrink-0">
+                              <Package className="h-4 w-4 text-gray-400" />
+                            </div>
+                          )}
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-navy">{product.name}</p>
+                            {product.description && (
+                              <p className="text-xs text-gray-500">{product.description}</p>
+                            )}
+                          </div>
+                          {product.price && (
+                            <span className="text-sm font-mono text-accent shrink-0">
+                              ${parseFloat(product.price).toFixed(2)}
+                            </span>
+                          )}
+                          {product.url && (
+                            <a
+                              href={product.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-accent hover:underline shrink-0"
+                            >
+                              <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
               )}
 
               {/* Total */}

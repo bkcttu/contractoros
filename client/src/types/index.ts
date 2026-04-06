@@ -133,4 +133,12 @@ export interface ProposalFormData {
   warranty: string
   specialNotes: string
   expirationDate: string
+  products?: Array<{
+    id: string
+    name: string
+    url: string
+    imageUrl: string
+    price: string
+    description: string
+  }>
 }

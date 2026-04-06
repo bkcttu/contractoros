@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Loader2, Save, CreditCard, ExternalLink } from 'lucide-react'
+import { useEffect, useState, useRef } from 'react'
+import { Loader2, Save, CreditCard, ExternalLink, Upload, Image, Trash2, Copy } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -35,9 +35,11 @@ export function SettingsPage() {
     licenseNumber: '',
     bio: '',
     brandColor: '#F97316',
+    logoUrl: '',
     taxRate: '0',
     defaultPaymentTerms: '50_upfront' as PaymentTerms,
   })
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [plan, setPlan] = useState('starter')
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export function SettingsPage() {
           licenseNumber: u.license_number || u.licenseNumber || '',
           bio: u.bio || '',
           brandColor: u.brand_color || u.brandColor || '#F97316',
+          logoUrl: u.logo_url || u.logoUrl || '',
           taxRate: String(u.tax_rate ?? u.taxRate ?? 0),
           defaultPaymentTerms: (u.default_payment_terms || u.defaultPaymentTerms || '50_upfront') as PaymentTerms,
         })
@@ -82,6 +85,7 @@ export function SettingsPage() {
         licenseNumber: form.licenseNumber,
         bio: form.bio,
         brandColor: form.brandColor,
+        logoUrl: form.logoUrl || null,
         taxRate: Number(form.taxRate),
         defaultPaymentTerms: form.defaultPaymentTerms,
       } as Partial<User>)
@@ -179,6 +183,70 @@ export function SettingsPage() {
           <CardDescription>Customize how your proposals and client portal look.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Logo Upload */}
+          <div className="space-y-2">
+            <Label>Logo</Label>
+            {form.logoUrl ? (
+              <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <img
+                  src={form.logoUrl}
+                  alt="Business logo"
+                  className="h-16 w-16 object-contain rounded"
+                />
+                <div className="flex gap-2">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => fileInputRef.current?.click()}
+                  >
+                    <Image className="h-4 w-4 mr-1" />
+                    Change
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => updateField('logoUrl', '')}
+                  >
+                    <Trash2 className="h-4 w-4 mr-1" />
+                    Remove
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center gap-2 hover:border-accent/50 hover:bg-accent/5 transition-colors cursor-pointer"
+              >
+                <Upload className="h-8 w-8 text-gray-400" />
+                <span className="text-sm font-medium text-gray-600">Upload your logo</span>
+                <span className="text-xs text-gray-400">PNG, JPG up to 2MB</span>
+              </button>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/png,image/jpeg"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0]
+                if (!file) return
+                if (file.size > 2 * 1024 * 1024) {
+                  showToast({ title: 'File too large. Max 2MB.', variant: 'destructive' })
+                  return
+                }
+                const reader = new FileReader()
+                reader.onload = () => {
+                  updateField('logoUrl', reader.result as string)
+                }
+                reader.readAsDataURL(file)
+                e.target.value = ''
+              }}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label>Brand Color</Label>
             <div className="flex items-center gap-3">
@@ -197,6 +265,79 @@ export function SettingsPage() {
               <div className="h-10 flex-1 rounded-lg" style={{ backgroundColor: form.brandColor }} />
             </div>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Email Signature */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Email Signature</CardTitle>
+          <CardDescription>Auto-generated from your profile. Copy and paste into your email client.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="border border-gray-200 rounded-lg p-5 bg-white">
+            <table cellPadding={0} cellSpacing={0} style={{ fontFamily: 'Arial, sans-serif', fontSize: '14px', color: '#1e293b' }}>
+              <tbody>
+                <tr>
+                  {form.logoUrl && (
+                    <td style={{ paddingRight: '16px', verticalAlign: 'top' }}>
+                      <img
+                        src={form.logoUrl}
+                        alt="Logo"
+                        style={{ width: '60px', height: '60px', objectFit: 'contain', borderRadius: '6px' }}
+                      />
+                    </td>
+                  )}
+                  <td style={{ verticalAlign: 'top' }}>
+                    {form.businessName && (
+                      <div style={{ fontWeight: 700, fontSize: '15px', color: form.brandColor, marginBottom: '2px' }}>
+                        {form.businessName}
+                      </div>
+                    )}
+                    {form.name && (
+                      <div style={{ fontWeight: 600, marginBottom: '4px' }}>
+                        {form.name}
+                      </div>
+                    )}
+                    <div style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.6' }}>
+                      {form.phone && <div>{form.phone}</div>}
+                      {form.email && <div>{form.email}</div>}
+                      {form.licenseNumber && <div>License: {form.licenseNumber}</div>}
+                    </div>
+                    <div
+                      style={{
+                        marginTop: '8px',
+                        borderTop: `2px solid ${form.brandColor}`,
+                        paddingTop: '4px',
+                        fontSize: '10px',
+                        color: '#94a3b8',
+                      }}
+                    >
+                      Powered by ContractorOS
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              const logoHtml = form.logoUrl
+                ? `<td style="padding-right:16px;vertical-align:top"><img src="${form.logoUrl}" alt="Logo" style="width:60px;height:60px;object-fit:contain;border-radius:6px"/></td>`
+                : ''
+              const html = `<table cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;font-size:14px;color:#1e293b"><tbody><tr>${logoHtml}<td style="vertical-align:top">${form.businessName ? `<div style="font-weight:700;font-size:15px;color:${form.brandColor};margin-bottom:2px">${form.businessName}</div>` : ''}${form.name ? `<div style="font-weight:600;margin-bottom:4px">${form.name}</div>` : ''}<div style="font-size:12px;color:#64748b;line-height:1.6">${form.phone ? `<div>${form.phone}</div>` : ''}${form.email ? `<div>${form.email}</div>` : ''}${form.licenseNumber ? `<div>License: ${form.licenseNumber}</div>` : ''}</div><div style="margin-top:8px;border-top:2px solid ${form.brandColor};padding-top:4px;font-size:10px;color:#94a3b8">Powered by ContractorOS</div></td></tr></tbody></table>`
+              navigator.clipboard.writeText(html).then(() => {
+                showToast({ title: 'Signature HTML copied to clipboard!' })
+              }).catch(() => {
+                showToast({ title: 'Failed to copy', variant: 'destructive' })
+              })
+            }}
+          >
+            <Copy className="h-4 w-4 mr-2" />
+            Copy Signature
+          </Button>
         </CardContent>
       </Card>
 
