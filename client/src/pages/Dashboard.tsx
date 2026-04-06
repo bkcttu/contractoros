@@ -24,7 +24,10 @@ export function Dashboard() {
   useEffect(() => {
     api.getProposals()
       .then((res) => setProposals(res.proposals))
-      .catch(console.error)
+      .catch(() => {
+        // In demo mode or if API is down, show empty state
+        setProposals([])
+      })
       .finally(() => setLoading(false))
   }, [])
 

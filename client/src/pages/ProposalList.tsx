@@ -26,7 +26,7 @@ export function ProposalList() {
   useEffect(() => {
     api.getProposals()
       .then((res) => setProposals(res.proposals))
-      .catch(console.error)
+      .catch(() => setProposals([]))
       .finally(() => setLoading(false))
   }, [])
 
