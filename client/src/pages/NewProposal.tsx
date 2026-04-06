@@ -585,46 +585,49 @@ export function NewProposal() {
                   <DollarSign className="h-4 w-4 text-accent" />
                   Pricing
                 </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="space-y-2">
-                    <Label htmlFor="materialsCost">
-                      Materials Cost <span className="text-red-400">*</span>
-                    </Label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
-                      <Input
-                        id="materialsCost"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="2,500.00"
-                        value={form.materialsCost}
-                        onChange={(e) => updateField('materialsCost', e.target.value)}
-                        className={cn('pl-7 font-mono', stepErrors.materialsCost && 'border-red-300 focus-visible:ring-red-300')}
-                      />
+
+                {!useDetailedItems && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="space-y-2">
+                      <Label htmlFor="materialsCost">
+                        Materials Cost <span className="text-red-400">*</span>
+                      </Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
+                        <Input
+                          id="materialsCost"
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          placeholder="2,500.00"
+                          value={form.materialsCost}
+                          onChange={(e) => updateField('materialsCost', e.target.value)}
+                          className={cn('pl-7 font-mono', stepErrors.materialsCost && 'border-red-300 focus-visible:ring-red-300')}
+                        />
+                      </div>
+                      {stepErrors.materialsCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.materialsCost}</p>}
                     </div>
-                    {stepErrors.materialsCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.materialsCost}</p>}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="laborCost">
-                      Labor Cost <span className="text-red-400">*</span>
-                    </Label>
-                    <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
-                      <Input
-                        id="laborCost"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        placeholder="1,500.00"
-                        value={form.laborCost}
-                        onChange={(e) => updateField('laborCost', e.target.value)}
-                        className={cn('pl-7 font-mono', stepErrors.laborCost && 'border-red-300 focus-visible:ring-red-300')}
-                      />
+                    <div className="space-y-2">
+                      <Label htmlFor="laborCost">
+                        Labor Cost <span className="text-red-400">*</span>
+                      </Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
+                        <Input
+                          id="laborCost"
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          placeholder="1,500.00"
+                          value={form.laborCost}
+                          onChange={(e) => updateField('laborCost', e.target.value)}
+                          className={cn('pl-7 font-mono', stepErrors.laborCost && 'border-red-300 focus-visible:ring-red-300')}
+                        />
+                      </div>
+                      {stepErrors.laborCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.laborCost}</p>}
                     </div>
-                    {stepErrors.laborCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.laborCost}</p>}
                   </div>
-                </div>
+                )}
 
                 {/* Total */}
                 <div className="bg-gradient-to-r from-accent/5 to-accent/10 border border-accent/20 rounded-lg p-4 flex items-center justify-between">
@@ -633,6 +636,78 @@ export function NewProposal() {
                     {formatCurrency(totalCost)}
                   </span>
                 </div>
+              </div>
+
+              {/* Detailed Line Items Toggle */}
+              <div className="relative">
+                <Separator />
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Detailed Line Items (Optional)
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                <label className="flex cursor-pointer items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setUseDetailedItems((prev) => !prev)}
+                    className="text-gray-400 hover:text-accent transition-colors"
+                  >
+                    {useDetailedItems ? (
+                      <ToggleRight className="h-6 w-6 text-accent" />
+                    ) : (
+                      <ToggleLeft className="h-6 w-6" />
+                    )}
+                  </button>
+                  <div>
+                    <span className="text-sm font-medium text-navy">Use detailed line items instead of simple pricing</span>
+                    <p className="text-xs text-gray-400 mt-0.5">Break down your estimate into individual items with quantities and categories</p>
+                  </div>
+                </label>
+                {stepErrors.lineItems && <p className="text-red-500 text-xs animate-in fade-in slide-in-from-top-1">{stepErrors.lineItems}</p>}
+
+                {useDetailedItems && (
+                  <LineItemBuilder
+                    items={lineItems}
+                    onChange={setLineItems}
+                    taxRate={8.25}
+                    onAiDescribe={async (name) => {
+                      return `Professional-grade ${name.toLowerCase()}. Sourced from trusted suppliers, backed by manufacturer warranty. Installed according to industry standards and local building codes.`
+                    }}
+                  />
+                )}
+              </div>
+
+              {/* Pricing Tiers Toggle */}
+              <div className="relative">
+                <Separator />
+                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Pricing Tiers (Optional)
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                <label className="flex cursor-pointer items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setTierMode((prev) => !prev)}
+                    className="text-gray-400 hover:text-accent transition-colors"
+                  >
+                    {tierMode ? (
+                      <ToggleRight className="h-6 w-6 text-accent" />
+                    ) : (
+                      <ToggleLeft className="h-6 w-6" />
+                    )}
+                  </button>
+                  <div>
+                    <span className="text-sm font-medium text-navy">Offer multiple pricing options</span>
+                    <p className="text-xs text-gray-400 mt-0.5">Give your client Good / Better / Best tiers to choose from</p>
+                  </div>
+                </label>
+
+                {tierMode && (
+                  <PricingTiers tiers={tiers} onChange={setTiers} mode="edit" />
+                )}
               </div>
 
               <Separator />
@@ -1074,13 +1149,63 @@ export function NewProposal() {
                 </>
               )}
 
+              {/* Line Items Summary */}
+              {useDetailedItems && lineItems.length > 0 && (
+                <>
+                  <Separator className="my-4" />
+                  <div>
+                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                      Line Items
+                    </h4>
+                    <div className="space-y-3">
+                      {(() => {
+                        const groups: Record<string, LineItem[]> = {}
+                        lineItems.forEach((item) => {
+                          const g = item.groupName || 'General'
+                          if (!groups[g]) groups[g] = []
+                          groups[g].push(item)
+                        })
+                        return Object.entries(groups).map(([groupName, items]) => (
+                          <div key={groupName} className="space-y-1">
+                            <p className="text-xs font-semibold text-navy uppercase tracking-wide border-l-2 border-orange-400 pl-2">
+                              {groupName}
+                            </p>
+                            {items.map((item) => (
+                              <div key={item.id} className="flex items-center justify-between bg-gray-50 rounded px-3 py-1.5 text-sm">
+                                <span className="text-gray-700">{item.itemName || 'Untitled item'}{item.isOptional ? <span className="ml-1 text-xs text-gray-400">(Optional)</span> : null}</span>
+                                <span className="font-mono text-accent shrink-0 ml-2">{formatCurrency(item.quantity * item.unitPrice)}</span>
+                              </div>
+                            ))}
+                          </div>
+                        ))
+                      })()}
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {/* Pricing Tiers Preview */}
+              {tierMode && tiers.length > 0 && (
+                <>
+                  <Separator className="my-4" />
+                  <div>
+                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                      Pricing Tiers
+                    </h4>
+                    <PricingTiers tiers={tiers} onChange={setTiers} mode="preview" />
+                  </div>
+                </>
+              )}
+
               {/* Total */}
               <div className="mt-6 bg-gradient-to-r from-navy/5 to-accent/10 border border-accent/20 rounded-lg p-5 flex items-center justify-between">
                 <div>
                   <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Estimated Total</p>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    Materials {formatCurrency(parseFloat(form.materialsCost) || 0)} + Labor{' '}
-                    {formatCurrency(parseFloat(form.laborCost) || 0)}
+                    {useDetailedItems && lineItems.length > 0
+                      ? `${lineItems.length} line item${lineItems.length === 1 ? '' : 's'}`
+                      : `Materials ${formatCurrency(parseFloat(form.materialsCost) || 0)} + Labor ${formatCurrency(parseFloat(form.laborCost) || 0)}`
+                    }
                   </p>
                 </div>
                 <span className="text-3xl font-heading font-bold text-accent">{formatCurrency(totalCost)}</span>
