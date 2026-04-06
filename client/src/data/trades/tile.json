@@ -1,0 +1,531 @@
+{
+  "slug": "tile",
+  "tradeName": "Tile",
+  "tradeNameEs": "Azulejo",
+  "icon": "Grid3x3",
+  "aiPersona": "You are an expert tile contractor assistant with deep knowledge of residential and commercial tile installation.\nYou understand all major tile types including ceramic, porcelain, natural stone (marble, travertine, slate), glass mosaic, and large-format tiles.\nYou know that porcelain is denser and more water-resistant than ceramic, making it ideal for wet areas and outdoor use.\nYou are familiar with backer board options including cement board (Durock, Hardiebacker), foam board (Kerdi-Board, GoBoard), and their applications.\nYou understand waterproofing systems like Schluter Kerdi, Laticrete Hydro Ban, and RedGard for showers and wet areas.\nYou know that proper substrate preparation is critical — floors must be flat within 1/8 inch over 10 feet for large-format tile.\nYou understand thinset mortar types including unmodified, modified, and large-format/medium-bed varieties and when each is appropriate.\nYou are experienced with tile layout patterns including straight lay, running bond, herringbone, basketweave, and diagonal.\nYou know that grout comes in sanded, unsanded, and epoxy varieties, and that grout joint width affects the choice.\nYou understand that large-format tiles (greater than 15 inches) require back-buttering and a medium-bed mortar for full coverage.\nYou are familiar with trim pieces including bullnose, Schluter profiles, pencil liner, and chair rail for finished edges.\nYou know that shower builds require proper waterproofing, slope to drain, and a curing schedule before tile installation.\nYou understand that floor tile installation requires removing existing flooring, leveling the substrate, and accounting for transitions to adjacent rooms.\nYou price tile work based on square footage for field tile plus linear footage for borders and trim.\nYou always account for tile waste — typically 10 percent for straight lay and 15 percent for diagonal or complex patterns.\nYou know that backsplash installations require careful layout around outlets, switches, and under-cabinet lighting.\nYou communicate clearly about lead times for specialty tile orders and the multi-day installation process.",
+  "jobTypes": [
+    {
+      "id": "bathroom_tile",
+      "name": "Bathroom Tile",
+      "nameEs": "Azulejo de Bano",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Floor Tile (porcelain)",
+          "description": "Porcelain floor tile, slip-resistant finish for bathroom",
+          "category": "materials",
+          "quantity": 60,
+          "unit": "sq ft",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Florida Tile", "Emser"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wall Tile (ceramic or porcelain)",
+          "description": "Bathroom wall tile for tub surround or wainscot areas",
+          "category": "materials",
+          "quantity": 80,
+          "unit": "sq ft",
+          "defaultPrice": 5.50,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Marazzi"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Cement Backer Board",
+          "description": "1/2-inch cement board substrate for walls and floors in wet areas",
+          "category": "materials",
+          "quantity": 140,
+          "unit": "sq ft",
+          "defaultPrice": 2.25,
+          "isOptional": false,
+          "brands": ["Durock", "Hardiebacker", "USG"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Waterproofing Membrane",
+          "description": "Liquid or sheet waterproofing for shower and tub areas",
+          "category": "materials",
+          "quantity": 80,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": ["Schluter Kerdi", "Laticrete Hydro Ban", "Custom RedGard"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Thinset Mortar",
+          "description": "Modified thinset mortar for tile bonding in wet areas",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 28.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Laticrete", "Custom Building Products"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Grout (sanded)",
+          "description": "Sanded grout for joints 1/8 inch and wider, color matched",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": ["Mapei Keracolor", "Laticrete Permacolor", "Custom Prism"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Trim Pieces (bullnose or Schluter)",
+          "description": "Edge trim for exposed tile edges, bullnose or metal profile",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "linear ft",
+          "defaultPrice": 5.00,
+          "isOptional": false,
+          "brands": ["Schluter", "Daltile"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Floor Tile Installation",
+          "description": "Set floor tile including layout, cutting, and grouting",
+          "category": "labor",
+          "quantity": 60,
+          "unit": "sq ft",
+          "defaultPrice": 10.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Wall Tile Installation",
+          "description": "Set wall tile including backer board prep, waterproofing, and grouting",
+          "category": "labor",
+          "quantity": 80,
+          "unit": "sq ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition of Existing Tile",
+          "description": "Remove existing tile, thinset, and backer board down to studs or subfloor",
+          "category": "labor",
+          "quantity": 140,
+          "unit": "sq ft",
+          "defaultPrice": 4.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "kitchen_backsplash",
+      "name": "Kitchen Backsplash",
+      "nameEs": "Salpicadero de Cocina",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Backsplash Tile",
+          "description": "Subway, mosaic, or decorative tile for kitchen backsplash",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "sq ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Anatolia", "Jeffrey Court"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Thinset Mortar",
+          "description": "White modified thinset for backsplash installation",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 28.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Custom Building Products"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Grout (unsanded)",
+          "description": "Unsanded grout for narrow joints in subway and mosaic tile",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Laticrete"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Edge Trim / Schluter Strip",
+          "description": "Metal or tile edge trim for exposed backsplash edges",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "linear ft",
+          "defaultPrice": 5.50,
+          "isOptional": false,
+          "brands": ["Schluter"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Backsplash Installation",
+          "description": "Layout, set, cut around outlets, and grout backsplash tile",
+          "category": "labor",
+          "quantity": 30,
+          "unit": "sq ft",
+          "defaultPrice": 14.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Outlet and Switch Cutouts",
+          "description": "Precision cuts around electrical outlets and switches",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 25.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Caulk Perimeter and Countertop Joint",
+          "description": "Color-matched silicone caulk at countertop, cabinet, and corner joints",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "floor_tile",
+      "name": "Floor Tile",
+      "nameEs": "Azulejo de Piso",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Floor Tile (porcelain or ceramic)",
+          "description": "Floor tile material, standard or large-format",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 5.50,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Florida Tile", "Emser"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Thinset Mortar",
+          "description": "Modified thinset, large-format mortar if tiles exceed 15 inches",
+          "category": "materials",
+          "quantity": 8,
+          "unit": "each",
+          "defaultPrice": 28.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Laticrete", "Custom Building Products"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Grout",
+          "description": "Sanded grout for floor tile joints, color matched to design",
+          "category": "materials",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Custom Prism"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Self-Leveling Compound",
+          "description": "Floor leveling compound for uneven subfloor preparation",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 38.00,
+          "isOptional": true,
+          "brands": ["Mapei Novoplan", "Ardex", "Laticrete"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Transition Strips",
+          "description": "Metal or wood transition strips at doorways to adjacent flooring",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": ["Schluter Reno-T"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Floor Tile Installation",
+          "description": "Set tile in thinset including layout, spacers, cutting, and grouting",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 9.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Existing Floor Removal",
+          "description": "Remove existing flooring and prep subfloor for new tile",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 3.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Subfloor Leveling",
+          "description": "Pour self-leveling compound to create flat substrate for tile",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 2.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "shower_build",
+      "name": "Shower Build",
+      "nameEs": "Construccion de Ducha",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Shower Wall Tile",
+          "description": "Porcelain or ceramic wall tile for full shower enclosure",
+          "category": "materials",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 7.00,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Emser"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shower Floor Tile (mosaic)",
+          "description": "Small-format mosaic tile for shower pan with slope to drain",
+          "category": "materials",
+          "quantity": 12,
+          "unit": "sq ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shower Pan System",
+          "description": "Pre-formed shower pan or mud bed with waterproof liner",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": ["Schluter Kerdi", "Noble Company", "Laticrete Hydro Ban"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Waterproofing System (full shower)",
+          "description": "Complete waterproofing for walls, curb, and floor of shower",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": ["Schluter Kerdi", "Laticrete Hydro Ban"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Cement Backer Board",
+          "description": "Cement board for shower walls, screwed to studs",
+          "category": "materials",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 2.25,
+          "isOptional": false,
+          "brands": ["Durock", "Hardiebacker"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shower Niche (recessed)",
+          "description": "Pre-formed recessed niche for shampoo/soap storage",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": true,
+          "brands": ["Schluter Kerdi-Board", "Noble"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Linear Drain",
+          "description": "Stainless steel linear shower drain for curbless or modern look",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": true,
+          "brands": ["Schluter Kerdi-Line", "QuickDrain"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shower Build Labor (complete)",
+          "description": "Full shower build including framing, backer, waterproofing, tile, and grout",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition of Existing Shower",
+          "description": "Demo existing shower or tub surround down to studs",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 750.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "outdoor_tile",
+      "name": "Outdoor Tile",
+      "nameEs": "Azulejo Exterior",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior Porcelain Tile",
+          "description": "Frost-resistant porcelain tile rated for exterior use",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 7.50,
+          "isOptional": false,
+          "brands": ["Daltile", "MSI", "Florida Tile"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior-Grade Thinset",
+          "description": "Polymer-modified thinset rated for freeze-thaw conditions",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 32.00,
+          "isOptional": false,
+          "brands": ["Mapei Kerabond", "Laticrete 254 Platinum"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior Grout",
+          "description": "Sanded grout rated for exterior exposure and freeze-thaw",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 28.00,
+          "isOptional": false,
+          "brands": ["Mapei", "Laticrete"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Surface Preparation",
+          "description": "Clean, level, and prep concrete substrate for tile",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Outdoor Tile Installation",
+          "description": "Set exterior tile with proper slope for drainage",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 11.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Stair Tread Tile",
+          "description": "Tile outdoor stairs with anti-slip nosing",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Daltile",
+    "MSI (MS International)",
+    "Florida Tile",
+    "Emser Tile",
+    "Marazzi",
+    "Anatolia Tile",
+    "Jeffrey Court",
+    "Schluter Systems",
+    "Mapei",
+    "Laticrete",
+    "Custom Building Products",
+    "Durock (cement board)",
+    "Hardiebacker (cement board)",
+    "Noble Company",
+    "Ardex",
+    "QuickDrain",
+    "Rubi (tile cutters)",
+    "MK Diamond (wet saws)",
+    "Raimondi (leveling systems)"
+  ],
+  "terminologyGlossary": {
+    "porcelain": "Dense, low-absorption tile fired at high temperatures, suitable for wet and outdoor areas",
+    "ceramic": "Standard kiln-fired tile, more porous than porcelain, best for dry interior walls and floors",
+    "thinset": "Cement-based adhesive mortar used to bond tile to substrate surfaces",
+    "grout": "Cementitious or epoxy material used to fill joints between tiles",
+    "sanded grout": "Grout with fine sand aggregate for joints 1/8 inch and wider",
+    "unsanded grout": "Smooth grout without sand for narrow joints under 1/8 inch",
+    "backer board": "Cement or foam substrate panel installed over studs or subfloor as a tile base",
+    "waterproofing membrane": "Liquid-applied or sheet barrier that prevents water penetration behind tile",
+    "bullnose": "A tile trim piece with one rounded finished edge for exposed tile borders",
+    "Schluter profile": "Metal or PVC edge trim system for finished tile edges and transitions",
+    "back-buttering": "Applying thinset to the back of a tile in addition to the substrate for full coverage",
+    "lippage": "Height difference between adjacent tile edges, controlled with leveling clips",
+    "mud bed": "A mortar bed floated to create slope in shower floors for drainage to the drain",
+    "subway tile": "Rectangular tile (typically 3x6 inches) installed in a running bond pattern",
+    "mosaic tile": "Small tiles (2 inches or less) usually mounted on mesh sheets for easy installation",
+    "epoxy grout": "Two-part resin-based grout that is waterproof, stain-proof, and chemical resistant"
+  },
+  "unitsOfMeasure": ["sq ft", "linear ft", "each", "job"],
+  "seasonalTips": [
+    { "month": 1, "tip": "Indoor tile projects are ideal during winter months. Ensure thinset and grout are stored above 50 degrees for proper curing." },
+    { "month": 4, "tip": "Spring bathroom remodels peak season. Order specialty tile early as lead times can stretch 4-6 weeks." },
+    { "month": 7, "tip": "Outdoor tile installations are best in warm, dry conditions. Avoid setting exterior tile if rain is expected within 24 hours." },
+    { "month": 10, "tip": "Last window for outdoor tile before freezing weather. Focus on interior projects and holiday bathroom refresh jobs." }
+  ],
+  "followUpToneNotes": "Tile customers are often design-focused and care deeply about aesthetics. Be knowledgeable about patterns, materials, and current trends. Emphasize the quality of waterproofing and substrate prep since these are invisible but critical. Discuss tile waste percentages and help customers order the right quantities. Show expertise in grout color selection and maintenance."
+}

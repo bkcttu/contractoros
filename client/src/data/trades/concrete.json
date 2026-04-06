@@ -1,0 +1,560 @@
+{
+  "slug": "concrete",
+  "tradeName": "Concrete",
+  "tradeNameEs": "Concreto",
+  "icon": "HardHat",
+  "aiPersona": "You are an expert concrete contractor assistant with deep knowledge of residential and commercial flatwork and structural concrete.\nYou understand concrete mix designs, PSI ratings, and when to specify different strengths (3000 PSI for sidewalks, 4000+ PSI for driveways).\nYou know the importance of proper subgrade preparation including compaction, gravel base, and vapor barriers.\nYou are familiar with reinforcement options including rebar, wire mesh, and fiber mesh and when each is appropriate.\nYou understand various concrete finishes including broom finish, exposed aggregate, stamped, stained, and polished.\nYou know that weather conditions critically affect concrete work - you cannot pour in freezing temps or extreme heat without special precautions.\nYou understand expansion joints, control joints, and their proper spacing to prevent cracking.\nYou can estimate concrete volume in cubic yards based on dimensions and thickness.\nYou know that a standard driveway should be 4 inches thick minimum and heavy-duty areas need 6 inches or more.\nYou understand the curing process and know that concrete reaches design strength at 28 days but should be kept moist for the first 7 days.\nYou are familiar with forming techniques, grade stakes, and proper slope for drainage.\nYou know that retaining walls require engineering for walls over 4 feet and proper drainage behind the wall.\nYou understand foundation work including footings, stem walls, and monolithic slabs.\nYou can advise on decorative concrete options and their cost premiums over standard gray concrete.\nYou always factor in concrete pump costs for jobs where the truck cannot reach the pour site.\nYou account for demolition and haul-away of existing concrete when doing replacement work.",
+  "jobTypes": [
+    {
+      "id": "driveway",
+      "name": "Driveway",
+      "nameEs": "Entrada de Autos",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Concrete Driveway Pour (4\" thick, 3500 PSI)",
+          "description": "Form, pour, and finish 4-inch concrete driveway with broom finish",
+          "category": "labor",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition of Existing Driveway",
+          "description": "Break out and remove existing concrete driveway",
+          "category": "labor",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 3.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Haul-Away of Debris",
+          "description": "Load and haul demolished concrete to recycling facility",
+          "category": "labor",
+          "quantity": 10,
+          "unit": "cubic yard",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gravel Base (4\" compacted)",
+          "description": "Crushed gravel base, spread and compacted to proper grade",
+          "category": "materials",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 1.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wire Mesh Reinforcement",
+          "description": "6x6 W1.4/W1.4 welded wire mesh for crack control",
+          "category": "materials",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 0.85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Rebar Reinforcement (#4 on 18\" centers)",
+          "description": "Grade 60 #4 rebar grid for heavy-duty applications",
+          "category": "materials",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Expansion Joints",
+          "description": "Pre-formed expansion joint material at structure interfaces",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "linear ft",
+          "defaultPrice": 3.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Stamped Concrete Upgrade",
+          "description": "Decorative stamped pattern with integral color and release agent",
+          "category": "materials",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 6.00,
+          "isOptional": true,
+          "brands": ["Brickform", "Butterfield Color"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Exposed Aggregate Finish",
+          "description": "Wash and expose decorative aggregate surface finish",
+          "category": "labor",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 4.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Concrete Pump (if needed)",
+          "description": "Line pump or boom pump for pours inaccessible to ready-mix truck",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 850.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Sealer Application",
+          "description": "Acrylic or penetrating sealer applied after cure for stain protection",
+          "category": "materials",
+          "quantity": 600,
+          "unit": "sq ft",
+          "defaultPrice": 0.75,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "patio",
+      "name": "Patio",
+      "nameEs": "Patio",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Concrete Patio Pour (4\" thick)",
+          "description": "Form, pour, and finish concrete patio slab",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 11.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gravel Base Preparation",
+          "description": "Crushed gravel subbase, graded and compacted",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 1.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Forming and Grading",
+          "description": "Set forms to grade with proper drainage slope",
+          "category": "labor",
+          "quantity": 70,
+          "unit": "linear ft",
+          "defaultPrice": 5.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wire Mesh Reinforcement",
+          "description": "Welded wire mesh placed on chairs for proper positioning",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 0.85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Stamped Concrete Finish",
+          "description": "Decorative stamp pattern with color hardener and release agent",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 6.50,
+          "isOptional": true,
+          "brands": ["Brickform", "Solomon Colors"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Colored Concrete (integral color)",
+          "description": "Integral color additive mixed into concrete for uniform tone",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 2.00,
+          "isOptional": true,
+          "brands": ["Solomon Colors", "Butterfield Color"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Acid Stain Finish",
+          "description": "Chemical acid stain applied after cure for variegated color effect",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 4.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Step/Landing Pour",
+          "description": "Concrete step or landing poured integral with patio",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 450.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Sealer Application",
+          "description": "Protective sealer coat after 28-day cure",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 0.75,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "sidewalk",
+      "name": "Sidewalk",
+      "nameEs": "Acera",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Sidewalk Pour (4\" thick, 3000 PSI)",
+          "description": "Form, pour, and broom finish standard sidewalk",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 10.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition of Existing Sidewalk",
+          "description": "Break out and remove old sidewalk sections",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 3.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Subgrade Preparation",
+          "description": "Grade, compact, and add gravel base as needed",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Forming",
+          "description": "Set and stake forms for straight or curved sidewalk",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "linear ft",
+          "defaultPrice": 4.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Control Joints (sawcut)",
+          "description": "Sawcut control joints at proper spacing to control cracking",
+          "category": "labor",
+          "quantity": 15,
+          "unit": "each",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "ADA-Compliant Ramp",
+          "description": "Truncated dome detectable warning panel at curb transitions",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 750.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "foundation",
+      "name": "Foundation",
+      "nameEs": "Cimentacion",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Concrete Footing (4000 PSI)",
+          "description": "Excavate, form, reinforce, and pour continuous footing",
+          "category": "labor",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Stem Wall Pour",
+          "description": "Form and pour stem wall on top of footing",
+          "category": "labor",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Monolithic Slab (4\" thick)",
+          "description": "Pour monolithic slab with thickened edges at perimeter",
+          "category": "labor",
+          "quantity": 1000,
+          "unit": "sq ft",
+          "defaultPrice": 9.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Rebar (#4 and #5)",
+          "description": "Grade 60 rebar for footing and stem wall reinforcement",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "linear ft",
+          "defaultPrice": 2.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Vapor Barrier (10 mil)",
+          "description": "10-mil polyethylene vapor barrier under slab",
+          "category": "materials",
+          "quantity": 1000,
+          "unit": "sq ft",
+          "defaultPrice": 0.35,
+          "isOptional": false,
+          "brands": ["Stego", "W.R. Meadows"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Anchor Bolts",
+          "description": "1/2\" x 10\" J-bolts set in wet concrete per code spacing",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "each",
+          "defaultPrice": 8.50,
+          "isOptional": false,
+          "brands": ["Simpson Strong-Tie"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Forming (foundation)",
+          "description": "Build and set foundation forms with proper alignment",
+          "category": "labor",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Concrete Pump",
+          "description": "Boom or line pump for foundation pour access",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 950.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Compaction and Grading",
+          "description": "Machine compaction of subgrade before forming",
+          "category": "labor",
+          "quantity": 1000,
+          "unit": "sq ft",
+          "defaultPrice": 2.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "retaining_wall",
+      "name": "Retaining Wall",
+      "nameEs": "Muro de Contenci\u00f3n",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Poured Concrete Retaining Wall",
+          "description": "Form, reinforce, and pour solid concrete retaining wall",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "sq ft",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Footing for Retaining Wall",
+          "description": "Excavate and pour reinforced footing per engineering specs",
+          "category": "labor",
+          "quantity": 50,
+          "unit": "linear ft",
+          "defaultPrice": 28.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Block Retaining Wall (CMU)",
+          "description": "CMU block wall alternative, filled and reinforced with rebar",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "sq ft",
+          "defaultPrice": 25.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drainage Gravel Behind Wall",
+          "description": "Clean drainage gravel fill behind wall for hydrostatic relief",
+          "category": "materials",
+          "quantity": 50,
+          "unit": "linear ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drain Pipe (perforated)",
+          "description": "4-inch perforated drain pipe with filter sock at base of wall",
+          "category": "materials",
+          "quantity": 50,
+          "unit": "linear ft",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Rebar Reinforcement",
+          "description": "Vertical and horizontal rebar per structural engineer specs",
+          "category": "materials",
+          "quantity": 100,
+          "unit": "linear ft",
+          "defaultPrice": 3.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Waterproofing Membrane",
+          "description": "Waterproofing membrane applied to back face of wall below grade",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": ["W.R. Meadows", "Sika"]
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Engineering Plan (walls over 4 ft)",
+          "description": "Structural engineering design and stamped plans for permitting",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1500.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Quikrete",
+    "Sakrete",
+    "BASF (admixtures)",
+    "Sika",
+    "Bon Tool",
+    "Marshalltown",
+    "Kraft Tool",
+    "Brickform (stamps/colors)",
+    "Solomon Colors",
+    "Butterfield Color",
+    "Euclid Chemical",
+    "W.R. Meadows",
+    "Dayton Superior",
+    "Simpson Strong-Tie",
+    "Hilti",
+    "Wacker Neuson (compactors)"
+  ],
+  "terminologyGlossary": {
+    "PSI": "Pounds per square inch - the compressive strength rating of concrete",
+    "cubic yard": "Standard unit for ordering concrete; one cubic yard equals 27 cubic feet",
+    "slump": "A measure of concrete workability; higher slump means wetter, more flowable mix",
+    "rebar": "Steel reinforcing bars placed in concrete to add tensile strength",
+    "wire mesh": "Welded wire fabric used as reinforcement in flatwork like driveways and patios",
+    "fiber mesh": "Synthetic or steel fibers mixed into concrete to reduce surface cracking",
+    "control joint": "A groove cut or tooled into concrete to control where cracking occurs",
+    "expansion joint": "A flexible material placed between concrete sections to allow thermal movement",
+    "broom finish": "A standard non-slip texture created by dragging a broom across wet concrete",
+    "stamped concrete": "Decorative concrete with patterns pressed in while wet to mimic stone, brick, or tile",
+    "exposed aggregate": "A finish where the surface cement is washed away to reveal the stone underneath",
+    "curing": "The process of keeping concrete moist and at proper temperature to reach full strength",
+    "flatwork": "Any horizontal concrete surface such as driveways, patios, sidewalks, and floors",
+    "form": "Temporary structure (usually wood or metal) that holds wet concrete in the desired shape",
+    "monolithic slab": "A foundation type where the footing and slab are poured as one continuous piece"
+  },
+  "unitsOfMeasure": ["sq ft", "cubic yard", "linear ft", "each"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Ground is often saturated from winter rain. Ensure proper subgrade drainage and compaction before pouring. Great time to book driveways and patios." },
+    { "month": 6, "tip": "Hot weather accelerates curing - use evaporation retarders and cure compound. Schedule pours for early morning to avoid midday heat. Hydrate crews frequently." },
+    { "month": 9, "tip": "Ideal pouring temperatures (50-70 degrees). Last window before winter for most exterior concrete projects. Monitor overnight low temperatures." },
+    { "month": 12, "tip": "Concrete should not be poured when ground is frozen or temps will drop below 40 degrees within 48 hours. Use blankets and hot water in mix if winter pours are necessary. Focus on interior slab work." }
+  ],
+  "followUpToneNotes": "Concrete customers value durability and long-term performance. Be straightforward and technical. Emphasize proper prep work and the cost difference between doing it right versus patching failures later. Provide clear timelines since concrete work is weather-dependent and requires curing time before use."
+}

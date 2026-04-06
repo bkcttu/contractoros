@@ -1,0 +1,608 @@
+{
+  "slug": "painting",
+  "tradeName": "Painting",
+  "tradeNameEs": "Pintura",
+  "icon": "Paintbrush",
+  "aiPersona": "You are an expert painting contractor assistant with deep knowledge of residential and commercial painting.\nYou understand surface preparation including sanding, priming, caulking, and patching before any paint is applied.\nYou know the difference between latex and oil-based paints and when each is appropriate.\nYou can recommend sheen levels (flat, eggshell, satin, semi-gloss, high-gloss) based on room type and surface.\nYou understand that exterior jobs require weather-appropriate scheduling and UV-resistant coatings.\nYou are familiar with cabinet refinishing workflows including degreasing, scuff-sanding, priming, and multi-coat spray or brush application.\nYou know that deck and fence staining involves pressure washing, drying time, and penetrating vs. film-forming stains.\nYou understand commercial painting requirements such as low-VOC regulations, after-hours scheduling, and large-scale spraying.\nYou always account for prep work in estimates because it typically represents 60-70% of a quality paint job.\nYou can calculate paint coverage based on square footage, number of coats, and surface porosity.\nYou recommend two coats minimum for color changes and one coat for refreshing existing colors.\nYou know that trim, doors, and ceilings are often priced separately from wall square footage.\nYou factor in the cost of painter's tape, drop cloths, and other consumables.\nYou understand that high ceilings, stairwells, and intricate trim add labor time and cost.\nYou communicate clearly with homeowners about dry times, ventilation, and when furniture can be moved back.\nYou always recommend premium paints for high-traffic areas and exteriors to ensure longevity.\nYou understand spray vs. brush vs. roller application and when each method is best for the job.\nYou know that proper masking and protection of floors, fixtures, and landscaping is essential.",
+  "jobTypes": [
+    {
+      "id": "interior_paint",
+      "name": "Interior Paint",
+      "nameEs": "Pintura Interior",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Wall Painting (2 coats)",
+          "description": "Two coats of interior latex paint on walls, cut-in and roll",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 3.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Ceiling Painting (flat finish)",
+          "description": "Flat finish ceiling paint, one to two coats as needed",
+          "category": "labor",
+          "quantity": 250,
+          "unit": "sq ft",
+          "defaultPrice": 2.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Trim and Baseboard Painting",
+          "description": "Semi-gloss finish on baseboards, crown, and window trim",
+          "category": "labor",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 2.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Door Painting (both sides)",
+          "description": "Paint interior door both sides including jamb and casing",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Window Frame Painting",
+          "description": "Paint window frames, sills, and casings",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Primer Coat (walls)",
+          "description": "Primer coat on new drywall or for major color changes",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 1.25,
+          "isOptional": true,
+          "brands": ["Zinsser", "Kilz", "Sherwin-Williams"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Wall Repair/Patch Before Painting",
+          "description": "Fill nail holes, patch small dents, sand smooth before painting",
+          "category": "labor",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Caulking Gaps and Seams",
+          "description": "Caulk gaps at trim joints, baseboards, and window casings for clean lines",
+          "category": "labor",
+          "quantity": 80,
+          "unit": "linear ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Interior Paint (per room)",
+          "description": "Premium interior latex paint, color-matched, two coats coverage",
+          "category": "materials",
+          "quantity": 3,
+          "unit": "room",
+          "defaultPrice": 185.00,
+          "isOptional": false,
+          "brands": ["Sherwin-Williams", "Benjamin Moore", "Behr"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Painter's Tape, Drop Cloths, Supplies",
+          "description": "Masking tape, drop cloths, plastic sheeting, roller covers, and brush set",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": ["FrogTape", "3M", "Purdy"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Accent Wall (dark/bold color)",
+          "description": "Feature wall with dark or bold color requiring additional coats",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 4.25,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "exterior_paint",
+      "name": "Exterior Paint",
+      "nameEs": "Pintura Exterior",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Exterior Wall Painting (2 coats)",
+          "description": "Two coats exterior acrylic latex on siding, stucco, or wood",
+          "category": "labor",
+          "quantity": 1500,
+          "unit": "sq ft",
+          "defaultPrice": 4.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Fascia and Soffit Painting",
+          "description": "Paint fascia boards and soffit panels, ladder/scaffolding access",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 3.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Exterior Trim Painting",
+          "description": "Window trim, corner boards, and other exterior trim elements",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "linear ft",
+          "defaultPrice": 3.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pressure Washing (prep)",
+          "description": "Pressure wash all surfaces to remove dirt, mildew, and loose paint",
+          "category": "labor",
+          "quantity": 1500,
+          "unit": "sq ft",
+          "defaultPrice": 0.35,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Scraping and Sanding (prep)",
+          "description": "Hand scrape and sand peeling or flaking areas back to sound surface",
+          "category": "labor",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 1.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Exterior Primer Coat",
+          "description": "Spot-prime or full-prime bare wood and repaired areas",
+          "category": "labor",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": ["Zinsser", "Kilz"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Garage Door Painting",
+          "description": "Paint garage door face, typically one to two coats",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shutter Painting",
+          "description": "Paint individual shutters, both sides, removed or in place",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Front Door Painting",
+          "description": "Paint front entry door including jamb and weather stripping mask-off",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Caulking Exterior Gaps",
+          "description": "Caulk around windows, doors, trim joints, and penetrations",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 2.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior Paint",
+          "description": "Premium exterior acrylic latex paint with UV and mildew resistance",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "gallon",
+          "defaultPrice": 65.00,
+          "isOptional": false,
+          "brands": ["Sherwin-Williams", "Benjamin Moore", "Dunn-Edwards"]
+        }
+      ]
+    },
+    {
+      "id": "cabinet_refinish",
+      "name": "Cabinet Refinish",
+      "nameEs": "Repintado de Gabinetes",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Cabinet Door Refinishing",
+          "description": "Sand, prime, and spray two coats on each cabinet door",
+          "category": "labor",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drawer Front Refinishing",
+          "description": "Sand, prime, and spray two coats on each drawer front",
+          "category": "labor",
+          "quantity": 10,
+          "unit": "each",
+          "defaultPrice": 55.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Cabinet Frame/Box Painting",
+          "description": "Paint exposed cabinet frames and interior edges where visible",
+          "category": "labor",
+          "quantity": 30,
+          "unit": "linear ft",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Degreasing and Cleaning",
+          "description": "TSP wash and degrease all cabinet surfaces before sanding",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 250.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Sanding and Scuffing",
+          "description": "120-180 grit scuff sand for adhesion on all surfaces",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Bonding Primer Application",
+          "description": "Spray bonding primer coat for maximum adhesion to slick surfaces",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 400.00,
+          "isOptional": false,
+          "brands": ["Zinsser", "Kilz", "Sherwin-Williams"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hardware Removal and Reinstall",
+          "description": "Remove hinges, pulls, and knobs before painting and reinstall after cure",
+          "category": "labor",
+          "quantity": 30,
+          "unit": "each",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Cabinet-Grade Paint Materials",
+          "description": "Cabinet-grade enamel paint, bonding primer, sandpaper, and supplies",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": ["Benjamin Moore Advance", "Sherwin-Williams ProClassic", "PPG Breakthrough"]
+        }
+      ]
+    },
+    {
+      "id": "deck_fence_stain",
+      "name": "Deck/Fence Stain",
+      "nameEs": "Tintura de Terraza/Cerca",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Deck Staining (2 coats)",
+          "description": "Apply two coats of penetrating or film-forming deck stain",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 3.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Fence Staining (both sides)",
+          "description": "Spray and back-brush stain on both sides of fence",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "linear ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pressure Washing Deck",
+          "description": "Pressure wash deck to remove dirt, mildew, and old stain",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 0.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pressure Washing Fence",
+          "description": "Pressure wash fence panels and posts",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "linear ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Brightener Application",
+          "description": "Apply wood brightener/neutralizer after washing for even stain absorption",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 0.40,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Railing Staining",
+          "description": "Stain deck railings, balusters, and post caps",
+          "category": "labor",
+          "quantity": 50,
+          "unit": "linear ft",
+          "defaultPrice": 4.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Stain Materials",
+          "description": "Exterior deck/fence stain, penetrating or semi-transparent",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "gallon",
+          "defaultPrice": 55.00,
+          "isOptional": false,
+          "brands": ["Cabot", "TWP", "Benjamin Moore Arborcoat", "Sherwin-Williams SuperDeck"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Minor Wood Repair Before Staining",
+          "description": "Replace cracked or split boards, re-nail loose boards",
+          "category": "labor",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "commercial",
+      "name": "Commercial",
+      "nameEs": "Comercial",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Commercial Wall Painting",
+          "description": "Large-area wall painting using airless spray and back-roll method",
+          "category": "labor",
+          "quantity": 5000,
+          "unit": "sq ft",
+          "defaultPrice": 2.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Commercial Ceiling Painting",
+          "description": "Spray flat ceiling paint in open office or retail space",
+          "category": "labor",
+          "quantity": 5000,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hallway/Corridor Painting",
+          "description": "Paint corridors and common areas, often requires durable finishes",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "linear ft",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Office Suite Painting",
+          "description": "Full paint of individual office suite including walls, trim, and doors",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "room",
+          "defaultPrice": 650.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Restroom Painting",
+          "description": "Semi-gloss moisture-resistant paint for commercial restrooms",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 425.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Epoxy Floor Coating",
+          "description": "Two-part epoxy floor system for warehouse, shop, or garage areas",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 5.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "After-Hours Labor Premium",
+          "description": "Premium rate for work performed evenings/weekends to avoid business disruption",
+          "category": "labor",
+          "quantity": 8,
+          "unit": "hour",
+          "defaultPrice": 75.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Commercial-Grade Paint",
+          "description": "Low-VOC commercial-grade interior paint, color matched",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "gallon",
+          "defaultPrice": 55.00,
+          "isOptional": false,
+          "brands": ["Sherwin-Williams", "PPG", "Benjamin Moore"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Low-VOC Paint Upgrade",
+          "description": "Upgrade to zero-VOC paint for LEED or sensitive environments",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "gallon",
+          "defaultPrice": 15.00,
+          "isOptional": true,
+          "brands": ["Benjamin Moore Natura", "Sherwin-Williams Harmony"]
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Sherwin-Williams",
+    "Benjamin Moore",
+    "Behr",
+    "PPG",
+    "Dunn-Edwards",
+    "Valspar",
+    "Glidden",
+    "Pratt & Lambert",
+    "California Paints",
+    "Farrow & Ball",
+    "Zinsser (primers)",
+    "Kilz (primers)",
+    "Purdy (brushes/rollers)",
+    "Wooster (brushes/rollers)",
+    "Graco (sprayers)",
+    "Wagner (sprayers)",
+    "3M (tape/sandpaper)",
+    "FrogTape",
+    "Cabot (stains)",
+    "TWP (stains)"
+  ],
+  "terminologyGlossary": {
+    "sheen": "The level of shine in a paint finish, ranging from flat to high-gloss",
+    "cutting in": "Painting a straight edge along trim, ceiling lines, or corners using a brush before rolling",
+    "mil thickness": "Measurement of paint film thickness; one mil equals one-thousandth of an inch",
+    "VOC": "Volatile Organic Compounds - chemicals in paint that evaporate and affect air quality",
+    "primer": "A preparatory coating applied before paint to improve adhesion and coverage",
+    "latex paint": "Water-based paint that is easy to clean up and dries quickly",
+    "oil-based paint": "Alkyd paint that provides a harder, more durable finish but requires mineral spirits for cleanup",
+    "eggshell": "A slight sheen finish between flat and satin, popular for living rooms and bedrooms",
+    "semi-gloss": "A moderately shiny finish ideal for trim, doors, kitchens, and bathrooms",
+    "back-rolling": "Rolling over a sprayed surface immediately to ensure even coverage and adhesion",
+    "flashing": "Uneven sheen on a painted surface caused by inconsistent application or surface porosity",
+    "feathering": "Blending the edges of a paint repair to match the surrounding area seamlessly",
+    "tack cloth": "A sticky cloth used to remove dust from surfaces before painting",
+    "bonding primer": "A specialty primer designed to adhere to slick surfaces like cabinets or laminate",
+    "dry time vs cure time": "Dry time is when paint is dry to touch; cure time is when it reaches full hardness (usually 30 days)"
+  },
+  "unitsOfMeasure": ["sq ft", "linear ft", "each", "room", "gallon", "hour", "job"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Ideal time to start exterior painting projects once temperatures consistently stay above 50°F. Book early as spring is peak season." },
+    { "month": 6, "tip": "Avoid painting exterior surfaces in direct sunlight or extreme heat above 90°F as paint can dry too quickly and blister. Early morning starts are best." },
+    { "month": 9, "tip": "Last chance for exterior projects before temperatures drop. Ensure paint has time to cure before overnight lows hit the 30s." },
+    { "month": 12, "tip": "Focus on interior painting projects. Ensure adequate ventilation and humidity control for proper drying. Great time for cabinet refinishing." }
+  ],
+  "followUpToneNotes": "Painting customers often care about color selection and aesthetics. Be warm and consultative. Emphasize prep work quality and the longevity of a professional finish versus DIY. Offer color consultation as a value-add. Follow up with photos of completed work when possible."
+}

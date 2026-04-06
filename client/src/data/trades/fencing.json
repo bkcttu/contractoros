@@ -1,0 +1,507 @@
+{
+  "slug": "fencing",
+  "tradeName": "Fencing",
+  "tradeNameEs": "Cercas",
+  "icon": "Fence",
+  "aiPersona": "You are an expert fencing contractor assistant with deep knowledge of residential and commercial fence installation and repair.\nYou understand all major fence types including wood privacy, cedar, chain link, ornamental iron, aluminum, vinyl/PVC, and composite.\nYou know that wood privacy fences are the most popular residential option and that cedar and redwood naturally resist rot while pressure-treated pine is the budget option.\nYou understand board styles including dog-ear, flat-top, board-on-board, shadowbox, and horizontal slat designs.\nYou know that post spacing is typically 8 feet on center for most fence styles and that corner and gate posts need extra reinforcement.\nYou understand that fence posts should be set in concrete with a minimum depth of one-third the above-ground height, and at least 24 inches in most jurisdictions.\nYou are familiar with post materials including pressure-treated 4x4, 6x6 for gates, steel posts for chain link, and galvanized or powder-coated metal for ornamental fencing.\nYou know that chain link fences require tension wire, top rail, line posts, terminal posts, tension bands, and fabric ties.\nYou understand that ornamental iron and aluminum fencing comes in pre-fabricated panels and requires precise layout and leveling.\nYou know that vinyl fencing is low maintenance but more expensive upfront, and that it can become brittle in extreme cold.\nYou always check for underground utilities before digging post holes by calling 811 or the local one-call service.\nYou understand setback requirements, property line surveys, and HOA restrictions that affect fence placement and style.\nYou know that gates require proper hardware including heavy-duty hinges, latches, and self-closing mechanisms for pool code compliance.\nYou factor in grade changes and terrain — stepped fencing for steep slopes and racked panels where the ground slopes gradually.\nYou understand permit requirements for fence height (typically 6 feet for backyard, 4 feet for front yard) and pool barrier codes.\nYou price fencing by linear foot for standard runs and per-unit for gates, corners, and end posts.\nYou account for old fence removal and disposal when doing replacement work.",
+  "jobTypes": [
+    {
+      "id": "wood_privacy",
+      "name": "Wood Privacy",
+      "nameEs": "Cerca de Madera Privada",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Cedar or PT Pine Fence Boards",
+          "description": "1x6 dog-ear or flat-top fence boards, cedar or pressure-treated",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fence Posts (4x4 pressure-treated)",
+          "description": "4x4x8 pressure-treated posts, ground contact rated",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Horizontal Rails (2x4)",
+          "description": "2x4 pressure-treated top and bottom rails between posts",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "each",
+          "defaultPrice": 9.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Post Concrete",
+          "description": "Quick-setting concrete for post setting, 2 bags per post",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "each",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": ["Quikrete", "Sakrete"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Post Caps",
+          "description": "Decorative or flat post caps for finished appearance",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 5.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Hardware (screws, brackets, nails)",
+          "description": "Galvanized or stainless screws, brackets, and fasteners",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": ["GRK", "Simpson Strong-Tie"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Fence Installation Labor",
+          "description": "Dig post holes, set posts, install rails and boards, plumb and level",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 15.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Gate Build and Install",
+          "description": "Build and install standard single-swing gate with hardware",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Old Fence Removal and Disposal",
+          "description": "Remove existing fence, pull posts, and haul away debris",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 4.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Stain or Seal (new fence)",
+          "description": "Apply penetrating stain or water sealer to newly installed fence",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 3.00,
+          "isOptional": true,
+          "brands": ["Cabot", "TWP", "Ready Seal"]
+        }
+      ]
+    },
+    {
+      "id": "chain_link",
+      "name": "Chain Link",
+      "nameEs": "Cerca de Malla Ciclonica",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Chain Link Fabric (galvanized or vinyl-coated)",
+          "description": "11-gauge chain link fabric, 6 ft height, galvanized or black vinyl",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 5.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Terminal Posts (corners/ends/gates)",
+          "description": "2-3/8 inch galvanized terminal posts with concrete",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Line Posts",
+          "description": "1-5/8 inch galvanized line posts at 10 ft spacing",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Top Rail",
+          "description": "1-3/8 inch galvanized top rail pipe",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fittings and Hardware",
+          "description": "Tension bands, brace bands, tie wires, tension bars, rail caps",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Chain Link Installation",
+          "description": "Set posts, install top rail, stretch and tie fabric",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Chain Link Gate Install",
+          "description": "Install single-swing chain link gate with latch and hinges",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "iron_metal",
+      "name": "Iron/Metal",
+      "nameEs": "Cerca de Hierro/Metal",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Ornamental Iron Fence Panels",
+          "description": "Pre-fabricated ornamental iron or aluminum panels, 6 ft sections",
+          "category": "materials",
+          "quantity": 25,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": ["Ameristar", "Jerith", "Fortress", "Ultra Aluminum"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Metal Fence Posts",
+          "description": "Steel or aluminum posts with mounting brackets",
+          "category": "materials",
+          "quantity": 26,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": ["Ameristar", "Jerith"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Post Concrete",
+          "description": "Quick-setting concrete for metal post setting",
+          "category": "materials",
+          "quantity": 52,
+          "unit": "each",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": ["Quikrete"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Hardware and Brackets",
+          "description": "Panel brackets, screws, and mounting hardware",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 200.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Iron Fence Installation",
+          "description": "Set posts, level, and mount ornamental fence panels",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Iron Gate Install",
+          "description": "Install ornamental iron gate with self-closing hinges and latch",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Pool Code Compliance Upgrade",
+          "description": "Self-closing, self-latching gate hardware per pool barrier code",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "vinyl",
+      "name": "Vinyl",
+      "nameEs": "Cerca de Vinilo",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Vinyl Fence Panels (6 ft privacy)",
+          "description": "6 ft tall white or tan vinyl privacy panels, 8 ft sections",
+          "category": "materials",
+          "quantity": 19,
+          "unit": "each",
+          "defaultPrice": 95.00,
+          "isOptional": false,
+          "brands": ["ActiveYards", "Bufftech", "Homeland Vinyl", "Veranda"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Vinyl Fence Posts",
+          "description": "5x5 vinyl posts with aluminum or steel internal reinforcement",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 42.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Post Concrete",
+          "description": "Quick-set concrete for vinyl post installation",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "each",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": ["Quikrete"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Post Caps and Trim",
+          "description": "Matching post caps and any trim pieces for gate openings",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Vinyl Fence Installation",
+          "description": "Dig post holes, set posts in concrete, assemble and mount panels",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "linear ft",
+          "defaultPrice": 14.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Vinyl Gate Install",
+          "description": "Install vinyl gate with matching hardware and latch",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 375.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "gate_install",
+      "name": "Gate Install",
+      "nameEs": "Instalacion de Puerta",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Single Swing Gate (wood)",
+          "description": "Custom-built single swing wood gate to match existing fence",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 225.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Double Swing Gate (wood)",
+          "description": "Double-wide driveway gate, wood construction",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gate Posts (6x6 heavy-duty)",
+          "description": "6x6 pressure-treated posts for gate support, extra depth concrete",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gate Hardware (hinges, latch, drop rod)",
+          "description": "Heavy-duty strap or T-hinges, thumb latch, and drop rod for double gate",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": ["Stanley", "National Hardware"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Anti-Sag Gate Kit",
+          "description": "Steel cable anti-sag kit for wide or heavy gates",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Gate Build and Installation",
+          "description": "Build, hang, and align gate with proper swing clearance",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Self-Closing Hinge Upgrade",
+          "description": "Spring-loaded self-closing hinges for pool code or convenience",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Gate Automation (electric opener)",
+          "description": "Electric gate opener for driveway gates with remote control",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200.00,
+          "isOptional": true,
+          "brands": ["LiftMaster", "Mighty Mule", "US Automatic"]
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Ameristar",
+    "Jerith",
+    "Fortress",
+    "ActiveYards",
+    "Bufftech",
+    "Homeland Vinyl",
+    "Veranda",
+    "Ultra Aluminum",
+    "Master Halco",
+    "Simpson Strong-Tie",
+    "GRK (fasteners)",
+    "Stanley (hardware)",
+    "National Hardware",
+    "Quikrete",
+    "Sakrete",
+    "Cabot (stain)",
+    "TWP (stain)",
+    "Ready Seal",
+    "LiftMaster (gate openers)"
+  ],
+  "terminologyGlossary": {
+    "dog-ear": "A fence board style with two angled cuts at the top corners creating a pointed shape",
+    "board-on-board": "A privacy fence style where boards overlap on alternating sides for full coverage from both directions",
+    "shadowbox": "A semi-private fence style with alternating boards on each side, allowing some airflow and light",
+    "terminal post": "A heavier post used at corners, ends, and gates that bears more structural load",
+    "line post": "Standard posts placed at regular intervals between terminal posts to support the fence",
+    "post cap": "A decorative or protective cap placed on top of fence posts to prevent water entry",
+    "rail": "Horizontal structural member connecting posts that fence boards or panels attach to",
+    "picket": "Individual vertical fence boards, especially in shorter decorative fences",
+    "racked panel": "A fence panel designed to follow the slope of the ground while keeping pickets vertical",
+    "stepped fence": "A fence installation method where level panels step down with the terrain on steep slopes",
+    "tension wire": "A wire stretched along the bottom of chain link fence to prevent fabric from being pushed up",
+    "setback": "The required distance a fence must be from the property line per local building codes",
+    "frost line": "The depth at which ground freezes, determining minimum post hole depth for stability",
+    "self-closing hinge": "A spring-loaded hinge that automatically closes a gate, required by pool barrier codes"
+  },
+  "unitsOfMeasure": ["linear ft", "each", "job", "set"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring is peak fence season. Ground is thawing and homeowners are planning outdoor projects. Book early to fill the schedule." },
+    { "month": 6, "tip": "Summer storms can damage fences. Market repair services and be ready for emergency calls. Ensure crews stay hydrated in heat." },
+    { "month": 9, "tip": "Fall is ideal for fence installation with cooler temps and stable ground. Push staining and sealing before winter weather arrives." },
+    { "month": 12, "tip": "Winter is typically slow for fencing. Focus on estimates and bookings for spring. Frozen ground makes digging difficult in cold climates." }
+  ],
+  "followUpToneNotes": "Fence customers care about privacy, security, and curb appeal. Be practical and straightforward. Help them understand material trade-offs between cost and longevity. Always mention checking property lines and calling 811 before digging. Discuss HOA requirements early to avoid surprises. Gate options are a great upsell opportunity."
+}

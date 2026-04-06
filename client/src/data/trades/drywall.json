@@ -1,0 +1,517 @@
+{
+  "slug": "drywall",
+  "tradeName": "Drywall",
+  "tradeNameEs": "Tablaroca",
+  "icon": "Layers",
+  "aiPersona": "You are an expert drywall contractor assistant with deep knowledge of residential and commercial drywall installation, finishing, and repair.\nYou understand drywall board types including standard 1/2-inch, 5/8-inch fire-rated (Type X), moisture-resistant (green board), and mold-resistant (purple board).\nYou know standard sheet sizes are 4x8 and 4x12, and that 4x12 sheets reduce the number of butt joints on long walls.\nYou are familiar with all six levels of drywall finish from Level 0 (no finish) through Level 5 (skim coat) and when each is appropriate.\nYou understand the difference between all-purpose joint compound, lightweight compound, setting-type (hot mud), and topping compound.\nYou know that taping is done with paper tape or fiberglass mesh tape, and that paper tape is stronger at corners and flat joints.\nYou are experienced with texture styles including knockdown, orange peel, skip trowel, smooth finish, popcorn, and hand-applied textures.\nYou understand that popcorn ceiling removal involves testing for asbestos first and requires proper containment if present.\nYou know that water-damaged drywall must be cut back to dry, sound material and that the source of water must be fixed before repair.\nYou can estimate materials accurately — a standard 4x8 sheet covers 32 square feet, and you always add 10-15 percent for waste and cuts.\nYou understand that hanging drywall on ceilings requires more labor than walls, and that scaffolding or stilts may be needed for high ceilings.\nYou know that corner bead comes in metal, vinyl, and paper-faced options, each with different performance characteristics.\nYou price finishing work by the number of coats — typically three coats of mud plus sanding between coats for a smooth finish.\nYou factor in dust control and cleanup, which is a significant concern for occupied homes.\nYou understand that soundproofing upgrades involve double layers of drywall, Green Glue compound, and resilient channel.\nYou communicate clearly with homeowners about the multi-day timeline for hanging, taping, mudding, sanding, and priming.\nYou know that drywall must be acclimated to the job site before installation and that temperature and humidity affect drying times.",
+  "jobTypes": [
+    {
+      "id": "new_hang",
+      "name": "New Hang",
+      "nameEs": "Instalacion Nueva",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Drywall Sheets (1/2\" standard, 4x8)",
+          "description": "Standard 1/2-inch gypsum board, 4x8 sheets for walls",
+          "category": "materials",
+          "quantity": 50,
+          "unit": "sheet",
+          "defaultPrice": 14.00,
+          "isOptional": false,
+          "brands": ["USG Sheetrock", "National Gypsum", "Georgia-Pacific", "CertainTeed"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drywall Sheets (5/8\" Type X, 4x8)",
+          "description": "5/8-inch fire-rated Type X board for garage ceilings and rated assemblies",
+          "category": "materials",
+          "quantity": 10,
+          "unit": "sheet",
+          "defaultPrice": 18.00,
+          "isOptional": true,
+          "brands": ["USG Sheetrock", "National Gypsum"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Joint Compound (all-purpose)",
+          "description": "All-purpose pre-mixed joint compound, 4.5-gallon bucket",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": ["USG Plus 3", "ProForm"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Paper Joint Tape",
+          "description": "Paper drywall tape for flat joints and inside corners",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 5.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Corner Bead (metal or paper-faced)",
+          "description": "Outside corner bead for all exposed outside corners",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "linear ft",
+          "defaultPrice": 1.25,
+          "isOptional": false,
+          "brands": ["Trim-Tex", "USG"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drywall Screws",
+          "description": "1-1/4\" coarse-thread drywall screws, box of 1000",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall Hanging (walls)",
+          "description": "Measure, cut, and screw drywall sheets to wall studs",
+          "category": "labor",
+          "quantity": 1600,
+          "unit": "sq ft",
+          "defaultPrice": 1.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall Hanging (ceilings)",
+          "description": "Hang drywall on ceiling joists, requires lift or extra labor",
+          "category": "labor",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 1.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Taping and Finishing (3 coats)",
+          "description": "Tape all joints and corners, apply three coats of mud with sanding",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Final Sanding and Dust Cleanup",
+          "description": "Final sand smooth, vacuum dust, and wipe surfaces for paint-ready finish",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 0.35,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "repair_patch",
+      "name": "Repair/Patch",
+      "nameEs": "Reparacion/Parche",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Small Patch (up to 6 inches)",
+          "description": "Patch small holes from doorknobs, anchors, or minor damage",
+          "category": "labor",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 65.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Medium Patch (6-24 inches)",
+          "description": "Cut out damaged area, install backer, patch with new drywall piece",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 145.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Large Patch (full sheet replacement)",
+          "description": "Remove and replace full sheet or half sheet of damaged drywall",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Crack Repair (stress/settling cracks)",
+          "description": "Route, tape, and mud settling or stress cracks in walls/ceilings",
+          "category": "labor",
+          "quantity": 20,
+          "unit": "linear ft",
+          "defaultPrice": 8.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Texture Matching",
+          "description": "Match existing wall texture on repaired areas to blend seamlessly",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Patch Materials",
+          "description": "Drywall piece, setting compound, tape, sandpaper, and mesh patch kit",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Prime Repaired Areas",
+          "description": "Apply PVA primer to all repaired areas for uniform paint absorption",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "texture",
+      "name": "Texture",
+      "nameEs": "Textura",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Knockdown Texture",
+          "description": "Spray and knock down texture on walls or ceilings",
+          "category": "labor",
+          "quantity": 1000,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Orange Peel Texture",
+          "description": "Spray orange peel texture for a light, uniform stipple finish",
+          "category": "labor",
+          "quantity": 1000,
+          "unit": "sq ft",
+          "defaultPrice": 1.25,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Skip Trowel Texture",
+          "description": "Hand-applied skip trowel texture for a Mediterranean or rustic look",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 2.25,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Smooth Finish (Level 5 skim coat)",
+          "description": "Full skim coat with thin layer of compound for perfectly smooth walls",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Popcorn Ceiling Removal",
+          "description": "Scrape popcorn texture, skim coat, and sand smooth. Assumes non-asbestos.",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 2.75,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Texture Compound and Supplies",
+          "description": "Texture compound, hopper gun supplies, plastic sheeting for masking",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Floor and Fixture Protection",
+          "description": "Mask and protect floors, fixtures, and openings from texture overspray",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 200.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "full_remodel",
+      "name": "Full Remodel",
+      "nameEs": "Remodelacion Completa",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Demo Existing Drywall",
+          "description": "Remove existing drywall, inspect framing, and haul away debris",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 1.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drywall Sheets (mixed sizes)",
+          "description": "1/2\" standard and 5/8\" Type X sheets as required by code",
+          "category": "materials",
+          "quantity": 65,
+          "unit": "sheet",
+          "defaultPrice": 15.00,
+          "isOptional": false,
+          "brands": ["USG Sheetrock", "National Gypsum"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Moisture-Resistant Board (green/purple)",
+          "description": "Moisture-resistant drywall for bathroom and kitchen wet areas",
+          "category": "materials",
+          "quantity": 10,
+          "unit": "sheet",
+          "defaultPrice": 20.00,
+          "isOptional": true,
+          "brands": ["USG Sheetrock", "Georgia-Pacific DensArmor"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Joint Compound and Tape",
+          "description": "All-purpose compound, topping compound, paper tape, and corner bead",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 225.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hang Drywall (walls and ceilings)",
+          "description": "Full hang of all walls and ceilings in remodel area",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Tape, Mud, and Sand (3 coats)",
+          "description": "Full tape and finish to Level 4 standard, three coats with sanding",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Texture Application",
+          "description": "Apply specified texture style to match existing or per design",
+          "category": "labor",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 1.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Cleanup and Dust Control",
+          "description": "Dust containment barriers, HEPA vacuum, and final cleanup",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "water_damage",
+      "name": "Water Damage",
+      "nameEs": "Dano por Agua",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Cut Out Water-Damaged Drywall",
+          "description": "Cut back damaged drywall to dry, sound material and remove debris",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 3.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Mold Assessment and Prep",
+          "description": "Inspect framing for mold, treat with antimicrobial if minor. Major mold requires specialist.",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 250.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Moisture-Resistant Drywall Replacement",
+          "description": "Mold-resistant purple board for replacement in water-prone areas",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "sheet",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": ["USG Sheetrock", "Georgia-Pacific DensArmor"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hang Replacement Drywall",
+          "description": "Install new drywall to replace water-damaged sections",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 2.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Tape, Mud, and Finish Repairs",
+          "description": "Tape and finish seams between new and existing drywall",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 2.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Texture Match",
+          "description": "Match existing texture on repaired areas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 225.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Stain-Block Primer",
+          "description": "Apply stain-blocking primer to prevent water stain bleed-through",
+          "category": "labor",
+          "quantity": 100,
+          "unit": "sq ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": ["Zinsser B-I-N", "Kilz Original"]
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "USG Sheetrock",
+    "National Gypsum",
+    "Georgia-Pacific",
+    "CertainTeed",
+    "American Gypsum",
+    "Continental Building Products",
+    "Trim-Tex (corner bead)",
+    "USG Plus 3 (compound)",
+    "ProForm (compound)",
+    "Hamilton (finishing tools)",
+    "Marshalltown (trowels)",
+    "DeWalt (screw guns)",
+    "Makita (screw guns)",
+    "Festool (sanders)",
+    "Hyde Tools",
+    "Zinsser (primers)"
+  ],
+  "terminologyGlossary": {
+    "Type X": "5/8-inch fire-rated drywall required by code for garage ceilings and rated wall assemblies",
+    "green board": "Moisture-resistant drywall with green paper facing, for damp areas but not direct water contact",
+    "purple board": "Mold and moisture resistant drywall, suitable for bathrooms, basements, and laundry rooms",
+    "butt joint": "The seam where two non-tapered drywall edges meet, requiring more mud to finish flat",
+    "tapered edge": "The factory-recessed long edge of drywall that allows tape and mud to sit flush",
+    "setting compound": "Chemical-setting joint compound (hot mud) that hardens by reaction, not drying, for fast repairs",
+    "all-purpose compound": "Pre-mixed drywall mud suitable for bedding tape, filling, and finish coats",
+    "topping compound": "Lightweight finish compound for final coats, easier to sand than all-purpose",
+    "Level 4 finish": "Standard finish with tape and three coats of compound, suitable for flat or light texture paint",
+    "Level 5 finish": "Premium smooth finish with a skim coat over Level 4, required for gloss paint or critical lighting",
+    "knockdown": "Spray texture that is flattened with a knife while wet for a mottled, Mediterranean look",
+    "orange peel": "Light spray texture resembling the skin of an orange, common in modern construction",
+    "skip trowel": "Hand-applied texture using a curved knife to leave random raised areas",
+    "corner bead": "Reinforcing strip installed on outside drywall corners to create a clean, durable edge",
+    "back blocking": "Supporting a drywall joint from behind with a piece of plywood or drywall for butt joints",
+    "resilient channel": "Metal furring strip that decouples drywall from framing for sound isolation"
+  },
+  "unitsOfMeasure": ["sheet", "sq ft", "linear ft", "each", "job"],
+  "seasonalTips": [
+    { "month": 1, "tip": "Cold weather slows compound drying. Ensure heat is running in the workspace and allow extra dry time between coats." },
+    { "month": 4, "tip": "Spring remodels are ramping up. Stock up on materials and book subcontractors early for new construction and renovations." },
+    { "month": 7, "tip": "High humidity slows drying and can cause compound to sag. Run dehumidifiers and fans to maintain proper conditions." },
+    { "month": 10, "tip": "Good conditions for interior work. Push drywall projects before the holiday slowdown. Ideal temperature and humidity for fast finishing." }
+  ],
+  "followUpToneNotes": "Drywall customers want to know their walls will look flawless when painted. Emphasize your finishing quality and the number of coats. Explain the difference between a Level 4 and Level 5 finish. Be upfront about the dust and timeline involved. Mention your dust control methods to put homeowners at ease."
+}

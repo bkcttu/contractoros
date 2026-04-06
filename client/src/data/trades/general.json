@@ -1,0 +1,595 @@
+{
+  "slug": "general",
+  "tradeName": "General Contractor",
+  "tradeNameEs": "Contratista General",
+  "icon": "Hammer",
+  "aiPersona": "You are an expert general contractor assistant with broad knowledge spanning all residential construction and remodeling trades.\nYou understand how to coordinate multiple subcontractors including plumbers, electricians, HVAC techs, drywall crews, painters, and flooring installers.\nYou know the typical sequence of construction — demo, rough framing, mechanical rough-ins, inspection, insulation, drywall, finish work, paint, flooring, fixtures, final inspection.\nYou understand building codes, permit requirements, and the inspection process for residential remodels and additions.\nYou can estimate projects that span multiple trades and know where the cost drivers are in each phase.\nYou are familiar with kitchen remodel workflows including cabinet ordering lead times, countertop templating, appliance rough-ins, and backsplash timing.\nYou understand bathroom remodel sequences including plumbing rough-in, waterproofing, tile work, vanity install, and fixture hookup.\nYou know that room additions require foundation work, framing, roofing tie-in, and matching existing finishes.\nYou understand garage conversions including insulation requirements, HVAC extension, electrical upgrades, and egress window requirements.\nYou are experienced with deck builds including footings, ledger board attachment, framing, decking material selection, and railing code requirements.\nYou know that change orders are a major source of disputes and you always document scope clearly in estimates.\nYou understand the difference between cost-plus and fixed-price contracts and when each is appropriate.\nYou factor in general conditions including dumpster rental, portable toilet, temporary power, and project management time.\nYou know that material lead times can make or break a project schedule and you always order long-lead items first.\nYou communicate timelines realistically and build in buffer for weather delays and inspection waits.\nYou help contractors build comprehensive estimates that protect their margins while being competitive.\nYou understand lien waivers, insurance requirements, and contractor licensing obligations.",
+  "jobTypes": [
+    {
+      "id": "kitchen_remodel",
+      "name": "Kitchen Remodel",
+      "nameEs": "Remodelacion de Cocina",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition",
+          "description": "Remove existing cabinets, countertops, flooring, and backsplash. Protect adjacent areas.",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Cabinets (base and wall)",
+          "description": "Semi-custom kitchen cabinets, full overlay, soft-close hinges and drawers",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 8500.00,
+          "isOptional": false,
+          "brands": ["KraftMaid", "Merillat", "Waypoint", "Fabuwood"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Countertops (quartz or granite)",
+          "description": "Fabricated and installed stone countertops with undermount sink cutout",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "sq ft",
+          "defaultPrice": 75.00,
+          "isOptional": false,
+          "brands": ["Caesarstone", "Silestone", "Cambria", "MSI"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Plumbing Rough-In and Hookup",
+          "description": "Move or add water supply and drain lines for new layout, connect fixtures",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2200.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Electrical Work",
+          "description": "Add circuits, outlets (GFCI), under-cabinet lighting, and appliance connections",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2800.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Flooring Installation",
+          "description": "Install new kitchen flooring (LVP, tile, or hardwood)",
+          "category": "labor",
+          "quantity": 150,
+          "unit": "sq ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Backsplash Tile Installation",
+          "description": "Install tile backsplash including layout, setting, and grouting",
+          "category": "labor",
+          "quantity": 30,
+          "unit": "sq ft",
+          "defaultPrice": 18.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Painting",
+          "description": "Paint walls, ceiling, and trim in kitchen area",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Sink and Faucet",
+          "description": "Undermount stainless steel sink with single-handle faucet",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 550.00,
+          "isOptional": false,
+          "brands": ["Kohler", "Moen", "Delta", "Kraus"]
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit",
+          "description": "Building permit for kitchen remodel (plumbing, electrical, structural if applicable)",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Dumpster Rental",
+          "description": "20-yard dumpster for demolition debris, 7-day rental",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 475.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Project Management",
+          "description": "Scheduling, coordination of subs, inspections, and customer communication",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2500.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "bathroom_remodel",
+      "name": "Bathroom Remodel",
+      "nameEs": "Remodelacion de Bano",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Demolition",
+          "description": "Remove existing fixtures, tile, vanity, and flooring",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Plumbing Rough-In",
+          "description": "Relocate or add supply, drain, and vent lines for new layout",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1800.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Electrical Work",
+          "description": "GFCI outlets, exhaust fan, vanity lighting, and heated floor wiring",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Tile Work (floor and shower/tub)",
+          "description": "Install floor tile and shower or tub surround tile with waterproofing",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Vanity and Top",
+          "description": "Bathroom vanity cabinet with stone or cultured marble top and sink",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": ["Kohler", "American Standard", "Restoration Hardware"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Toilet",
+          "description": "New toilet, elongated bowl, comfort height, with wax ring and supply line",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": ["Kohler", "TOTO", "American Standard"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shower Fixtures",
+          "description": "Shower valve, trim, shower head, and handle set",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": ["Moen", "Delta", "Kohler"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall and Paint",
+          "description": "Moisture-resistant drywall, finish, and paint bathroom walls/ceiling",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1100.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Accessories (mirror, towel bars, TP holder)",
+          "description": "Install bathroom mirror, towel bars, toilet paper holder, and robe hooks",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 275.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit",
+          "description": "Permit for bathroom remodel with plumbing and electrical work",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "room_addition",
+      "name": "Room Addition",
+      "nameEs": "Adicion de Habitacion",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Foundation (slab or pier)",
+          "description": "Concrete slab or pier foundation for addition footprint",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Framing",
+          "description": "Wall framing, roof framing, and tie-in to existing structure",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Roofing",
+          "description": "Roof sheathing, underlayment, and shingles matched to existing roof",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Electrical Rough-In",
+          "description": "Wire new circuits, outlets, switches, and lighting for addition",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "HVAC Extension",
+          "description": "Extend ductwork or add mini-split for addition climate control",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3000.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Insulation, Drywall, and Paint",
+          "description": "Insulate walls and ceiling, hang and finish drywall, paint",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 14.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Flooring",
+          "description": "Install flooring to match or complement existing home",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Windows and Exterior Door",
+          "description": "Energy-efficient windows and exterior entry or sliding door",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": ["Milgard", "Andersen", "Pella"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior Siding/Stucco Match",
+          "description": "Match exterior finish to existing home for seamless appearance",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "sq ft",
+          "defaultPrice": 10.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit and Plans",
+          "description": "Architectural plans, structural engineering, and building permit",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "garage_conversion",
+      "name": "Garage Conversion",
+      "nameEs": "Conversion de Garaje",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Wall and Ceiling Framing",
+          "description": "Frame garage door opening wall, insulate walls and ceiling",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Electrical Upgrade",
+          "description": "Add circuits, outlets, switches, and lighting to code",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2800.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "HVAC Extension",
+          "description": "Add ductwork run or mini-split for heating and cooling",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall, Texture, and Paint",
+          "description": "Hang, tape, texture, and paint walls and ceiling throughout",
+          "category": "labor",
+          "quantity": 500,
+          "unit": "sq ft",
+          "defaultPrice": 6.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Flooring Installation",
+          "description": "Level garage floor and install LVP, laminate, or tile flooring",
+          "category": "labor",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 8.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Egress Window",
+          "description": "Code-required egress window if converting to bedroom",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200.00,
+          "isOptional": true,
+          "brands": ["Milgard", "Andersen"]
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit",
+          "description": "Permit for garage conversion with inspections",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 500.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "deck_build",
+      "name": "Deck Build",
+      "nameEs": "Construccion de Terraza",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Footings and Posts",
+          "description": "Dig footings, pour concrete, and set support posts per code",
+          "category": "labor",
+          "quantity": 8,
+          "unit": "each",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Ledger Board and Framing",
+          "description": "Attach ledger to house, build beam and joist framing structure",
+          "category": "labor",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Decking Material",
+          "description": "Composite or pressure-treated decking boards installed",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "sq ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": ["Trex", "TimberTech", "Fiberon"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Railing System",
+          "description": "Code-compliant railing with balusters, 36-inch height minimum",
+          "category": "materials",
+          "quantity": 50,
+          "unit": "linear ft",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": ["Trex", "TimberTech", "Deckorators"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Stairs",
+          "description": "Deck stairs with stringers, treads, and railing to grade",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 850.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Structural Hardware",
+          "description": "Joist hangers, post bases, carriage bolts, and structural screws",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": ["Simpson Strong-Tie"]
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit",
+          "description": "Deck building permit with footing and framing inspections",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "KraftMaid (cabinets)",
+    "Merillat (cabinets)",
+    "Waypoint (cabinets)",
+    "Caesarstone (countertops)",
+    "Silestone (countertops)",
+    "Cambria (countertops)",
+    "Kohler (fixtures)",
+    "Moen (fixtures)",
+    "Delta (fixtures)",
+    "Milgard (windows)",
+    "Andersen (windows)",
+    "Pella (windows)",
+    "Trex (decking)",
+    "TimberTech (decking)",
+    "Simpson Strong-Tie (structural)",
+    "Sherwin-Williams (paint)",
+    "Daltile (tile)",
+    "LG Hausys (surfaces)",
+    "Schluter (tile systems)"
+  ],
+  "terminologyGlossary": {
+    "rough-in": "The phase where plumbing, electrical, and HVAC are installed inside walls before drywall goes up",
+    "finish work": "The final phase including trim, paint, fixtures, flooring, and hardware installation",
+    "change order": "A formal document altering the original scope, schedule, or price of a contract",
+    "general conditions": "Overhead project costs including dumpster, portable toilet, temporary power, and project management",
+    "punch list": "A final list of small items to complete or fix before the project is considered done",
+    "load-bearing wall": "A structural wall that supports weight from above and cannot be removed without engineering",
+    "ledger board": "A horizontal board bolted to the house that supports one side of a deck frame",
+    "egress window": "A window that meets code for emergency escape, required in bedrooms and basements",
+    "subcontractor": "A licensed tradesperson hired by the general contractor to perform specific work",
+    "lien waiver": "A legal document signed by a contractor confirming payment was received, protecting the homeowner",
+    "cost-plus contract": "A contract where the homeowner pays actual costs plus a percentage markup for the contractor",
+    "fixed-price contract": "A contract with a set total price regardless of actual costs incurred",
+    "scope of work": "A detailed written description of all work to be performed under a contract",
+    "as-built": "Drawings or documentation reflecting the actual conditions after construction is complete"
+  },
+  "unitsOfMeasure": ["sq ft", "each", "job", "linear ft", "hour"],
+  "seasonalTips": [
+    { "month": 1, "tip": "Plan spring projects now. Order cabinets and long-lead materials in January to start construction in March or April." },
+    { "month": 4, "tip": "Peak remodeling season begins. Lock in subcontractor schedules early as good subs book out 4-6 weeks." },
+    { "month": 7, "tip": "Outdoor projects like decks and additions are in full swing. Monitor weather for concrete and exterior work scheduling." },
+    { "month": 10, "tip": "Push interior remodels for the holiday season. Kitchen and bathroom refreshes make great holiday investments for homeowners." }
+  ],
+  "followUpToneNotes": "General contracting customers want confidence that their project will be managed professionally. Emphasize your coordination ability, timeline management, and communication. Be transparent about costs and realistic about timelines. Discuss the permit and inspection process to show you do things by the book. Avoid overpromising on timelines."
+}
