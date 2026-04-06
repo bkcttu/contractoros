@@ -14,6 +14,7 @@ import { Pipeline } from '@/pages/Pipeline'
 import { FollowUpCenter } from '@/pages/FollowUpCenter'
 import { QRCodes } from '@/pages/QRCodes'
 import { Reviews } from '@/pages/Reviews'
+import { Pricing } from '@/pages/Pricing'
 
 function AuthenticatedRoutes() {
   return (
@@ -43,6 +44,8 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
 
         {/* Public routes */}
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/precios" element={<Pricing lang="es" />} />
         <Route path="/p/:id" element={<ClientPortal />} />
         <Route
           path="/sign-in/*"

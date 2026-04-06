@@ -14,6 +14,7 @@ import { FollowUpCenter } from '@/pages/FollowUpCenter'
 import { QRCodes } from '@/pages/QRCodes'
 import { Reviews } from '@/pages/Reviews'
 import { Coach } from '@/pages/Coach'
+import { Pricing } from '@/pages/Pricing'
 
 export function DemoApp() {
   return (
@@ -23,6 +24,8 @@ export function DemoApp() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/sign-in" element={<Navigate to="/dashboard" replace />} />
         <Route path="/sign-up" element={<Navigate to="/onboarding" replace />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/precios" element={<Pricing lang="es" />} />
         <Route path="/p/:id" element={<ClientPortal />} />
 
         {/* App routes (with sidebar) */}
