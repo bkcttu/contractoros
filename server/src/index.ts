@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import { clerkMiddleware } from '@clerk/express'
 import { userRoutes } from './routes/users.js'
 import { proposalRoutes } from './routes/proposals.js'
 import { publicRoutes } from './routes/public.js'
@@ -14,7 +13,15 @@ app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }))
 
 app.use(cors())
 app.use(express.json())
-app.use(clerkMiddleware())
+
+// Only use Clerk middleware if credentials are available
+if (process.env.CLERK_SECRET_KEY) {
+  import('@clerk/express').then(({ clerkMiddleware }) => {
+    app.use(clerkMiddleware())
+  })
+} else {
+  console.warn('Missing CLERK_SECRET_KEY — running without auth middleware')
+}
 
 // Routes
 app.use('/api/users', userRoutes)
