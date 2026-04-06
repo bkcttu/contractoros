@@ -13,6 +13,7 @@ import { Pipeline } from '@/pages/Pipeline'
 import { FollowUpCenter } from '@/pages/FollowUpCenter'
 import { QRCodes } from '@/pages/QRCodes'
 import { Reviews } from '@/pages/Reviews'
+import { Coach } from '@/pages/Coach'
 
 export function DemoApp() {
   return (
@@ -38,6 +39,7 @@ export function DemoApp() {
                 <Route path="/follow-ups" element={<FollowUpCenter />} />
                 <Route path="/qr-codes" element={<QRCodes />} />
                 <Route path="/reviews" element={<Reviews />} />
+                <Route path="/coach" element={<Coach />} />
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
