@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { SignedIn, SignedOut, SignIn, SignUp } from '@clerk/clerk-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Toaster } from '@/components/Toaster'
+import { LandingPage } from '@/pages/LandingPage'
 import { Dashboard } from '@/pages/Dashboard'
 import { ProposalList } from '@/pages/ProposalList'
 import { NewProposal } from '@/pages/NewProposal'
@@ -30,6 +31,9 @@ export default function App() {
   return (
     <>
       <Routes>
+        {/* Landing page — visible to everyone */}
+        <Route path="/" element={<LandingPage />} />
+
         {/* Public routes */}
         <Route path="/p/:id" element={<ClientPortal />} />
         <Route
@@ -41,7 +45,7 @@ export default function App() {
                   <h1 className="text-3xl font-heading font-bold text-white">ContractorOS</h1>
                   <p className="text-white/60 mt-2">The only business tool you'll ever need</p>
                 </div>
-                <SignIn routing="path" path="/sign-in" signUpUrl="/sign-up" />
+                <SignIn routing="path" path="/sign-in" signUpUrl="/sign-up" afterSignInUrl="/dashboard" />
               </div>
             </div>
           }
@@ -55,13 +59,13 @@ export default function App() {
                   <h1 className="text-3xl font-heading font-bold text-white">ContractorOS</h1>
                   <p className="text-white/60 mt-2">Start your 14-day free trial</p>
                 </div>
-                <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" />
+                <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" afterSignUpUrl="/onboarding" />
               </div>
             </div>
           }
         />
 
-        {/* Protected routes */}
+        {/* Protected routes — must be signed in */}
         <Route
           path="/*"
           element={
