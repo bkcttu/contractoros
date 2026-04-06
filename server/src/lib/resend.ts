@@ -3,10 +3,10 @@ import { Resend } from 'resend'
 const apiKey = process.env.RESEND_API_KEY
 
 if (!apiKey) {
-  console.warn('Missing RESEND_API_KEY - email sending will fail')
+  console.warn('Missing RESEND_API_KEY — email sending disabled')
 }
 
-export const resend = new Resend(apiKey || '')
+export const resend = apiKey ? new Resend(apiKey) : null
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:5173'
 
@@ -18,6 +18,11 @@ export async function sendProposalEmail(
   contractorEmail: string
 ) {
   const proposalLink = `${APP_URL}/p/${proposalId}`
+
+  if (!resend) {
+    console.warn('Email not sent — Resend not configured')
+    return
+  }
 
   return resend.emails.send({
     from: 'ContractorOS <noreply@contractoros.com>',
