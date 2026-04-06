@@ -271,6 +271,7 @@ function SocialProofBar() {
 
 function VideoSection() {
   const scrollRef = useScrollReveal()
+  const [playing, setPlaying] = useState(false)
 
   return (
     <section ref={scrollRef} id="demo" className="bg-[#F8F9FA] py-24 sm:py-32">
@@ -282,22 +283,37 @@ function VideoSection() {
           Watch how real contractors are closing more jobs and spending less time on paperwork.
         </p>
 
-        {/* Video placeholder */}
+        {/* Video */}
         <div className="scale-in mx-auto mt-12 max-w-4xl">
-          <div className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl bg-navy shadow-2xl">
-            <img
-              src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&q=80&auto=format"
-              alt="Demo thumbnail"
-              className="h-full w-full object-cover opacity-50 transition duration-500 group-hover:opacity-60 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="btn-press flex h-20 w-20 items-center justify-center rounded-full bg-accent text-white shadow-2xl shadow-orange-500/40 transition group-hover:scale-110">
-                <Play className="h-8 w-8 ml-1" fill="currentColor" />
-              </div>
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy/90 to-transparent p-6">
-              <p className="font-heading text-sm font-semibold text-white/80">2:34 min</p>
-            </div>
+          <div className="relative aspect-video overflow-hidden rounded-2xl bg-navy shadow-2xl">
+            {playing ? (
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1"
+                title="ContractorOS Demo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 h-full w-full"
+              />
+            ) : (
+              <button
+                onClick={() => setPlaying(true)}
+                className="group relative h-full w-full"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&q=80&auto=format"
+                  alt="Demo thumbnail"
+                  className="h-full w-full object-cover opacity-50 transition duration-500 group-hover:opacity-60 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="btn-press flex h-20 w-20 items-center justify-center rounded-full bg-accent text-white shadow-2xl shadow-orange-500/40 transition group-hover:scale-110">
+                    <Play className="h-8 w-8 ml-1" fill="currentColor" />
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy/90 to-transparent p-6">
+                  <p className="font-heading text-sm font-semibold text-white/80">2:34 min</p>
+                </div>
+              </button>
+            )}
           </div>
         </div>
 
