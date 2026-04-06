@@ -17,23 +17,31 @@ import {
   Menu,
   X,
   ChevronRight,
+  Play,
+  Shield,
+  Clock,
+  Send,
+  Twitter,
+  Linkedin,
+  Youtube,
+  Droplets,
 } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 /* ------------------------------------------------------------------ */
-/*  Navigation                                                        */
+/*  Navbar                                                             */
 /* ------------------------------------------------------------------ */
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-lg">
+    <nav className="sticky top-0 z-50 w-full glass border-b border-white/10">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white shadow-lg shadow-orange-500/25">
             <Zap className="h-5 w-5" />
           </div>
           <span className="font-heading text-xl font-bold text-navy">
@@ -41,94 +49,45 @@ function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden items-center gap-8 md:flex">
-          <a
-            href="#features"
-            className="font-body text-sm font-medium text-gray-600 transition hover:text-navy"
-          >
+          <a href="#features" className="font-body text-sm font-medium text-gray-600 transition hover:text-navy">
             Features
           </a>
-          <a
-            href="#pricing"
-            className="font-body text-sm font-medium text-gray-600 transition hover:text-navy"
-          >
+          <a href="#pricing" className="font-body text-sm font-medium text-gray-600 transition hover:text-navy">
             Pricing
           </a>
-          <a
-            href="#testimonials"
-            className="font-body text-sm font-medium text-gray-600 transition hover:text-navy"
-          >
+          <a href="#testimonials" className="font-body text-sm font-medium text-gray-600 transition hover:text-navy">
             Testimonials
           </a>
         </div>
 
-        {/* Desktop actions */}
         <div className="hidden items-center gap-4 md:flex">
-          <Link
-            to="/sign-in"
-            className="font-body text-sm font-medium text-gray-600 transition hover:text-navy"
-          >
+          <Link to="/sign-in" className="font-body text-sm font-medium text-gray-600 transition hover:text-navy">
             Sign In
           </Link>
           <Link
             to="/sign-up"
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 font-heading text-sm font-semibold text-white shadow-sm transition hover:bg-accent-600"
+            className="btn-press inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 font-heading text-sm font-semibold text-white shadow-lg shadow-orange-500/25 transition hover:bg-orange-600"
           >
             Get Started Free
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? (
-            <X className="h-6 w-6 text-navy" />
-          ) : (
-            <Menu className="h-6 w-6 text-navy" />
-          )}
+        <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+          {mobileOpen ? <X className="h-6 w-6 text-navy" /> : <Menu className="h-6 w-6 text-navy" />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-t border-gray-100 bg-white px-4 pb-6 pt-4 md:hidden">
+        <div className="border-t border-gray-100 bg-white/95 backdrop-blur-xl px-4 pb-6 pt-4 md:hidden">
           <div className="flex flex-col gap-4">
-            <a
-              href="#features"
-              onClick={() => setMobileOpen(false)}
-              className="font-body text-sm font-medium text-gray-600"
-            >
-              Features
-            </a>
-            <a
-              href="#pricing"
-              onClick={() => setMobileOpen(false)}
-              className="font-body text-sm font-medium text-gray-600"
-            >
-              Pricing
-            </a>
-            <a
-              href="#testimonials"
-              onClick={() => setMobileOpen(false)}
-              className="font-body text-sm font-medium text-gray-600"
-            >
-              Testimonials
-            </a>
-            <hr className="border-gray-100" />
-            <Link
-              to="/sign-in"
-              className="font-body text-sm font-medium text-gray-600"
-            >
-              Sign In
-            </Link>
-            <Link
-              to="/sign-up"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-2.5 font-heading text-sm font-semibold text-white"
-            >
+            <a href="#features" className="font-body text-sm font-medium text-gray-700" onClick={() => setMobileOpen(false)}>Features</a>
+            <a href="#pricing" className="font-body text-sm font-medium text-gray-700" onClick={() => setMobileOpen(false)}>Pricing</a>
+            <a href="#testimonials" className="font-body text-sm font-medium text-gray-700" onClick={() => setMobileOpen(false)}>Testimonials</a>
+            <hr className="border-gray-200" />
+            <Link to="/sign-in" className="font-body text-sm font-medium text-gray-700">Sign In</Link>
+            <Link to="/sign-up" className="btn-press inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-5 py-3 font-heading text-sm font-semibold text-white">
               Get Started Free
             </Link>
           </div>
@@ -139,125 +98,117 @@ function Navbar() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Hero                                                              */
+/*  Hero                                                               */
 /* ------------------------------------------------------------------ */
 
 function Hero() {
+  const scrollRef = useScrollReveal()
+
   return (
-    <section className="relative overflow-hidden bg-navy">
-      {/* Background image with overlay */}
+    <section ref={scrollRef} className="relative overflow-hidden bg-navy">
+      {/* Background photo overlay */}
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80&auto=format"
           alt=""
-          className="h-full w-full object-cover opacity-20"
+          className="h-full w-full object-cover opacity-15"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/95 to-navy/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/95 to-navy/70" />
       </div>
-      {/* Decorative accent glow */}
-      <div className="pointer-events-none absolute -right-40 top-20 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28 lg:flex lg:items-center lg:gap-16 lg:px-8 lg:pt-32 lg:pb-28">
-        {/* Left: Copy */}
-        <div className="max-w-2xl lg:flex-1">
-          {/* Pill */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-sm">
-            <Zap className="h-4 w-4 text-accent" />
-            <span className="font-body text-xs font-semibold tracking-wide text-white/80">
-              AI-POWERED CONTRACTOR PLATFORM
-            </span>
-          </div>
+      {/* Dot pattern overlay */}
+      <div className="absolute inset-0 dot-pattern opacity-20" />
 
-          <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
-            The Only Business Tool a Contractor Will{' '}
-            <span className="text-accent">Ever Need</span>
-          </h1>
-
-          <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-white/70 sm:text-xl">
-            AI-powered proposals, smart scheduling, one-click invoicing, and
-            automated follow-ups.{' '}
-            <span className="font-semibold text-white">
-              From first call to five-star review — on autopilot.
-            </span>
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <Link
-              to="/sign-up"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-heading text-base font-bold text-white shadow-lg shadow-accent/25 transition hover:bg-accent-600 hover:shadow-xl hover:shadow-accent/30"
-            >
-              Start Your Free Trial
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/40 hover:bg-white/5"
-            >
-              See How It Works
-            </a>
-          </div>
-
-          <p className="mt-4 font-body text-sm text-white/40">14 days free. No credit card required.</p>
-
-          {/* Trust badges */}
-          <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-6">
-            <div className="flex -space-x-2">
-              {[
-                'https://randomuser.me/api/portraits/men/32.jpg',
-                'https://randomuser.me/api/portraits/women/44.jpg',
-                'https://randomuser.me/api/portraits/men/67.jpg',
-                'https://randomuser.me/api/portraits/women/17.jpg',
-                'https://randomuser.me/api/portraits/men/52.jpg',
-              ].map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt=""
-                  className="h-8 w-8 rounded-full border-2 border-navy object-cover"
-                />
-              ))}
+      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:py-40">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left — copy */}
+          <div className="stagger-children">
+            <div className="fade-in-up mb-6 inline-flex items-center gap-2 rounded-full border border-orange-400/30 bg-orange-500/10 px-4 py-1.5 text-sm font-medium text-orange-300">
+              <Zap className="h-3.5 w-3.5" />
+              AI-Powered Business Platform
             </div>
-            <div>
-              <div className="flex gap-0.5">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+
+            <h1 className="fade-in-up font-heading text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+              The Only Business Tool You&apos;ll{' '}
+              <span className="gradient-text">Ever Need</span>
+            </h1>
+
+            <p className="fade-in-up mt-6 max-w-lg font-body text-lg leading-relaxed text-gray-300">
+              Proposals, scheduling, invoicing, reviews, and follow-ups — all powered by AI.
+              Built exclusively for trade contractors who want to grow.
+            </p>
+
+            <div className="fade-in-up mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                to="/sign-up"
+                className="btn-press inline-flex items-center gap-2 rounded-xl bg-accent px-7 py-3.5 font-heading text-base font-semibold text-white shadow-xl shadow-orange-500/30 transition hover:bg-orange-600"
+              >
+                Start Free Trial
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href="#demo"
+                className="btn-press inline-flex items-center gap-2 rounded-xl border border-white/20 px-7 py-3.5 font-heading text-base font-semibold text-white transition hover:border-white/40 hover:bg-white/5"
+              >
+                <Play className="h-4 w-4" />
+                Watch Demo
+              </a>
+            </div>
+
+            {/* Trust row */}
+            <div className="fade-in-up mt-10 flex items-center gap-4">
+              <div className="flex -space-x-3">
+                {[12, 22, 32, 44, 55].map((id) => (
+                  <img
+                    key={id}
+                    src={`https://randomuser.me/api/portraits/men/${id}.jpg`}
+                    alt="User"
+                    className="h-9 w-9 rounded-full border-2 border-navy object-cover"
+                  />
                 ))}
               </div>
-              <p className="font-body text-xs text-white/50">Loved by 2,000+ contractors</p>
+              <div className="text-sm text-gray-400">
+                <span className="font-semibold text-white">2,000+</span> contractors already growing
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Right: Contractor photo + floating cards */}
-        <div className="relative mt-12 hidden lg:block lg:flex-1">
-          <img
-            src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80&auto=format"
-            alt="Contractor reviewing proposal on tablet"
-            className="relative z-10 rounded-2xl shadow-2xl shadow-black/30"
-          />
-          {/* Floating proposal card */}
-          <div className="absolute -left-8 top-8 z-20 rounded-xl border border-white/20 bg-white p-4 shadow-xl animate-bounce" style={{ animationDuration: '3s' }}>
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100">
-                <Check className="h-5 w-5 text-emerald-600" />
-              </div>
-              <div>
-                <p className="font-heading text-sm font-bold text-navy">Proposal Accepted!</p>
-                <p className="font-mono text-xs text-emerald-600">+$8,750</p>
+          {/* Right — hero visual (desktop) */}
+          <div className="relative hidden lg:block">
+            <div className="fade-in-up relative overflow-hidden rounded-2xl shadow-2xl">
+              <img
+                src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80&auto=format"
+                alt="Contractor using ContractorOS"
+                className="h-[520px] w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
+            </div>
+
+            {/* Floating card — proposal */}
+            <div className="float-subtle absolute -left-8 top-16 z-10 glass rounded-xl px-5 py-4 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/20 text-green-400">
+                  <Check className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-heading text-sm font-bold text-white">Proposal Accepted!</p>
+                  <p className="font-mono text-lg font-bold text-green-400">+$8,750</p>
+                </div>
               </div>
             </div>
-          </div>
-          {/* Floating rating card */}
-          <div className="absolute -right-4 bottom-12 z-20 rounded-xl border border-white/20 bg-white p-4 shadow-xl animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
-            <div className="flex items-center gap-2">
-              <div className="flex gap-0.5">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                ))}
+
+            {/* Floating card — review */}
+            <div className="float-slow absolute -right-4 bottom-24 z-10 glass rounded-xl px-5 py-4 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-400">
+                  <Star className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-yellow-400">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                  <p className="font-heading text-sm font-bold text-white">New Review!</p>
+                </div>
               </div>
-              <span className="font-heading text-sm font-bold text-navy">New Review!</span>
             </div>
-            <p className="mt-1 font-body text-xs text-gray-500">"Excellent work, highly recommend!"</p>
           </div>
         </div>
       </div>
@@ -266,116 +217,178 @@ function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Social proof / logos bar                                          */
+/*  Social Proof Bar                                                   */
 /* ------------------------------------------------------------------ */
 
-function SocialProof() {
+function SocialProofBar() {
+  const scrollRef = useScrollReveal()
   const trades = [
     { icon: Wrench, label: 'Plumbing' },
-    { icon: Hammer, label: 'Roofing' },
     { icon: Zap, label: 'Electrical' },
+    { icon: Hammer, label: 'Carpentry' },
     { icon: Paintbrush, label: 'Painting' },
     { icon: Leaf, label: 'Landscaping' },
-    { icon: Home, label: 'General' },
+    { icon: Home, label: 'Roofing' },
+    { icon: Droplets, label: 'HVAC' },
+    { icon: Shield, label: 'General' },
   ]
 
   return (
-    <section className="border-y border-gray-100 bg-white py-12">
-      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="font-body text-sm font-medium tracking-wide text-gray-400">
-          TRUSTED BY 2,000+ CONTRACTORS ACROSS THE COUNTRY
+    <section ref={scrollRef} className="relative overflow-hidden border-y border-gray-100 bg-white py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="fade-in-up mb-8 text-center font-body text-sm font-medium uppercase tracking-widest text-gray-400">
+          Trusted by 2,000+ contractors across every trade
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-12">
-          {trades.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-2 text-gray-300">
-              <Icon className="h-7 w-7" />
-              <span className="font-heading text-base font-semibold">
-                {label}
-              </span>
-            </div>
-          ))}
+        {/* Marquee scroll */}
+        <div className="relative">
+          <div className="flex animate-[marquee_30s_linear_infinite] gap-12">
+            {[...trades, ...trades].map((t, i) => {
+              const Icon = t.icon
+              return (
+                <div key={i} className="flex shrink-0 items-center gap-2 text-gray-400">
+                  <Icon className="h-5 w-5" />
+                  <span className="font-heading text-sm font-semibold whitespace-nowrap">{t.label}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
+      </div>
+      {/* Inline marquee keyframes */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Video Section                                                      */
+/* ------------------------------------------------------------------ */
+
+function VideoSection() {
+  const scrollRef = useScrollReveal()
+
+  return (
+    <section ref={scrollRef} id="demo" className="bg-[#F8F9FA] py-24 sm:py-32">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="fade-in-up font-heading text-3xl font-extrabold text-navy sm:text-4xl">
+          See ContractorOS <span className="gradient-text">in Action</span>
+        </h2>
+        <p className="fade-in-up mx-auto mt-4 max-w-2xl font-body text-lg text-gray-500">
+          Watch how real contractors are closing more jobs and spending less time on paperwork.
+        </p>
+
+        {/* Video placeholder */}
+        <div className="scale-in mx-auto mt-12 max-w-4xl">
+          <div className="group relative aspect-video cursor-pointer overflow-hidden rounded-2xl bg-navy shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&q=80&auto=format"
+              alt="Demo thumbnail"
+              className="h-full w-full object-cover opacity-50 transition duration-500 group-hover:opacity-60 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="btn-press flex h-20 w-20 items-center justify-center rounded-full bg-accent text-white shadow-2xl shadow-orange-500/40 transition group-hover:scale-110">
+                <Play className="h-8 w-8 ml-1" fill="currentColor" />
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy/90 to-transparent p-6">
+              <p className="font-heading text-sm font-semibold text-white/80">2:34 min</p>
+            </div>
+          </div>
+        </div>
+
+        <p className="fade-in-up mt-6 font-body text-sm text-gray-500">
+          Watch how Mike closes <span className="font-semibold text-navy">$40K/month</span> using ContractorOS
+        </p>
       </div>
     </section>
   )
 }
 
 /* ------------------------------------------------------------------ */
-/*  Features                                                          */
+/*  Features                                                           */
 /* ------------------------------------------------------------------ */
 
-const features = [
+const FEATURES = [
   {
     icon: FileText,
     title: 'AI Proposal Generator',
-    description:
-      'Write winning proposals in 60 seconds. Just answer a few questions and our AI crafts a professional, branded proposal ready to send.',
+    description: 'Create stunning, branded proposals in 60 seconds flat. Our AI writes, formats, and sends — you just approve.',
+    color: 'bg-blue-500/10 text-blue-500',
   },
   {
     icon: Calendar,
     title: 'Smart Scheduling',
-    description:
-      'Let clients book online and sync with Google Calendar. No more phone tag or double bookings — ever.',
+    description: 'Clients book directly into your calendar. No back-and-forth texts, automatic reminders, zero no-shows.',
+    color: 'bg-purple-500/10 text-purple-500',
   },
   {
     icon: DollarSign,
     title: 'One-Click Invoicing',
-    description:
-      'Convert accepted proposals to invoices instantly. Accept credit cards, ACH, and checks in one place.',
+    description: 'Convert any proposal to an invoice instantly. Accept cards, ACH, or checks — get paid the same day.',
+    color: 'bg-green-500/10 text-green-500',
   },
   {
     icon: Users,
     title: 'Client Portal',
-    description:
-      'Clients view, sign, and pay — no login needed. A beautiful, professional experience for every customer.',
+    description: 'A branded portal where clients view proposals, approve work, pay invoices, and leave reviews.',
+    color: 'bg-orange-500/10 text-orange-500',
   },
   {
     icon: MessageSquare,
     title: 'AI Follow-Ups',
-    description:
-      'Never lose a job to silence again. Smart follow-up sequences nudge prospects at exactly the right time.',
+    description: 'Never lose a lead again. Smart sequences follow up at the perfect time to close more deals.',
+    color: 'bg-pink-500/10 text-pink-500',
   },
   {
     icon: Star,
     title: 'Review Automation',
-    description:
-      'Get 5-star reviews on autopilot. Automatically request reviews after every completed job.',
+    description: 'Automatically request 5-star reviews after every job. Build your reputation on autopilot.',
+    color: 'bg-yellow-500/10 text-yellow-600',
   },
 ]
 
 function Features() {
+  const scrollRef = useScrollReveal()
+
   return (
-    <section id="features" className="bg-[#F8F9FA] py-20 sm:py-28">
+    <section ref={scrollRef} id="features" className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-body text-sm font-semibold tracking-wide text-accent">
-            EVERYTHING YOU NEED
+          <p className="fade-in-up font-body text-sm font-semibold uppercase tracking-widest text-accent">
+            Powerful Features
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-5xl">
-            One platform to run your entire business
+          <h2 className="fade-in-up mt-3 font-heading text-3xl font-extrabold text-navy sm:text-4xl">
+            Everything You Need
           </h2>
-          <p className="mt-4 font-body text-lg text-gray-500">
-            Stop juggling five different apps. ContractorOS replaces them all.
+          <p className="fade-in-up mt-4 font-body text-lg text-gray-500">
+            Six AI-powered tools that replace your entire software stack.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ icon: Icon, title, description }) => (
-            <div
-              key={title}
-              className="group rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition hover:shadow-lg hover:shadow-navy/5"
-            >
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent-50 text-accent transition group-hover:bg-accent group-hover:text-white">
-                <Icon className="h-6 w-6" />
+        <div className="stagger-children mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((f) => {
+            const Icon = f.icon
+            return (
+              <div
+                key={f.title}
+                className="card-hover group rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition"
+              >
+                <div className={cn('mb-5 flex h-12 w-12 items-center justify-center rounded-xl', f.color)}>
+                  <Icon className="h-6 w-6" />
+                </div>
+                <h3 className="font-heading text-lg font-bold text-navy">{f.title}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-gray-500">{f.description}</p>
+                <div className="mt-5 flex items-center gap-1 text-sm font-medium text-accent opacity-0 transition group-hover:opacity-100">
+                  Learn more <ChevronRight className="h-4 w-4" />
+                </div>
               </div>
-              <h3 className="font-heading text-lg font-bold text-navy">
-                {title}
-              </h3>
-              <p className="mt-2 font-body leading-relaxed text-gray-500">
-                {description}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
@@ -383,104 +396,97 @@ function Features() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Visual showcase — side-by-side photo + app                        */
+/*  Showcase Section                                                   */
 /* ------------------------------------------------------------------ */
 
 function Showcase() {
+  const scrollRef = useScrollReveal()
+
   return (
-    <section className="overflow-hidden bg-white py-20 sm:py-28">
+    <section ref={scrollRef} className="bg-[#F8F9FA] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Row 1 — image left, copy right */}
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Image */}
-          <div className="relative">
+          <div className="fade-in-left relative">
             <img
               src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80&auto=format"
-              alt="Contractor on job site using tablet"
-              className="rounded-2xl shadow-xl"
+              alt="Contractor on tablet"
+              className="rounded-2xl shadow-2xl"
             />
-            {/* Floating stat */}
-            <div className="absolute -bottom-6 -right-6 rounded-xl bg-navy p-5 shadow-xl sm:-right-8">
-              <p className="font-mono text-3xl font-bold text-accent">60s</p>
-              <p className="font-body text-xs text-white/60">Avg. proposal time</p>
+            {/* Floating stat card */}
+            <div className="float-subtle glass absolute -bottom-6 -right-6 rounded-xl px-5 py-3 shadow-xl">
+              <p className="font-mono text-2xl font-bold text-accent">60s</p>
+              <p className="text-xs font-medium text-gray-500">Avg. proposal time</p>
             </div>
           </div>
 
-          {/* Copy */}
-          <div>
-            <p className="font-body text-sm font-semibold tracking-wide text-accent">
-              BUILT FOR THE FIELD
+          <div className="fade-in-right">
+            <p className="font-body text-sm font-semibold uppercase tracking-widest text-accent">
+              Proposals on the Go
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              Write proposals from your truck. Close deals from the job site.
-            </h2>
-            <p className="mt-4 font-body text-lg leading-relaxed text-gray-500">
-              ContractorOS is built mobile-first for contractors who work with their hands, not behind a desk.
-              Fill out a quick form, and AI writes a professional proposal your clients will love.
+            <h3 className="mt-3 font-heading text-3xl font-extrabold text-navy">
+              Write proposals from your truck
+            </h3>
+            <p className="mt-4 font-body text-lg text-gray-500">
+              Snap a photo of the job, and our AI drafts a professional proposal in seconds.
             </p>
             <ul className="mt-8 space-y-4">
               {[
-                { title: '10x faster than writing by hand', desc: 'AI generates polished proposals in under 60 seconds' },
-                { title: '40% higher close rate', desc: 'Professional proposals get signed faster' },
-                { title: 'Works on any device', desc: 'Phone, tablet, or desktop — looks great everywhere' },
+                'AI writes scope of work from photos',
+                'Branded PDF sent to client instantly',
+                'Digital signature & approval built in',
               ].map((item) => (
-                <li key={item.title} className="flex gap-4">
-                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10">
-                    <Check className="h-3.5 w-3.5 text-accent" />
+                <li key={item} className="flex items-center gap-3">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
+                    <Check className="h-3.5 w-3.5" />
                   </div>
-                  <div>
-                    <p className="font-heading text-sm font-bold text-navy">{item.title}</p>
-                    <p className="font-body text-sm text-gray-500">{item.desc}</p>
-                  </div>
+                  <span className="font-body text-gray-600">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        {/* Second row — reversed */}
-        <div className="mt-20 grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Copy */}
-          <div className="order-2 lg:order-1">
-            <p className="font-body text-sm font-semibold tracking-wide text-accent">
-              GET PAID FASTER
+        {/* Row 2 — copy left, image right */}
+        <div className="mt-24 grid items-center gap-12 lg:grid-cols-2 lg:gap-20 sm:mt-32">
+          <div className="fade-in-left order-2 lg:order-1">
+            <p className="font-body text-sm font-semibold uppercase tracking-widest text-accent">
+              End-to-End Workflow
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
-              From proposal to payment in one seamless flow
-            </h2>
-            <p className="mt-4 font-body text-lg leading-relaxed text-gray-500">
-              Clients receive a beautiful proposal link — no login required. They review, e-sign, and pay
-              the deposit all in one place. You get notified instantly.
+            <h3 className="mt-3 font-heading text-3xl font-extrabold text-navy">
+              From proposal to payment in one flow
+            </h3>
+            <p className="mt-4 font-body text-lg text-gray-500">
+              No more juggling five different apps. Everything happens in one place.
             </p>
+            {/* Stats grid */}
             <div className="mt-8 grid grid-cols-3 gap-6">
               {[
-                { value: '$2.1M+', label: 'Proposals sent' },
-                { value: '68%', label: 'Avg. close rate' },
-                { value: '4.9/5', label: 'User rating' },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-heading text-2xl font-extrabold text-navy sm:text-3xl">{stat.value}</p>
-                  <p className="font-body text-xs text-gray-400">{stat.label}</p>
+                { num: '$2.1M+', label: 'Proposals Sent' },
+                { num: '68%', label: 'Close Rate' },
+                { num: '4.9/5', label: 'Avg Rating' },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="font-mono text-2xl font-bold text-navy">{s.num}</p>
+                  <p className="mt-1 text-xs font-medium text-gray-400">{s.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Image */}
-          <div className="relative order-1 lg:order-2">
+          <div className="fade-in-right relative order-1 lg:order-2">
             <img
               src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format"
-              alt="Homeowner reviewing proposal"
-              className="rounded-2xl shadow-xl"
+              alt="Happy homeowner"
+              className="rounded-2xl shadow-2xl"
             />
-            {/* Floating payment card */}
-            <div className="absolute -bottom-6 -left-6 rounded-xl bg-white p-4 shadow-xl border border-gray-100 sm:-left-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
-                  <DollarSign className="h-5 w-5 text-emerald-600" />
-                </div>
+            {/* Floating notification */}
+            <div className="float-slow glass absolute -left-6 top-12 rounded-xl px-5 py-3 shadow-xl">
+              <div className="flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-green-400" />
                 <div>
-                  <p className="font-heading text-sm font-bold text-navy">Payment Received</p>
-                  <p className="font-mono text-xs text-emerald-600">+$4,250.00</p>
+                  <p className="text-xs text-gray-400">Payment received</p>
+                  <p className="font-mono text-sm font-bold text-white">$4,250.00</p>
                 </div>
               </div>
             </div>
@@ -492,62 +498,47 @@ function Showcase() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  How It Works                                                      */
+/*  How It Works                                                       */
 /* ------------------------------------------------------------------ */
 
+const STEPS = [
+  { icon: Send, title: 'Sign Up in 60 Seconds', description: 'Create your free account. No credit card needed. Import your contacts or start fresh.' },
+  { icon: FileText, title: 'Send Your First Proposal', description: 'Use AI to build a proposal from scratch or a photo. Your client gets a branded, signable document.' },
+  { icon: DollarSign, title: 'Get Paid & Get Reviews', description: 'Clients pay online instantly. After the job, automated review requests boost your reputation.' },
+]
+
 function HowItWorks() {
-  const steps = [
-    {
-      num: '1',
-      title: 'Fill out a simple form',
-      description:
-        'Answer a few quick questions about the job — scope, materials, timeline. Takes less than two minutes.',
-    },
-    {
-      num: '2',
-      title: 'AI writes your proposal',
-      description:
-        'Our AI instantly generates a professional, branded proposal tailored to the job and your business.',
-    },
-    {
-      num: '3',
-      title: 'Send, track, get paid',
-      description:
-        'Send it with one click. Track when it is opened, get e-signatures, and collect payment — all in one flow.',
-    },
-  ]
+  const scrollRef = useScrollReveal()
 
   return (
-    <section id="how-it-works" className="bg-white py-20 sm:py-28">
+    <section ref={scrollRef} className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-body text-sm font-semibold tracking-wide text-accent">
-            SIMPLE AS 1-2-3
-          </p>
-          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-5xl">
+          <p className="fade-in-up font-body text-sm font-semibold uppercase tracking-widest text-accent">Simple Setup</p>
+          <h2 className="fade-in-up mt-3 font-heading text-3xl font-extrabold text-navy sm:text-4xl">
             How It Works
           </h2>
         </div>
 
-        <div className="relative mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
+        <div className="stagger-children relative mt-16 grid gap-12 lg:grid-cols-3 lg:gap-8">
           {/* Connecting line (desktop) */}
-          <div className="pointer-events-none absolute left-0 right-0 top-10 hidden md:block">
-            <div className="mx-auto h-0.5 w-2/3 bg-gradient-to-r from-accent/20 via-accent/40 to-accent/20" />
-          </div>
+          <div className="absolute left-0 right-0 top-16 hidden h-0.5 bg-gradient-to-r from-transparent via-accent/30 to-transparent lg:block" />
 
-          {steps.map(({ num, title, description }) => (
-            <div key={num} className="relative text-center">
-              <div className="relative z-10 mx-auto flex h-20 w-20 items-center justify-center rounded-full border-4 border-accent-100 bg-accent font-heading text-2xl font-extrabold text-white shadow-lg shadow-accent/20">
-                {num}
+          {STEPS.map((step, i) => {
+            const Icon = step.icon
+            return (
+              <div key={step.title} className="fade-in-up relative text-center">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-orange-500/25 ring-4 ring-white relative z-10">
+                  <span className="font-heading text-xl font-bold">{i + 1}</span>
+                </div>
+                <div className="mb-3 flex justify-center">
+                  <Icon className="h-5 w-5 text-accent" />
+                </div>
+                <h3 className="font-heading text-lg font-bold text-navy">{step.title}</h3>
+                <p className="mx-auto mt-2 max-w-xs font-body text-sm text-gray-500">{step.description}</p>
               </div>
-              <h3 className="mt-6 font-heading text-xl font-bold text-navy">
-                {title}
-              </h3>
-              <p className="mt-2 font-body leading-relaxed text-gray-500">
-                {description}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
@@ -555,132 +546,97 @@ function HowItWorks() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Pricing                                                           */
+/*  Pricing                                                            */
 /* ------------------------------------------------------------------ */
 
-const plans = [
+const PLANS = [
   {
     name: 'Starter',
     price: 'Free',
-    period: '',
-    description: 'For solo contractors just getting started.',
-    features: [
-      '5 proposals per month',
-      'Basic scheduling',
-      '1 user',
-      'Client portal',
-      'Email support',
-    ],
-    cta: 'Get Started Free',
-    highlighted: false,
+    description: 'Perfect for getting started',
+    features: ['5 proposals/month', 'Basic scheduling', 'Email support', 'Client portal', '1 user'],
+    cta: 'Start Free',
+    popular: false,
   },
   {
     name: 'Pro',
     price: '$79',
-    period: '/mo',
-    description: 'Everything you need to grow your business.',
-    badge: 'Most Popular',
-    features: [
-      'Unlimited proposals',
-      'Smart scheduling + Google Calendar',
-      'One-click invoicing',
-      'AI follow-ups',
-      'Review automation',
-      'Website builder',
-      'Priority support',
-    ],
+    description: 'Everything you need to grow',
+    features: ['Unlimited proposals', 'AI follow-ups', 'One-click invoicing', 'Review automation', 'Priority support', 'Custom branding'],
     cta: 'Start Free Trial',
-    highlighted: true,
+    popular: true,
   },
   {
     name: 'Team',
     price: '$149',
-    period: '/mo',
-    description: 'For growing teams that need more power.',
-    features: [
-      'Everything in Pro',
-      'Up to 5 users',
-      'Team scheduling',
-      'Advanced reporting',
-      'Dedicated account manager',
-      'Custom branding',
-    ],
-    cta: 'Start Free Trial',
-    highlighted: false,
+    description: 'For growing teams',
+    features: ['Everything in Pro', 'Up to 10 users', 'Team scheduling', 'Advanced analytics', 'API access', 'Dedicated account manager'],
+    cta: 'Contact Sales',
+    popular: false,
   },
 ]
 
 function Pricing() {
+  const scrollRef = useScrollReveal()
+
   return (
-    <section id="pricing" className="bg-[#F8F9FA] py-20 sm:py-28">
+    <section ref={scrollRef} id="pricing" className="bg-[#F8F9FA] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-body text-sm font-semibold tracking-wide text-accent">
-            TRANSPARENT PRICING
+          <p className="fade-in-up font-body text-sm font-semibold uppercase tracking-widest text-accent">
+            Pricing
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-5xl">
-            Plans that grow with your business
+          <h2 className="fade-in-up mt-3 font-heading text-3xl font-extrabold text-navy sm:text-4xl">
+            Simple, Transparent Pricing
           </h2>
-          <p className="mt-4 font-body text-lg text-gray-500">
-            14-day free trial on all paid plans. No credit card required.
+          <p className="fade-in-up mt-4 font-body text-lg text-gray-500">
+            Start free, upgrade when you&apos;re ready. No contracts, cancel anytime.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
-          {plans.map((plan) => (
+        <div className="stagger-children mt-16 grid gap-8 lg:grid-cols-3">
+          {PLANS.map((plan) => (
             <div
               key={plan.name}
               className={cn(
-                'relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition',
-                plan.highlighted
-                  ? 'scale-[1.02] border-accent shadow-xl shadow-accent/10 lg:scale-105'
-                  : 'border-gray-100 hover:shadow-md'
+                'card-hover relative rounded-2xl bg-white p-8 shadow-sm transition',
+                plan.popular
+                  ? 'border-2 border-accent shadow-xl shadow-orange-500/10 lg:scale-105'
+                  : 'border border-gray-100',
               )}
             >
-              {plan.badge && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 font-heading text-xs font-bold text-white">
-                  {plan.badge}
-                </span>
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                  Most Popular
+                </div>
               )}
-
-              <h3 className="font-heading text-xl font-bold text-navy">
-                {plan.name}
-              </h3>
-              <p className="mt-1 font-body text-sm text-gray-500">
-                {plan.description}
-              </p>
-
-              <div className="mt-6">
-                <span className="font-heading text-5xl font-extrabold text-navy">
-                  {plan.price}
-                </span>
-                {plan.period && (
-                  <span className="font-body text-base text-gray-400">
-                    {plan.period}
-                  </span>
+              <h3 className="font-heading text-lg font-bold text-navy">{plan.name}</h3>
+              <p className="mt-1 font-body text-sm text-gray-500">{plan.description}</p>
+              <div className="mt-6 flex items-baseline gap-1">
+                <span className="font-heading text-4xl font-extrabold text-navy">{plan.price}</span>
+                {plan.price !== 'Free' && (
+                  <span className="font-body text-sm text-gray-400">/month</span>
                 )}
               </div>
-
-              <ul className="mt-8 flex flex-1 flex-col gap-3">
+              <ul className="mt-8 space-y-3">
                 {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />
-                    <span className="font-body text-sm text-gray-600">{f}</span>
+                  <li key={f} className="flex items-center gap-3 text-sm text-gray-600">
+                    <Check className="h-4 w-4 shrink-0 text-green-500" />
+                    {f}
                   </li>
                 ))}
               </ul>
-
               <Link
                 to="/sign-up"
                 className={cn(
-                  'mt-8 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-heading text-sm font-bold transition',
-                  plan.highlighted
-                    ? 'bg-accent text-white shadow-lg shadow-accent/25 hover:bg-accent-600'
-                    : 'border-2 border-navy-200 text-navy hover:border-navy hover:bg-navy-50'
+                  'btn-press mt-8 flex w-full items-center justify-center gap-2 rounded-xl py-3 font-heading text-sm font-semibold transition',
+                  plan.popular
+                    ? 'bg-accent text-white shadow-lg shadow-orange-500/25 hover:bg-orange-600'
+                    : 'border border-gray-200 text-navy hover:border-gray-300 hover:bg-gray-50',
                 )}
               >
                 {plan.cta}
-                <ChevronRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           ))}
@@ -691,78 +647,62 @@ function Pricing() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Testimonials                                                      */
+/*  Testimonials                                                       */
 /* ------------------------------------------------------------------ */
 
-const testimonials = [
+const TESTIMONIALS = [
   {
-    quote:
-      "ContractorOS cut my proposal time from 2 hours to 5 minutes. I closed $40K in new jobs my first month just because I could actually respond fast enough. It's a no-brainer.",
-    name: 'Mike R.',
-    trade: 'HVAC Contractor, Phoenix AZ',
-    stars: 5,
-    photo: 'https://randomuser.me/api/portraits/men/45.jpg',
+    quote: 'I went from spending 3 hours on proposals to 60 seconds. Last month I closed $42K in new work — all from my phone.',
+    name: 'Mike Reynolds',
+    trade: 'Plumbing Contractor',
+    location: 'Denver, CO',
+    avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
   },
   {
-    quote:
-      "I used to lose half my leads because I couldn't follow up fast enough. Now the AI handles it for me and my close rate went from 30% to 62%. Best money I've ever spent on my business.",
-    name: 'Sarah T.',
-    trade: 'Roofing Contractor, Dallas TX',
-    stars: 5,
-    photo: 'https://randomuser.me/api/portraits/women/32.jpg',
+    quote: 'The automated review requests are a game changer. I went from 12 Google reviews to 87 in four months. My phone rings nonstop now.',
+    name: 'Sarah Chen',
+    trade: 'General Contractor',
+    location: 'Austin, TX',
+    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
-    quote:
-      'We went from 12 Google reviews to 87 in three months without lifting a finger. The automated review requests are pure gold. Our phone rings twice as much now.',
-    name: 'Carlos M.',
-    trade: 'General Contractor, Miami FL',
-    stars: 5,
-    photo: 'https://randomuser.me/api/portraits/men/67.jpg',
+    quote: 'My close rate jumped from 35% to 68% once I started using the AI proposals. Clients say they look more professional than the big companies.',
+    name: 'James Okafor',
+    trade: 'Electrical Contractor',
+    location: 'Atlanta, GA',
+    avatar: 'https://randomuser.me/api/portraits/men/36.jpg',
   },
 ]
 
 function Testimonials() {
+  const scrollRef = useScrollReveal()
+
   return (
-    <section id="testimonials" className="bg-white py-20 sm:py-28">
+    <section ref={scrollRef} id="testimonials" className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-body text-sm font-semibold tracking-wide text-accent">
-            REAL RESULTS
+          <p className="fade-in-up font-body text-sm font-semibold uppercase tracking-widest text-accent">
+            Testimonials
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl lg:text-5xl">
-            Contractors love ContractorOS
+          <h2 className="fade-in-up mt-3 font-heading text-3xl font-extrabold text-navy sm:text-4xl">
+            Loved by Contractors Everywhere
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="flex flex-col rounded-2xl border border-gray-100 bg-[#F8F9FA] p-8"
-            >
-              {/* Stars */}
-              <div className="mb-4 flex gap-1">
-                {Array.from({ length: t.stars }).map((_, i) => (
-                  <Star
-                    key={i}
-                    className="h-5 w-5 fill-amber-400 text-amber-400"
-                  />
+        <div className="stagger-children mt-16 grid gap-8 lg:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <div key={t.name} className="card-hover rounded-2xl border border-gray-100 bg-white p-8 shadow-sm">
+              <div className="mb-4 flex gap-1 text-yellow-400">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4" fill="currentColor" />
                 ))}
               </div>
-              <blockquote className="flex-1 font-body leading-relaxed text-gray-600">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-4">
-                <img
-                  src={t.photo}
-                  alt={t.name}
-                  className="h-10 w-10 rounded-full object-cover"
-                />
+              <p className="font-body text-gray-600 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+              <div className="mt-6 flex items-center gap-3">
+                <img src={t.avatar} alt={t.name} className="h-11 w-11 rounded-full object-cover" />
                 <div>
-                  <p className="font-heading text-sm font-bold text-navy">
-                    {t.name}
-                  </p>
-                  <p className="font-body text-xs text-gray-400">{t.trade}</p>
+                  <p className="font-heading text-sm font-bold text-navy">{t.name}</p>
+                  <p className="text-xs text-gray-400">{t.trade} &middot; {t.location}</p>
                 </div>
               </div>
             </div>
@@ -774,43 +714,76 @@ function Testimonials() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Final CTA                                                         */
+/*  Stats Bar                                                          */
 /* ------------------------------------------------------------------ */
 
-function FinalCTA() {
-  return (
-    <section className="relative overflow-hidden bg-navy py-20 sm:py-28">
-      {/* Decorative elements */}
-      <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-      <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+function StatsBar() {
+  const scrollRef = useScrollReveal()
+  const stats = [
+    { num: '2,000+', label: 'Contractors' },
+    { num: '60 seconds', label: 'Avg Proposal Time' },
+    { num: '$2.1M+', label: 'In Proposals Sent' },
+    { num: '4.9/5', label: 'Average Rating' },
+  ]
 
-      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-        <h2 className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-          Ready to Run Your Business on Autopilot?
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl font-body text-lg text-navy-200">
-          Join 2,000+ contractors who are winning more jobs, getting paid
-          faster, and earning five-star reviews — without the busywork.
-        </p>
-        <div className="mt-10">
-          <Link
-            to="/sign-up"
-            className="inline-flex items-center gap-2 rounded-xl bg-accent px-10 py-4 font-heading text-base font-bold text-white shadow-lg shadow-accent/30 transition hover:bg-accent-600 hover:shadow-xl"
-          >
-            Start Your Free Trial
-            <ArrowRight className="h-5 w-5" />
-          </Link>
+  return (
+    <section ref={scrollRef} className="relative bg-navy py-20 sm:py-24">
+      <div className="noise-overlay absolute inset-0 opacity-30" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="stagger-children grid grid-cols-2 gap-10 lg:grid-cols-4">
+          {stats.map((s) => (
+            <div key={s.label} className="fade-in text-center">
+              <p className="font-mono text-3xl font-extrabold text-white sm:text-4xl">{s.num}</p>
+              <p className="mt-2 font-body text-sm font-medium text-gray-400">{s.label}</p>
+            </div>
+          ))}
         </div>
-        <p className="mt-4 font-body text-sm text-navy-300">
-          14 days free. No credit card required.
-        </p>
       </div>
     </section>
   )
 }
 
 /* ------------------------------------------------------------------ */
-/*  Footer                                                            */
+/*  Final CTA                                                          */
+/* ------------------------------------------------------------------ */
+
+function FinalCTA() {
+  const scrollRef = useScrollReveal()
+
+  return (
+    <section ref={scrollRef} className="relative overflow-hidden bg-navy py-24 sm:py-32">
+      <div className="noise-overlay absolute inset-0 opacity-20" />
+      {/* Gradient glows */}
+      <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-accent/20 blur-[120px]" />
+      <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-orange-600/20 blur-[120px]" />
+
+      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+        <h2 className="fade-in-up font-heading text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
+          Ready to Run Your Business on{' '}
+          <span className="gradient-text">Autopilot</span>?
+        </h2>
+        <p className="fade-in-up mx-auto mt-6 max-w-xl font-body text-lg text-gray-300">
+          Join 2,000+ contractors who are closing more jobs, getting paid faster, and growing their reputation — all with one platform.
+        </p>
+        <div className="fade-in-up mt-10">
+          <Link
+            to="/sign-up"
+            className="btn-press inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 font-heading text-base font-semibold text-white shadow-2xl shadow-orange-500/30 transition hover:bg-orange-600"
+          >
+            Get Started Free
+            <ArrowRight className="h-5 w-5" />
+          </Link>
+          <p className="mt-4 font-body text-sm text-gray-400">
+            14 days free &middot; No credit card required
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Footer                                                             */
 /* ------------------------------------------------------------------ */
 
 function Footer() {
@@ -846,36 +819,39 @@ function Footer() {
   return (
     <footer className="border-t border-gray-100 bg-white py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-12 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2">
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white">
                 <Zap className="h-5 w-5" />
               </div>
-              <span className="font-heading text-xl font-bold text-navy">
-                ContractorOS
-              </span>
+              <span className="font-heading text-xl font-bold text-navy">ContractorOS</span>
             </Link>
-            <p className="mt-4 max-w-xs font-body text-sm leading-relaxed text-gray-500">
-              The AI-powered business platform built specifically for trade
-              contractors. From first call to five-star review — on autopilot.
+            <p className="mt-4 max-w-xs font-body text-sm text-gray-400">
+              The AI-powered business platform built exclusively for trade contractors.
             </p>
+            <div className="mt-6 flex gap-4">
+              <a href="#" className="text-gray-400 transition hover:text-navy" aria-label="Twitter">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 transition hover:text-navy" aria-label="LinkedIn">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="#" className="text-gray-400 transition hover:text-navy" aria-label="YouTube">
+                <Youtube className="h-5 w-5" />
+              </a>
+            </div>
           </div>
 
           {/* Link columns */}
           {columns.map((col) => (
             <div key={col.title}>
-              <h4 className="font-heading text-sm font-bold text-navy">
-                {col.title}
-              </h4>
-              <ul className="mt-4 flex flex-col gap-3">
+              <h4 className="font-heading text-sm font-bold text-navy">{col.title}</h4>
+              <ul className="mt-4 space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-body text-sm text-gray-500 transition hover:text-navy"
-                    >
+                    <a href={link.href} className="font-body text-sm text-gray-400 transition hover:text-navy">
                       {link.label}
                     </a>
                   </li>
@@ -885,9 +861,9 @@ function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 border-t border-gray-100 pt-8 text-center">
+        <div className="mt-16 border-t border-gray-100 pt-8 text-center">
           <p className="font-body text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} ContractorOS. All rights reserved.
+            Built with &#10084;&#65039; for contractors &middot; &copy; {new Date().getFullYear()} ContractorOS. All rights reserved.
           </p>
         </div>
       </div>
@@ -896,20 +872,22 @@ function Footer() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Page                                                              */
+/*  Landing Page                                                       */
 /* ------------------------------------------------------------------ */
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen scroll-smooth bg-white font-body">
+    <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <SocialProof />
+      <SocialProofBar />
+      <VideoSection />
       <Features />
       <Showcase />
       <HowItWorks />
       <Pricing />
       <Testimonials />
+      <StatsBar />
       <FinalCTA />
       <Footer />
     </div>
