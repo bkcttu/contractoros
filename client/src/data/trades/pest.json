@@ -1,0 +1,438 @@
+{
+  "slug": "pest",
+  "tradeName": "Pest Control",
+  "tradeNameEs": "Control de Plagas",
+  "icon": "Bug",
+  "aiPersona": "You are an expert pest control technician assistant with deep knowledge of residential and commercial pest management.\nYou understand Integrated Pest Management (IPM) principles — identifying the pest, understanding its biology, and using the least-toxic effective treatment.\nYou know the difference between general pest treatment (ants, roaches, spiders) and specialty services (termites, bed bugs, rodents, wildlife).\nYou are familiar with treatment methods including liquid barrier treatments, granular baits, gel baits, dust applications, fumigation, and heat treatments.\nYou understand that termite treatments fall into two categories — liquid barrier treatments (termiticides) and bait station systems.\nYou know that subterranean termites require soil treatment while drywood termites may require fumigation or localized treatment.\nYou are experienced with rodent control including snap traps, bait stations, exclusion work (sealing entry points), and sanitation recommendations.\nYou understand bed bug treatment protocols including heat treatment (raising room temperature above 120 degrees), chemical treatment, and the importance of preparation by the homeowner.\nYou know that wildlife removal (raccoons, squirrels, bats, birds) requires humane trapping and exclusion, and may require permits.\nYou understand the safety requirements for pesticide application including proper PPE, product labels, application rates, and re-entry intervals.\nYou know that recurring service plans (monthly or quarterly) are the backbone of a pest control business.\nYou are familiar with the inspection process — identifying pest species, entry points, harborage areas, moisture sources, and conducive conditions.\nYou understand the importance of documentation including service tickets, product labels, SDS sheets, and state licensing requirements.\nYou factor in the size of the home or commercial space when pricing treatments.\nYou know that initial treatments typically cost more than recurring maintenance visits.\nYou advise customers on prevention including sealing cracks, removing food sources, proper landscaping, and moisture control.\nYou communicate clearly about product safety, re-entry times, and what to expect after treatment.",
+  "jobTypes": [
+    {
+      "id": "general_pest",
+      "name": "General Pest Treatment",
+      "nameEs": "Tratamiento General de Plagas",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Initial Inspection and Treatment",
+          "description": "Thorough inspection of property, identify pest species, apply targeted treatment",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Perimeter Barrier Treatment (exterior)",
+          "description": "Liquid barrier spray around foundation, entry points, and eaves",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 75.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Interior Crack and Crevice Treatment",
+          "description": "Gel bait and crack-and-crevice treatment in kitchens, bathrooms, and baseboards",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 50.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Granular Bait (exterior perimeter)",
+          "description": "Granular insect bait applied around landscaping beds and entry paths",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Dust Application (wall voids/attic)",
+          "description": "Insecticidal dust applied to wall voids, attic spaces, and weep holes",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 40.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Quarterly Maintenance Plan",
+          "description": "Recurring quarterly treatment visits for ongoing pest prevention",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "visit",
+          "defaultPrice": 95.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Monthly Maintenance Plan",
+          "description": "Monthly service visits for heavy pest pressure areas or commercial",
+          "category": "labor",
+          "quantity": 12,
+          "unit": "visit",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "termite_treatment",
+      "name": "Termite Treatment",
+      "nameEs": "Tratamiento de Termitas",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Termite Inspection (WDI/WDO report)",
+          "description": "Full wood-destroying insect inspection with written report",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Liquid Barrier Treatment (full perimeter)",
+          "description": "Trench and rod termiticide around entire foundation perimeter",
+          "category": "labor",
+          "quantity": 200,
+          "unit": "linear ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Termiticide Product",
+          "description": "Non-repellent liquid termiticide for soil barrier treatment",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Bait Station System (alternative)",
+          "description": "In-ground termite bait monitoring stations installed around perimeter",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drill and Treat Concrete (garage, patios)",
+          "description": "Drill through concrete slabs to treat soil underneath at expansion joints",
+          "category": "labor",
+          "quantity": 10,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Annual Termite Warranty Renewal",
+          "description": "Annual inspection and retreat warranty for continued termite protection",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "year",
+          "defaultPrice": 175.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Wood Damage Repair (minor)",
+          "description": "Replace termite-damaged wood trim, sill plate, or fascia board",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 500.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "rodent_control",
+      "name": "Rodent Control",
+      "nameEs": "Control de Roedores",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Rodent Inspection",
+          "description": "Inspect property for entry points, droppings, nesting, and activity patterns",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Snap Traps and Bait Stations (interior)",
+          "description": "Set snap traps and secured bait stations in activity areas",
+          "category": "materials",
+          "quantity": 12,
+          "unit": "each",
+          "defaultPrice": 12.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Exterior Bait Stations (tamper-resistant)",
+          "description": "Tamper-resistant rodent bait stations placed around building perimeter",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Exclusion Work (seal entry points)",
+          "description": "Seal gaps, cracks, pipe penetrations, and vents with steel wool, caulk, and metal flashing",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Follow-Up Visits (check traps/bait)",
+          "description": "Return visits to check traps, replenish bait, and monitor activity",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "visit",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Attic Cleanout (droppings/insulation)",
+          "description": "Remove contaminated insulation and droppings, sanitize attic space",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 1200.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "bed_bug_treatment",
+      "name": "Bed Bug Treatment",
+      "nameEs": "Tratamiento de Chinches",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Bed Bug Inspection",
+          "description": "Thorough inspection of beds, furniture, baseboards, and crevices for bed bug activity",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 150.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Heat Treatment (whole room)",
+          "description": "Raise room temperature above 120 degrees for 4-6 hours to kill all life stages",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "room",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Chemical Treatment (alternative)",
+          "description": "Targeted residual spray and dust application to cracks, crevices, and harborage areas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "room",
+          "defaultPrice": 400.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Mattress and Box Spring Encasements",
+          "description": "Bed bug proof encasements to trap and prevent bed bug harborage",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 65.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Interceptor Traps (bed legs)",
+          "description": "Climb-up interceptor traps placed under bed legs for monitoring",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Follow-Up Treatment (2 weeks post)",
+          "description": "Return visit to inspect and re-treat if needed, check for remaining activity",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "wildlife_removal",
+      "name": "Wildlife Removal",
+      "nameEs": "Remocion de Vida Silvestre",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Wildlife Inspection",
+          "description": "Identify species, locate entry points, assess damage, and develop removal plan",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Humane Trapping and Removal",
+          "description": "Set humane live traps, monitor, and relocate captured wildlife",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Exclusion Work (seal entry points)",
+          "description": "Seal all entry points with metal flashing, hardware cloth, or foam after removal",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 650.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Attic/Crawlspace Cleanup",
+          "description": "Remove nesting material, droppings, and contaminated insulation",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 800.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Sanitizing and Deodorizing",
+          "description": "Enzyme-based sanitizer and deodorizer for affected areas",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 225.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Follow-Up Check (verify exclusion)",
+          "description": "Return visit to confirm no re-entry and check all sealed areas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 95.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Syngenta",
+    "BASF",
+    "Bayer Environmental Science",
+    "FMC Corporation",
+    "Nisus Corporation",
+    "Control Solutions Inc",
+    "Rockwell Labs",
+    "MGK (insecticides)",
+    "Bell Labs (rodenticides)",
+    "Catchmaster (traps)",
+    "Victor (traps)",
+    "Tomcat (rodent products)",
+    "Chapin (sprayers)",
+    "B&G Equipment (sprayers)",
+    "Temprid (insecticide)",
+    "Termidor (termiticide)"
+  ],
+  "terminologyGlossary": {
+    "IPM": "Integrated Pest Management - a systematic approach using inspection, identification, and least-toxic treatments",
+    "liquid barrier": "A chemical perimeter treatment applied to soil or foundation to prevent pest entry",
+    "bait station": "A secured container holding poisoned bait for target pests like ants, roaches, or rodents",
+    "gel bait": "A ready-to-use bait applied in small dots in cracks and crevices for roaches and ants",
+    "residual spray": "A pesticide that remains active on treated surfaces for weeks or months after application",
+    "non-repellent": "A termiticide that pests cannot detect, allowing them to walk through it and transfer to colony",
+    "exclusion": "Physical methods of sealing entry points to prevent pest access to a structure",
+    "harborage": "A sheltered area where pests hide, nest, and reproduce",
+    "conducive condition": "Property conditions that attract or support pest activity, such as moisture or wood-soil contact",
+    "WDI report": "Wood-Destroying Insect report, often required for real estate transactions",
+    "fumigation": "Sealing a structure and introducing gas to kill all pests inside, primarily for drywood termites",
+    "re-entry interval": "The time period after pesticide application before people or pets can safely re-enter the area",
+    "colony elimination": "The goal of termite bait systems - workers carry bait back to the colony to destroy it",
+    "dust application": "Insecticidal dust blown into wall voids, attics, and other concealed spaces"
+  },
+  "unitsOfMeasure": ["sq ft", "linear ft", "each", "visit", "room", "job", "year"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring brings ant season and termite swarms. Push termite inspections and general pest initial treatments. Great time for new recurring service signups." },
+    { "month": 6, "tip": "Peak pest season for ants, roaches, mosquitoes, and wasps. Ensure trucks are fully stocked and schedules are tight." },
+    { "month": 9, "tip": "Rodents start seeking shelter as temperatures drop. Market exclusion work and rodent prevention services proactively." },
+    { "month": 12, "tip": "Indoor pest pressure increases as pests overwinter inside homes. Focus on recurring service renewals and spider treatments." }
+  ],
+  "followUpToneNotes": "Pest control customers want reassurance that their home is safe and the problem will be resolved. Be confident but not alarmist. Explain the treatment process and what to expect. Emphasize the value of ongoing prevention versus one-time reactive treatments. Discuss product safety clearly, especially regarding children and pets. Always recommend an ongoing maintenance plan."
+}

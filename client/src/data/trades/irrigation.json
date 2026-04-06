@@ -1,0 +1,449 @@
+{
+  "slug": "irrigation",
+  "tradeName": "Irrigation",
+  "tradeNameEs": "Irrigacion",
+  "icon": "Droplets",
+  "aiPersona": "You are an expert irrigation contractor assistant with deep knowledge of residential and commercial landscape irrigation systems.\nYou understand the full range of sprinkler head types including rotors, spray heads, drip emitters, micro-sprayers, and bubblers.\nYou know that rotor heads are ideal for large turf areas (25-50 ft radius) while spray heads cover smaller zones (5-15 ft radius).\nYou are familiar with drip irrigation for planting beds, gardens, and trees, and you know that drip reduces water waste significantly.\nYou understand zone design principles — grouping heads by precipitation rate, sun exposure, plant type, and soil conditions.\nYou know standard pipe sizes (3/4 inch, 1 inch, 1-1/4 inch mainline) and that PVC is standard in warm climates while poly pipe is used in freeze areas.\nYou are experienced with irrigation controllers including traditional timer-based models and smart Wi-Fi controllers with weather-based adjustments.\nYou understand that smart controllers can reduce water use by 20-40 percent through evapotranspiration-based scheduling.\nYou know that proper system design starts with measuring water pressure and flow rate at the meter to size zones correctly.\nYou understand backflow prevention requirements — RPZ valves, double-check valves, and atmospheric vacuum breakers per local code.\nYou are familiar with valve boxes, solenoid valves, and wiring standards for multi-zone systems.\nYou know that winterization (blowing out lines with compressed air) is essential in freeze climates to prevent pipe and head damage.\nYou understand spring startup procedures including opening valves, checking for breaks, adjusting heads, and programming the controller.\nYou know that head-to-head coverage is the standard for uniform water distribution.\nYou factor in trenching costs for new installations and the option of pulling pipe versus open-trench methods.\nYou are familiar with water audits and can help optimize existing systems for water conservation.\nYou communicate clearly about water schedules, run times, and watering restrictions that vary by municipality.",
+  "jobTypes": [
+    {
+      "id": "new_system_install",
+      "name": "New System Install",
+      "nameEs": "Instalacion de Sistema Nuevo",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Smart Irrigation Controller",
+          "description": "Wi-Fi smart controller with weather-based scheduling, 8-12 zones",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": false,
+          "brands": ["Rachio", "Hunter Hydrawise", "Rain Bird ESP-TM2"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Rotor Heads (large turf zones)",
+          "description": "Gear-driven rotor heads with adjustable arc, 25-45 ft radius",
+          "category": "materials",
+          "quantity": 12,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": ["Hunter PGP", "Rain Bird 5000", "Hunter I-20"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Spray Heads (small turf/beds)",
+          "description": "Pop-up spray heads with matched precipitation nozzles, 4-15 ft radius",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 8.50,
+          "isOptional": false,
+          "brands": ["Hunter Pro-Spray", "Rain Bird 1800", "Orbit"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drip Zone Kit (planting beds)",
+          "description": "Drip tubing, emitters, filters, and pressure regulators for bed zones",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "zone",
+          "defaultPrice": 175.00,
+          "isOptional": true,
+          "brands": ["Hunter", "Rain Bird", "Netafim"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Zone Valves (solenoid)",
+          "description": "Electric solenoid valves for each irrigation zone",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 22.00,
+          "isOptional": false,
+          "brands": ["Hunter", "Rain Bird", "Irritrol"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "PVC Pipe and Fittings (mainline and lateral)",
+          "description": "Schedule 40 PVC mainline and Class 200 lateral pipe with fittings",
+          "category": "materials",
+          "quantity": 500,
+          "unit": "linear ft",
+          "defaultPrice": 1.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Valve Boxes",
+          "description": "Standard and jumbo valve boxes with lids for underground access",
+          "category": "materials",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Backflow Prevention Device",
+          "description": "RPZ or double-check backflow preventer per local code",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 225.00,
+          "isOptional": false,
+          "brands": ["Watts", "Febco", "Wilkins"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wire and Connectors",
+          "description": "Multi-strand irrigation wire and waterproof connectors for valve wiring",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "linear ft",
+          "defaultPrice": 0.35,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Trenching and Installation",
+          "description": "Trench, lay pipe, install heads, wire valves, and backfill",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "zone",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "System Programming and Adjustment",
+          "description": "Program controller zones, set run times, adjust all heads for coverage",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 175.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "repair_replace_heads",
+      "name": "Repair/Replace Heads",
+      "nameEs": "Reparar/Reemplazar Cabezales",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Service Call / Diagnosis",
+          "description": "Inspect system, identify broken or malfunctioning heads and lines",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 75.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Replacement Spray Heads",
+          "description": "Replace broken or clogged pop-up spray heads with matching models",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 8.50,
+          "isOptional": false,
+          "brands": ["Hunter", "Rain Bird", "Orbit"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Replacement Rotor Heads",
+          "description": "Replace broken gear-driven rotors with matching models",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 18.00,
+          "isOptional": true,
+          "brands": ["Hunter", "Rain Bird"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Replacement Nozzles",
+          "description": "Replace worn or clogged nozzles for proper spray pattern",
+          "category": "materials",
+          "quantity": 8,
+          "unit": "each",
+          "defaultPrice": 3.00,
+          "isOptional": false,
+          "brands": ["Hunter MP Rotator", "Rain Bird R-VAN"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Head Replacement Labor",
+          "description": "Dig up, replace, and adjust sprinkler heads",
+          "category": "labor",
+          "quantity": 7,
+          "unit": "each",
+          "defaultPrice": 25.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pipe Repair (broken line)",
+          "description": "Locate and repair broken PVC pipe section",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "controller_upgrade",
+      "name": "Controller Upgrade",
+      "nameEs": "Actualizacion de Controlador",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Smart Wi-Fi Controller",
+          "description": "Upgrade to smart controller with app control and weather-based scheduling",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": false,
+          "brands": ["Rachio 3", "Hunter Hydrawise", "Rain Bird ARC8", "Orbit B-hyve"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Rain/Freeze Sensor",
+          "description": "Wireless rain and freeze sensor to prevent watering during rain or freeze events",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": true,
+          "brands": ["Hunter", "Rain Bird"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Flow Meter",
+          "description": "Inline flow meter for leak detection and water usage monitoring",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": true,
+          "brands": ["Rachio", "Hunter"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Controller Installation",
+          "description": "Remove old controller, mount new unit, wire all zones and test",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 150.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "System Audit and Zone Optimization",
+          "description": "Run each zone, check coverage, adjust run times for new smart controller",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "winterize",
+      "name": "Winterize",
+      "nameEs": "Winterizacion",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "System Blowout (compressed air)",
+          "description": "Blow out all zones with high-volume compressor to remove water from lines and heads",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shut Off Water Supply and Drain",
+          "description": "Turn off water supply, drain backflow preventer, and open drain valves",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Controller Shutdown",
+          "description": "Set controller to rain mode or off, note zone settings for spring restart",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 15.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Backflow Preventer Protection",
+          "description": "Insulate exposed backflow preventer against freeze damage",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 25.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Spring Startup Service (pre-book)",
+          "description": "Pre-book spring startup at discounted rate when booking winterization",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 95.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "spring_startup",
+      "name": "Spring Startup",
+      "nameEs": "Arranque de Primavera",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Turn On Water Supply",
+          "description": "Slowly open main water supply and pressurize system",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Run and Inspect All Zones",
+          "description": "Activate each zone, check for breaks, leaks, and head damage from winter",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 65.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Adjust and Clean Heads",
+          "description": "Adjust head height, arc, and radius. Clean clogged nozzles and filters.",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Program Controller for Season",
+          "description": "Set watering schedule based on current conditions and local restrictions",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 25.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Backflow Preventer Test",
+          "description": "Test backflow device and certify as required by local water authority",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Minor Repair Parts",
+          "description": "Replacement heads, nozzles, or fittings for any damage found during startup",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 45.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Hunter Industries",
+    "Rain Bird",
+    "Orbit",
+    "Rachio",
+    "Irritrol",
+    "Toro",
+    "Netafim (drip)",
+    "Watts (backflow)",
+    "Febco (backflow)",
+    "Wilkins (backflow)",
+    "K-Rain",
+    "Weathermatic",
+    "Hydro-Rain",
+    "DIG Corporation (drip)",
+    "Lasco (PVC fittings)"
+  ],
+  "terminologyGlossary": {
+    "rotor": "A gear-driven sprinkler head that rotates a single stream across a large area, 25-50 ft radius",
+    "spray head": "A pop-up sprinkler that fans water in a fixed pattern over a smaller area, 5-15 ft radius",
+    "drip emitter": "A low-volume irrigation device that delivers water directly to plant root zones",
+    "zone": "A group of sprinkler heads controlled by one valve, designed for similar water needs",
+    "precipitation rate": "The rate at which water is applied to an area, measured in inches per hour",
+    "head-to-head coverage": "Design standard where each head throws water to the adjacent head for uniform coverage",
+    "backflow preventer": "A device that prevents irrigation water from flowing back into the potable water supply",
+    "RPZ valve": "Reduced Pressure Zone valve - the most reliable type of backflow preventer",
+    "solenoid valve": "An electrically operated valve that opens and closes to control water flow to each zone",
+    "mainline": "The pressurized pipe from the water source to the zone valves",
+    "lateral line": "The pipe from a zone valve to the sprinkler heads it controls",
+    "GPM": "Gallons per minute - the flow rate measurement used to size zones and pipes",
+    "PSI": "Pounds per square inch - the water pressure measurement critical for head selection",
+    "ET-based scheduling": "Evapotranspiration-based watering that adjusts run times based on weather and plant needs",
+    "winterization": "The process of removing water from irrigation pipes using compressed air before freezing weather"
+  },
+  "unitsOfMeasure": ["zone", "each", "linear ft", "job", "visit"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring startup season is here. Book early as every customer wants service in the same 2-week window. Upsell controller upgrades." },
+    { "month": 6, "tip": "Peak watering season. Market system audits and nozzle upgrades for water conservation. Smart controller upgrades save customers money." },
+    { "month": 9, "tip": "Adjust schedules for fall watering. Begin booking winterization appointments before the rush. Check for leaks before shutdown." },
+    { "month": 11, "tip": "Winterization crunch time. Ensure compressor is serviced and ready. Pre-book spring startups at a discount to lock in revenue." }
+  ],
+  "followUpToneNotes": "Irrigation customers appreciate water savings and convenience. Emphasize smart controller benefits and water conservation. Be practical about scheduling around weather and municipal watering restrictions. Winterization and spring startup are excellent recurring service opportunities. Help customers understand that a well-maintained system saves water and money long-term."
+}

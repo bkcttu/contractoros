@@ -1,0 +1,472 @@
+{
+  "slug": "pool",
+  "tradeName": "Pool Service",
+  "tradeNameEs": "Servicio de Piscina",
+  "icon": "Waves",
+  "aiPersona": "You are an expert pool contractor and service technician assistant with deep knowledge of residential pool construction, maintenance, and repair.\nYou understand pool types including gunite/shotcrete, fiberglass, vinyl liner, and above-ground pools.\nYou know that gunite pools are custom-built and represent the majority of in-ground pool construction.\nYou are familiar with pool surface materials including plaster (white and colored), pebble finishes (PebbleTec, PebbleSheen), quartz finishes, and tile.\nYou understand pool equipment including single-speed, dual-speed, and variable-speed pumps and their energy efficiency differences.\nYou know that variable-speed pumps can reduce energy costs by 70-80 percent compared to single-speed pumps.\nYou are experienced with filter types including sand, cartridge, and DE (diatomaceous earth) filters and their maintenance requirements.\nYou understand pool chemistry including pH, chlorine, alkalinity, calcium hardness, cyanuric acid, and salt systems.\nYou know that salt chlorine generators convert salt to chlorine and reduce the need for manual chemical additions.\nYou are familiar with pool heaters including gas heaters, heat pumps, and solar heating systems.\nYou understand pool automation systems that control pump speed, lighting, heating, and water features from a phone or panel.\nYou know that pool resurfacing is needed every 10-15 years for plaster and longer for pebble finishes.\nYou understand the pool building process including excavation, steel and plumbing, gunite/shotcrete, tile and coping, decking, plaster, and fill/startup.\nYou are experienced with leak detection methods including pressure testing, dye testing, and electronic leak detection.\nYou know that weekly service includes testing water chemistry, adding chemicals, skimming, brushing, vacuuming, and checking equipment.\nYou factor in pool size (gallons) when pricing chemical treatments and service.\nYou understand local pool barrier and safety codes including fencing, self-closing gates, and drain covers.\nYou communicate clearly about water chemistry and help homeowners understand the importance of balanced water for surface longevity.",
+  "jobTypes": [
+    {
+      "id": "pool_build",
+      "name": "Pool Build",
+      "nameEs": "Construccion de Piscina",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Excavation",
+          "description": "Dig pool shell to engineered specifications, haul away dirt",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 6500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Steel (rebar cage)",
+          "description": "Steel rebar cage tied to engineering specs for pool shell reinforcement",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 4500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Plumbing (pool and equipment)",
+          "description": "Run all suction, return, and equipment plumbing lines",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 3500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Gunite/Shotcrete Shell",
+          "description": "Shoot gunite or shotcrete shell to form pool structure",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 8500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Waterline Tile and Coping",
+          "description": "Decorative tile at waterline and coping stone around pool edge",
+          "category": "materials",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pool Surface (plaster or pebble)",
+          "description": "Interior pool finish - standard white plaster or upgraded pebble finish",
+          "category": "materials",
+          "quantity": 800,
+          "unit": "sq ft",
+          "defaultPrice": 8.00,
+          "isOptional": false,
+          "brands": ["PebbleTec", "NPP (National Plasterers)", "Wet Edge"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Variable-Speed Pump",
+          "description": "Energy-efficient variable-speed pool pump, 1.5-2.0 HP",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": ["Pentair IntelliFlo", "Hayward TriStar VS", "Jandy VS FloPro"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Filter System",
+          "description": "Pool filter - cartridge, sand, or DE type sized for pool volume",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650.00,
+          "isOptional": false,
+          "brands": ["Pentair", "Hayward", "Jandy"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Salt Chlorine Generator",
+          "description": "Salt cell system for automatic chlorine generation from salt water",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1400.00,
+          "isOptional": true,
+          "brands": ["Pentair IntelliChlor", "Hayward AquaRite", "CircuPool"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Pool Heater (gas or heat pump)",
+          "description": "Pool heating system for comfortable water temperature year-round",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 3500.00,
+          "isOptional": true,
+          "brands": ["Pentair MasterTemp", "Hayward H-Series", "Raypak"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "LED Pool Light",
+          "description": "Color-changing LED pool light with niche",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 550.00,
+          "isOptional": false,
+          "brands": ["Pentair", "Hayward", "Jandy"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Equipment Set and Startup",
+          "description": "Install all equipment, fill pool, balance chemistry, and commission system",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 2500.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits & Fees",
+          "itemName": "Building Permit and Engineering",
+          "description": "Pool permit, structural engineering, and required inspections",
+          "category": "fee",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 2500.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "resurface_replaster",
+      "name": "Resurface/Replaster",
+      "nameEs": "Repavimentar/Replastar",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Drain Pool",
+          "description": "Pump out pool water with proper discharge per local regulations",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Surface Preparation (chip and bond coat)",
+          "description": "Chip loose plaster, acid wash, and apply bond coat for adhesion",
+          "category": "labor",
+          "quantity": 800,
+          "unit": "sq ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pool Plaster (standard white)",
+          "description": "White marcite plaster finish, hand-applied",
+          "category": "materials",
+          "quantity": 800,
+          "unit": "sq ft",
+          "defaultPrice": 5.00,
+          "isOptional": false,
+          "brands": ["NPP"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pebble Finish Upgrade",
+          "description": "Premium pebble finish (PebbleTec, PebbleSheen) instead of standard plaster",
+          "category": "materials",
+          "quantity": 800,
+          "unit": "sq ft",
+          "defaultPrice": 4.00,
+          "isOptional": true,
+          "brands": ["PebbleTec", "Wet Edge", "Hydrazzo"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Waterline Tile Replacement",
+          "description": "Remove and replace waterline tile during resurface",
+          "category": "materials",
+          "quantity": 120,
+          "unit": "linear ft",
+          "defaultPrice": 25.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Fill, Balance, and Startup",
+          "description": "Refill pool, balance water chemistry, and brush daily for first 2 weeks",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "equipment_upgrade",
+      "name": "Equipment Upgrade",
+      "nameEs": "Actualizacion de Equipo",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Variable-Speed Pump",
+          "description": "Replace single-speed with variable-speed pump for energy savings",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200.00,
+          "isOptional": false,
+          "brands": ["Pentair IntelliFlo", "Hayward TriStar VS", "Jandy VS FloPro"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Filter Replacement",
+          "description": "New pool filter sized for pool volume and pump capacity",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650.00,
+          "isOptional": true,
+          "brands": ["Pentair", "Hayward", "Jandy"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Salt Chlorine Generator",
+          "description": "Install new salt system or replace aging salt cell",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1400.00,
+          "isOptional": true,
+          "brands": ["Pentair IntelliChlor", "Hayward AquaRite", "CircuPool"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Pool Automation System",
+          "description": "Smart automation panel for pump, lights, heater, and water features",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 2200.00,
+          "isOptional": true,
+          "brands": ["Pentair IntelliCenter", "Hayward OmniLogic", "Jandy iAquaLink"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Equipment Installation Labor",
+          "description": "Remove old equipment, plumb and wire new equipment, test and commission",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 750.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "weekly_service",
+      "name": "Weekly Service",
+      "nameEs": "Servicio Semanal",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Weekly Pool Cleaning and Chemical Service",
+          "description": "Test water, add chemicals, skim surface, brush walls, vacuum, empty baskets, check equipment",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "visit",
+          "defaultPrice": 125.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Chemicals (monthly allowance)",
+          "description": "Chlorine, acid, stabilizer, and specialty chemicals as needed",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Filter Clean (quarterly)",
+          "description": "Disassemble, deep clean, and inspect filter cartridges or grids",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Green-to-Clean Recovery",
+          "description": "Restore green or neglected pool to clear, balanced condition",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Salt Cell Cleaning",
+          "description": "Remove and acid-wash salt chlorinator cell to remove calcium buildup",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "leak_detection",
+      "name": "Leak Detection",
+      "nameEs": "Deteccion de Fugas",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Leak Detection (pressure and dye test)",
+          "description": "Pressure test all plumbing lines and perform dye testing at suspected areas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 450.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Electronic Leak Detection",
+          "description": "Use electronic listening equipment to pinpoint leaks in shell or plumbing",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 350.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pipe Repair (underground)",
+          "description": "Excavate and repair leaking underground pipe section",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 750.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shell Crack Repair",
+          "description": "Chip out around crack, apply hydraulic cement and waterproof patch",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 500.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Light Niche or Fitting Repair",
+          "description": "Repair leak at light niche, return fitting, or skimmer",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Bucket Test (evaporation vs leak)",
+          "description": "Perform bucket test to determine if water loss is evaporation or actual leak",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 0.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "Pentair",
+    "Hayward",
+    "Jandy (Fluidra)",
+    "Zodiac",
+    "Polaris (cleaners)",
+    "PebbleTec (finishes)",
+    "NPP - National Plasterers (finishes)",
+    "Wet Edge (finishes)",
+    "Raypak (heaters)",
+    "CircuPool (salt systems)",
+    "CompuPool (salt systems)",
+    "CMP (fittings/lights)",
+    "Paramount (in-floor cleaning)",
+    "S.R. Smith (rails/slides)",
+    "Taylor Technologies (test kits)",
+    "LaMotte (test kits)"
+  ],
+  "terminologyGlossary": {
+    "gunite": "A dry-mix concrete sprayed under high pressure to form the pool shell structure",
+    "shotcrete": "A wet-mix concrete sprayed to form the pool shell, similar to gunite but different application",
+    "plaster": "The interior surface finish of a pool, typically white marcite applied over the shell",
+    "pebble finish": "A premium pool surface with exposed pebbles for durability and aesthetic texture",
+    "coping": "The cap or edge material around the top of the pool wall where it meets the deck",
+    "variable-speed pump": "An energy-efficient pump that adjusts RPM to match demand, saving 70-80% on energy",
+    "DE filter": "Diatomaceous earth filter that provides the finest filtration of pool water",
+    "salt chlorine generator": "A system that converts dissolved salt into chlorine through electrolysis",
+    "TDS": "Total dissolved solids - the measure of minerals and other dissolved materials in pool water",
+    "calcium hardness": "The calcium level in pool water, important for preventing plaster etching or scale buildup",
+    "cyanuric acid": "A chlorine stabilizer that protects chlorine from UV degradation in outdoor pools",
+    "turnover rate": "The time it takes for the pump to circulate the entire pool volume once, typically 8-12 hours",
+    "skimmer": "A built-in device at the waterline that pulls surface water and debris into the filtration system",
+    "return jet": "Fittings in the pool wall that return filtered, treated water back to the pool",
+    "acid wash": "Draining the pool and washing the surface with acid to remove stains and restore appearance"
+  },
+  "unitsOfMeasure": ["sq ft", "linear ft", "each", "job", "visit", "gallon"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring opening season. Market pool startups, equipment inspections, and green-to-clean services. Push salt cell inspections before heavy use." },
+    { "month": 5, "tip": "Pre-summer rush. Book equipment upgrades and minor repairs before homeowners start using pools daily. Variable-speed pump upgrades are a strong sell." },
+    { "month": 8, "tip": "Peak service season. Ensure weekly routes are efficient. Chemical demand is highest in summer heat. Watch for algae outbreaks after storms." },
+    { "month": 10, "tip": "Pool closing and winterization season in cold climates. In warm climates, reduce service frequency and pitch equipment maintenance during the off-peak." }
+  ],
+  "followUpToneNotes": "Pool customers value reliability and crystal-clear water. Be knowledgeable about water chemistry without being overly technical. Emphasize the value of consistent weekly service versus sporadic attention. Energy savings from variable-speed pumps are a strong selling point. Discuss surface longevity and how proper chemistry extends the life of plaster and pebble finishes."
+}

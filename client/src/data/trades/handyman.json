@@ -1,0 +1,448 @@
+{
+  "slug": "handyman",
+  "tradeName": "Handyman",
+  "tradeNameEs": "Manitas",
+  "icon": "Wrench",
+  "aiPersona": "You are an expert handyman assistant with broad knowledge across many home repair and improvement trades.\nYou handle a wide variety of tasks from minor plumbing and electrical fixes to drywall repair, fixture installation, and general carpentry.\nYou understand that handyman work is typically small to medium jobs that do not require a specialty trade license.\nYou know that most handyman services are priced by the hour with a minimum service call fee, or per task for common jobs.\nYou are familiar with furniture and equipment assembly including IKEA, shelving systems, TV wall mounts, and home gym equipment.\nYou understand basic plumbing tasks like replacing faucets, fixing running toilets, installing garbage disposals, and clearing simple drain clogs.\nYou know basic electrical work including replacing outlets, switches, light fixtures, ceiling fans, and doorbell systems.\nYou are experienced with drywall patching from nail holes to medium-sized patches from doorknob damage or removed fixtures.\nYou understand fixture swaps including towel bars, toilet paper holders, shower heads, door handles, and cabinet hardware.\nYou know how to hang shelves, mirrors, curtain rods, and pictures properly with the right anchors for each wall type.\nYou are familiar with weather stripping, caulking, door adjustments, and other weatherization tasks.\nYou understand that some tasks cross into licensed trade territory and you know when to recommend a licensed specialist.\nYou price jobs fairly — hourly rates typically range from $65-$125 depending on the market, with a minimum trip charge.\nYou know that having a well-stocked truck saves time and money because trips to the hardware store eat into productivity.\nYou communicate clearly about what is included in an estimate and what could add time or cost.\nYou understand the concept of a honey-do list — a collection of small tasks that homeowners bundle into a single service visit.\nYou are organized and efficient, tackling multiple small tasks in a logical order to minimize setup and cleanup time.\nYou always clean up after each task and leave the home better than you found it.",
+  "jobTypes": [
+    {
+      "id": "general_repair",
+      "name": "General Repair",
+      "nameEs": "Reparacion General",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Service Call / First Hour",
+          "description": "Minimum service call including first hour of on-site work",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "hour",
+          "defaultPrice": 95.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Additional Labor Hours",
+          "description": "Additional on-site labor beyond the first hour",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "hour",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Running Toilet Repair",
+          "description": "Replace flapper, fill valve, or flush valve to stop running toilet",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 95.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Leaky Faucet Repair",
+          "description": "Repair or replace faucet cartridge, seats, or O-rings to stop drip",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 110.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Door Adjustment/Repair",
+          "description": "Adjust sticking door, plane edge, tighten hinges, or fix latch alignment",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 75.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Miscellaneous Parts and Hardware",
+          "description": "Small parts, fasteners, anchors, caulk, and repair materials from truck stock",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 35.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "assembly_install",
+      "name": "Assembly/Install",
+      "nameEs": "Ensamblaje/Instalacion",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Furniture Assembly (small)",
+          "description": "Assemble bookshelf, nightstand, small desk, or similar piece",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 75.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Furniture Assembly (large/complex)",
+          "description": "Assemble large desk, bed frame, dresser, or entertainment center",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "TV Wall Mount Installation",
+          "description": "Mount TV bracket to wall, connect cables, and conceal wiring if possible",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shelf/Floating Shelf Installation",
+          "description": "Install floating shelves or bracket shelving with proper anchors",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 65.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Curtain Rod/Blinds Installation",
+          "description": "Install curtain rods, blinds, or shades including bracket mounting",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Ceiling Fan Installation",
+          "description": "Install ceiling fan on existing electrical box (no new wiring)",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Mounting Hardware",
+          "description": "Wall anchors, toggle bolts, lag screws, and mounting hardware as needed",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 25.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "drywall_patch",
+      "name": "Drywall Patch",
+      "nameEs": "Parche de Tablaroca",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Small Hole Patches (nail/screw holes)",
+          "description": "Fill and smooth small nail and screw holes, sand and prime",
+          "category": "labor",
+          "quantity": 10,
+          "unit": "each",
+          "defaultPrice": 15.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Medium Patch (fist to basketball size)",
+          "description": "Cut out damage, install backer or California patch, mud, sand, and prime",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 95.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Large Patch (greater than 12 inches)",
+          "description": "Cut to nearest studs, install new drywall piece, tape, mud, and sand",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Texture Matching",
+          "description": "Match existing texture (knockdown, orange peel, or smooth) on patched areas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Prime Patched Areas",
+          "description": "Apply primer to all patched and textured areas for paint-ready finish",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 45.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Patch Materials",
+          "description": "Drywall scraps, joint compound, mesh tape, sandpaper, and primer",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 30.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "fixture_swap",
+      "name": "Fixture Swap",
+      "nameEs": "Cambio de Accesorios",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Light Fixture Replacement",
+          "description": "Remove old light fixture and install new one on existing wiring",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Faucet Replacement",
+          "description": "Remove old faucet and install new one with supply line connections",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Toilet Replacement",
+          "description": "Remove old toilet, install new with wax ring and supply line",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Garbage Disposal Install",
+          "description": "Install new garbage disposal on existing sink plumbing",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 135.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Door Hardware Swap",
+          "description": "Replace door handles, deadbolts, or lock sets",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 35.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Bathroom Accessories Install",
+          "description": "Install towel bars, TP holder, robe hooks, and similar accessories",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 30.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Miscellaneous Parts",
+          "description": "Supply lines, wax rings, wire nuts, anchors, and small parts as needed",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 40.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "honey_do_list",
+      "name": "Honey-Do List",
+      "nameEs": "Lista de Tareas del Hogar",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Half-Day Service (4 hours)",
+          "description": "4-hour block of handyman time to tackle a list of small tasks",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "hour",
+          "defaultPrice": 85.00,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Full-Day Service (8 hours)",
+          "description": "Full day of handyman service for larger task lists or multiple rooms",
+          "category": "labor",
+          "quantity": 8,
+          "unit": "hour",
+          "defaultPrice": 80.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Caulking (tubs, showers, sinks)",
+          "description": "Remove old caulk and re-caulk tubs, showers, and sink edges",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 45.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Weather Stripping Replacement",
+          "description": "Replace worn weather stripping on exterior doors",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 55.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Picture/Mirror Hanging",
+          "description": "Hang pictures, mirrors, or artwork with proper anchors and leveling",
+          "category": "labor",
+          "quantity": 5,
+          "unit": "each",
+          "defaultPrice": 20.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Smoke/CO Detector Install",
+          "description": "Install or replace smoke and carbon monoxide detectors",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 25.00,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Miscellaneous Materials",
+          "description": "Caulk, weather stripping, anchors, screws, and small parts from truck stock",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "job",
+          "defaultPrice": 50.00,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": [
+    "DeWalt (tools)",
+    "Milwaukee (tools)",
+    "Makita (tools)",
+    "Moen (faucets)",
+    "Delta (faucets)",
+    "Kohler (fixtures)",
+    "Kwikset (door hardware)",
+    "Schlage (door hardware)",
+    "InSinkErator (disposals)",
+    "Waste King (disposals)",
+    "Lutron (dimmers/switches)",
+    "Leviton (outlets/switches)",
+    "Dap (caulk/sealant)",
+    "GE (light fixtures)",
+    "Hunter (ceiling fans)",
+    "Hampton Bay (ceiling fans)"
+  ],
+  "terminologyGlossary": {
+    "toggle bolt": "A heavy-duty wall anchor with spring wings that spread behind the drywall for strong hold",
+    "molly bolt": "A metal wall anchor that expands behind drywall when tightened for medium-weight hanging",
+    "stud finder": "An electronic device that locates wood framing studs behind drywall",
+    "P-trap": "The curved section of drain pipe under a sink that holds water to prevent sewer gas entry",
+    "flapper valve": "The rubber seal inside a toilet tank that lifts to release water during a flush",
+    "GFCI outlet": "Ground Fault Circuit Interrupter outlet required near water sources for shock protection",
+    "wire nut": "A twist-on connector used to join electrical wires securely",
+    "California patch": "A drywall repair method using a drywall piece with attached paper flaps as its own tape",
+    "shim": "A thin wedge used to level or plumb doors, windows, and cabinets during installation",
+    "caulk": "A flexible sealant used to fill gaps around tubs, windows, trim, and countertops",
+    "plumber's putty": "A soft sealant used under sink drains and faucet bases to prevent water seepage",
+    "minimum service call": "The minimum charge for a handyman visit, regardless of how little time the work takes",
+    "trip charge": "A fee covering travel time and fuel to get to the job site"
+  },
+  "unitsOfMeasure": ["hour", "each", "job"],
+  "seasonalTips": [
+    { "month": 1, "tip": "New Year home improvement lists are common. Market bundle deals for multi-task visits. Weatherization tasks are in high demand." },
+    { "month": 4, "tip": "Spring cleaning drives demand for home repairs, fixture updates, and outdoor prep. Push deck staining and pressure washing add-ons." },
+    { "month": 7, "tip": "Summer is busy with assembly projects (patio furniture, play sets) and pre-vacation home checks. Offer premium scheduling." },
+    { "month": 10, "tip": "Fall prep season — weather stripping, storm door install, and gutter guard installation. Holiday prep work starts in November." }
+  ],
+  "followUpToneNotes": "Handyman customers value reliability, punctuality, and a can-do attitude. Be friendly and practical. Emphasize the convenience of tackling multiple tasks in one visit to save on trip charges. Be transparent about what you can and cannot do — recommending a licensed specialist when needed builds trust. Follow up with availability for future honey-do lists."
+}
