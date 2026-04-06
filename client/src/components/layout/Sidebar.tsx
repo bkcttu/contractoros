@@ -9,6 +9,8 @@ import {
   Menu,
   X,
   Zap,
+  GitBranch,
+  Bell,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -17,6 +19,8 @@ const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Plus, label: 'New Proposal', path: '/proposals/new' },
   { icon: FileText, label: 'Proposals', path: '/proposals' },
+  { icon: GitBranch, label: 'Pipeline', path: '/pipeline' },
+  { icon: Bell, label: 'Follow-ups', path: '/follow-ups' },
   { icon: Settings, label: 'Settings', path: '/settings' },
 ]
 

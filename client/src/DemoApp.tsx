@@ -9,6 +9,8 @@ import { ProposalPreview } from '@/pages/ProposalPreview'
 import { ClientPortal } from '@/pages/ClientPortal'
 import { Onboarding } from '@/pages/Onboarding'
 import { SettingsPage } from '@/pages/Settings'
+import { Pipeline } from '@/pages/Pipeline'
+import { FollowUpCenter } from '@/pages/FollowUpCenter'
 
 export function DemoApp() {
   return (
@@ -30,6 +32,8 @@ export function DemoApp() {
                 <Route path="/proposals" element={<ProposalList />} />
                 <Route path="/proposals/new" element={<NewProposal />} />
                 <Route path="/proposals/:id" element={<ProposalPreview />} />
+                <Route path="/pipeline" element={<Pipeline />} />
+                <Route path="/follow-ups" element={<FollowUpCenter />} />
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/settings" element={<SettingsPage />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
