@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react'
-import { Loader2, Save, CreditCard, ExternalLink, Upload, Image, Trash2, Copy } from 'lucide-react'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { Loader2, Save, CreditCard, ExternalLink, Upload, Image, Trash2, Copy, Check } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,7 +10,16 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { api } from '@/lib/api'
 import { showToast } from '@/components/Toaster'
-import type { TradeType, PaymentTerms, User } from '@/types'
+import type { TradeType, PaymentTerms, FontPairType, User } from '@/types'
+
+const FONT_PAIRS: { value: FontPairType; name: string; heading: string; body: string; vibe: string }[] = [
+  { value: 'modern_pro', name: 'Modern Pro', heading: 'DM Sans', body: 'Inter', vibe: 'Clean, corporate' },
+  { value: 'industrial', name: 'Industrial', heading: 'Barlow Condensed', body: 'Barlow', vibe: 'Strong, trade' },
+  { value: 'friendly', name: 'Friendly', heading: 'Nunito', body: 'Nunito Sans', vibe: 'Approachable' },
+  { value: 'premium', name: 'Premium', heading: 'Playfair Display', body: 'Lato', vibe: 'Luxury remodels' },
+  { value: 'bold_builder', name: 'Bold Builder', heading: 'Oswald', body: 'Source Sans 3', vibe: 'Punchy' },
+  { value: 'minimal', name: 'Minimal', heading: 'Outfit', body: 'Outfit Light', vibe: 'Sleek, modern' },
+]
 
 const TRADE_OPTIONS: { value: TradeType; label: string }[] = [
   { value: 'hvac', label: 'HVAC' },
@@ -35,11 +44,20 @@ export function SettingsPage() {
     licenseNumber: '',
     bio: '',
     brandColor: '#F97316',
+    secondaryColor: '#64748B',
+    fontPair: 'modern_pro' as FontPairType,
+    tagline: '',
     logoUrl: '',
+    signatureUrl: '',
     taxRate: '0',
     defaultPaymentTerms: '50_upfront' as PaymentTerms,
   })
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const signatureFileInputRef = useRef<HTMLInputElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [signatureTab, setSignatureTab] = useState<'type' | 'draw' | 'upload'>('type')
+  const [typedSignature, setTypedSignature] = useState('')
+  const [isDrawing, setIsDrawing] = useState(false)
   const [plan, setPlan] = useState('starter')
 
   useEffect(() => {
@@ -56,7 +74,11 @@ export function SettingsPage() {
           licenseNumber: u.license_number || u.licenseNumber || '',
           bio: u.bio || '',
           brandColor: u.brand_color || u.brandColor || '#F97316',
+          secondaryColor: u.secondary_color || u.secondaryColor || '#64748B',
+          fontPair: (u.font_pair || u.fontPair || 'modern_pro') as FontPairType,
+          tagline: u.tagline || '',
           logoUrl: u.logo_url || u.logoUrl || '',
+          signatureUrl: u.signature_url || u.signatureUrl || '',
           taxRate: String(u.tax_rate ?? u.taxRate ?? 0),
           defaultPaymentTerms: (u.default_payment_terms || u.defaultPaymentTerms || '50_upfront') as PaymentTerms,
         })
@@ -85,7 +107,11 @@ export function SettingsPage() {
         licenseNumber: form.licenseNumber,
         bio: form.bio,
         brandColor: form.brandColor,
+        secondaryColor: form.secondaryColor,
+        fontPair: form.fontPair,
+        tagline: form.tagline,
         logoUrl: form.logoUrl || null,
+        signatureUrl: form.signatureUrl || null,
         taxRate: Number(form.taxRate),
         defaultPaymentTerms: form.defaultPaymentTerms,
       } as Partial<User>)
@@ -105,6 +131,59 @@ export function SettingsPage() {
       showToast({ title: 'Failed to start checkout', variant: 'destructive' })
     }
   }
+
+  const getCanvasCoords = useCallback((e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current
+    if (!canvas) return { x: 0, y: 0 }
+    const rect = canvas.getBoundingClientRect()
+    if ('touches' in e) {
+      const touch = e.touches[0] || e.changedTouches[0]
+      return { x: touch.clientX - rect.left, y: touch.clientY - rect.top }
+    }
+    return { x: (e as React.MouseEvent).nativeEvent.offsetX, y: (e as React.MouseEvent).nativeEvent.offsetY }
+  }, [])
+
+  const startDrawing = useCallback((e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    const canvas = canvasRef.current
+    const ctx = canvas?.getContext('2d')
+    if (!ctx) return
+    setIsDrawing(true)
+    const { x, y } = getCanvasCoords(e)
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+  }, [getCanvasCoords])
+
+  const draw = useCallback((e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    if (!isDrawing) return
+    const canvas = canvasRef.current
+    const ctx = canvas?.getContext('2d')
+    if (!ctx) return
+    const { x, y } = getCanvasCoords(e)
+    ctx.lineWidth = 2
+    ctx.lineCap = 'round'
+    ctx.strokeStyle = '#1e293b'
+    ctx.lineTo(x, y)
+    ctx.stroke()
+  }, [isDrawing, getCanvasCoords])
+
+  const stopDrawing = useCallback(() => {
+    if (!isDrawing) return
+    setIsDrawing(false)
+    const canvas = canvasRef.current
+    if (canvas) {
+      updateField('signatureUrl', canvas.toDataURL())
+    }
+  }, [isDrawing])
+
+  const clearCanvas = useCallback(() => {
+    const canvas = canvasRef.current
+    const ctx = canvas?.getContext('2d')
+    if (!ctx || !canvas) return
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    updateField('signatureUrl', '')
+  }, [])
 
   if (loading) {
     return (
@@ -265,6 +344,247 @@ export function SettingsPage() {
               <div className="h-10 flex-1 rounded-lg" style={{ backgroundColor: form.brandColor }} />
             </div>
           </div>
+
+          {/* Secondary Color */}
+          <div className="space-y-2">
+            <Label>Secondary Color (headers, dividers)</Label>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                value={form.secondaryColor}
+                onChange={(e) => updateField('secondaryColor', e.target.value)}
+                className="h-10 w-14 rounded border border-gray-200 cursor-pointer"
+              />
+              <Input
+                value={form.secondaryColor}
+                onChange={(e) => updateField('secondaryColor', e.target.value)}
+                className="w-32 font-mono"
+                placeholder="#64748B"
+              />
+              <div className="h-10 flex-1 rounded-lg" style={{ backgroundColor: form.secondaryColor }} />
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Font Pair Selector */}
+          <div className="space-y-2">
+            <Label>Font Pair</Label>
+            <p className="text-sm text-gray-500">Choose a font combination for your proposals and documents.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {FONT_PAIRS.map((fp) => (
+                <button
+                  key={fp.value}
+                  type="button"
+                  onClick={() => updateField('fontPair', fp.value)}
+                  className={`card-hover relative text-left p-4 rounded-lg border-2 transition-all ${
+                    form.fontPair === fp.value
+                      ? 'border-accent bg-accent/5'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  {form.fontPair === fp.value && (
+                    <div className="absolute top-2 right-2 h-5 w-5 rounded-full bg-accent flex items-center justify-center">
+                      <Check className="h-3 w-3 text-white" />
+                    </div>
+                  )}
+                  <div className="text-lg font-bold text-navy">{fp.name}</div>
+                  <div className="text-3xl font-bold text-navy mt-1">Aa</div>
+                  <div className="text-xs text-gray-400 mt-1">{fp.heading} / {fp.body}</div>
+                  <div className="text-xs text-gray-500 mt-0.5">{fp.vibe}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <Separator />
+
+          {/* Business Tagline */}
+          <div className="space-y-2">
+            <Label>Tagline (appears under your logo)</Label>
+            <Input
+              value={form.tagline}
+              onChange={(e) => updateField('tagline', e.target.value)}
+              placeholder="Quality work. Fair prices. Every time."
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Your Signature */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Your Signature</CardTitle>
+          <CardDescription>Add a signature for proposals and contracts.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          {/* Signature Tab Buttons */}
+          <div className="flex gap-1 p-1 bg-gray-100 rounded-lg w-fit">
+            {(['type', 'draw', 'upload'] as const).map((tab) => (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setSignatureTab(tab)}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors capitalize ${
+                  signatureTab === tab
+                    ? 'bg-white text-navy shadow-sm'
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          {/* Type Tab */}
+          {signatureTab === 'type' && (
+            <div className="space-y-3">
+              <Input
+                value={typedSignature}
+                onChange={(e) => setTypedSignature(e.target.value)}
+                placeholder="Type your name..."
+              />
+              {typedSignature && (
+                <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                  <p
+                    className="text-2xl text-navy"
+                    style={{ fontFamily: "'Dancing Script', cursive", fontStyle: 'italic' }}
+                  >
+                    {typedSignature}
+                  </p>
+                </div>
+              )}
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                disabled={!typedSignature}
+                onClick={() => {
+                  // Create a canvas to render the typed signature as an image
+                  const tempCanvas = document.createElement('canvas')
+                  tempCanvas.width = 300
+                  tempCanvas.height = 150
+                  const ctx = tempCanvas.getContext('2d')
+                  if (ctx) {
+                    ctx.fillStyle = 'transparent'
+                    ctx.clearRect(0, 0, 300, 150)
+                    ctx.font = 'italic 36px cursive'
+                    ctx.fillStyle = '#1e293b'
+                    ctx.fillText(typedSignature, 10, 90)
+                    updateField('signatureUrl', tempCanvas.toDataURL())
+                    showToast({ title: 'Signature saved!' })
+                  }
+                }}
+              >
+                Use This Signature
+              </Button>
+            </div>
+          )}
+
+          {/* Draw Tab */}
+          {signatureTab === 'draw' && (
+            <div className="space-y-3">
+              <canvas
+                ref={canvasRef}
+                width={300}
+                height={150}
+                className="border-2 border-dashed border-gray-300 rounded-lg cursor-crosshair touch-none bg-white w-full"
+                style={{ maxWidth: '300px' }}
+                onMouseDown={startDrawing}
+                onMouseMove={draw}
+                onMouseUp={stopDrawing}
+                onMouseLeave={stopDrawing}
+                onTouchStart={startDrawing}
+                onTouchMove={draw}
+                onTouchEnd={stopDrawing}
+              />
+              <Button type="button" variant="outline" size="sm" onClick={clearCanvas}>
+                Clear
+              </Button>
+            </div>
+          )}
+
+          {/* Upload Tab */}
+          {signatureTab === 'upload' && (
+            <div className="space-y-3">
+              {form.signatureUrl && !form.signatureUrl.startsWith('data:image/png;base64') ? (
+                <div className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                  <img
+                    src={form.signatureUrl}
+                    alt="Signature"
+                    className="h-16 object-contain"
+                  />
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => signatureFileInputRef.current?.click()}
+                    >
+                      <Image className="h-4 w-4 mr-1" />
+                      Change
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => updateField('signatureUrl', '')}
+                    >
+                      <Trash2 className="h-4 w-4 mr-1" />
+                      Remove
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => signatureFileInputRef.current?.click()}
+                  className="w-full border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center gap-2 hover:border-accent/50 hover:bg-accent/5 transition-colors cursor-pointer"
+                >
+                  <Upload className="h-8 w-8 text-gray-400" />
+                  <span className="text-sm font-medium text-gray-600">Upload your signature</span>
+                  <span className="text-xs text-gray-400">PNG, JPG up to 2MB</span>
+                </button>
+              )}
+              <input
+                ref={signatureFileInputRef}
+                type="file"
+                accept="image/png,image/jpeg"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0]
+                  if (!file) return
+                  if (file.size > 2 * 1024 * 1024) {
+                    showToast({ title: 'File too large. Max 2MB.', variant: 'destructive' })
+                    return
+                  }
+                  const reader = new FileReader()
+                  reader.onload = () => {
+                    updateField('signatureUrl', reader.result as string)
+                  }
+                  reader.readAsDataURL(file)
+                  e.target.value = ''
+                }}
+              />
+            </div>
+          )}
+
+          {/* Signature Preview */}
+          {form.signatureUrl && (
+            <>
+              <Separator />
+              <div className="space-y-2">
+                <Label>Signature Preview</Label>
+                <div className="border border-gray-200 rounded-lg p-4 bg-white">
+                  <img
+                    src={form.signatureUrl}
+                    alt="Signature preview"
+                    className="h-16 object-contain"
+                  />
+                </div>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
 

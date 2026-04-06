@@ -30,6 +30,10 @@ import {
   Share2,
   Save,
   Link2,
+  ToggleLeft,
+  ToggleRight,
+  List,
+  Layers,
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -42,6 +46,8 @@ import { cn } from '@/lib/utils'
 import { api } from '@/lib/api'
 import { showToast } from '@/components/Toaster'
 import type { PaymentTerms, TradeType } from '@/types'
+import { LineItemBuilder, type LineItem } from '@/components/LineItemBuilder'
+import { PricingTiers, DEFAULT_TIERS, type PricingTier } from '@/components/PricingTiers'
 
 const STEPS = [
   { id: 1, label: 'Client Info', icon: User },
@@ -76,7 +82,7 @@ function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
 }
 
-function getDemoProposalText(trade: TradeType, clientName: string, description: string, products?: Array<{ name: string; url: string; imageUrl: string; price: string; description: string }>): string {
+function getDemoProposalText(trade: TradeType, clientName: string, description: string, products?: Array<{ name: string; url: string; imageUrl: string; price: string; description: string }>, detailedLineItems?: LineItem[], pricingTiers?: PricingTier[]): string {
   const tradeName = TRADE_LABELS[trade] || 'General Contracting'
   return `PROFESSIONAL ${tradeName.toUpperCase()} PROPOSAL
 
@@ -102,6 +108,33 @@ ${products && products.length > 0 ? `MATERIALS & PRODUCTS
 The following materials and products will be used for this project:
 
 ${products.map((p) => `- ${p.name}${p.price ? ` — $${parseFloat(p.price).toFixed(2)}` : ''}${p.description ? ` (${p.description})` : ''}${p.url ? `\n  Product link: ${p.url}` : ''}`).join('\n')}
+
+` : ''}${detailedLineItems && detailedLineItems.length > 0 ? `DETAILED LINE ITEMS
+
+${(() => {
+  const groups = detailedLineItems.reduce<Record<string, LineItem[]>>((acc, item) => {
+    const group = item.groupName || 'Ungrouped'
+    if (!acc[group]) acc[group] = []
+    acc[group].push(item)
+    return acc
+  }, {})
+  return Object.entries(groups).map(([groupName, items]) => {
+    const groupLines = items.map(item =>
+      `  - ${item.itemName}: ${item.quantity} ${item.unit} x $${item.unitPrice.toFixed(2)} = $${item.lineTotal.toFixed(2)}${item.isOptional ? ' (Optional)' : ''}`
+    ).join('\n')
+    const groupTotal = items.reduce((s, i) => s + i.lineTotal, 0)
+    return `${groupName}:\n${groupLines}\n  Subtotal: $${groupTotal.toFixed(2)}`
+  }).join('\n\n')
+})()}
+
+Total: $${detailedLineItems.reduce((s, i) => s + i.lineTotal, 0).toFixed(2)}
+
+` : ''}${pricingTiers && pricingTiers.length > 0 ? `PRICING OPTIONS
+
+${pricingTiers.map(tier => {
+  const features = tier.features.filter(f => f.included).map(f => `    - ${f.text}`).join('\n')
+  return `${tier.label} — ${tier.name}: $${tier.price.toFixed(2)}${tier.isHighlighted ? ' (Recommended)' : ''}\n${features}`
+}).join('\n\n')}
 
 ` : ''}QUALITY ASSURANCE
 
@@ -146,6 +179,11 @@ export function NewProposal() {
     expirationDate: getDefaultExpiration(),
   })
 
+  const [lineItems, setLineItems] = useState<LineItem[]>([])
+  const [useDetailedItems, setUseDetailedItems] = useState(false)
+  const [tierMode, setTierMode] = useState(false)
+  const [tiers, setTiers] = useState<PricingTier[]>(DEFAULT_TIERS)
+
   const [products, setProducts] = useState<Array<{
     id: string
     name: string
@@ -189,11 +227,18 @@ export function NewProposal() {
     }
   }
 
+  const lineItemsTotal = useMemo(() => {
+    return lineItems.reduce((sum, item) => sum + item.lineTotal, 0)
+  }, [lineItems])
+
   const totalCost = useMemo(() => {
+    if (useDetailedItems && lineItems.length > 0) {
+      return lineItemsTotal
+    }
     const m = parseFloat(form.materialsCost) || 0
     const l = parseFloat(form.laborCost) || 0
     return m + l
-  }, [form.materialsCost, form.laborCost])
+  }, [form.materialsCost, form.laborCost, useDetailedItems, lineItems, lineItemsTotal])
 
   const validateStep = useCallback(
     (step: number): boolean => {
@@ -208,16 +253,20 @@ export function NewProposal() {
 
       if (step === 2) {
         if (!form.jobDescription.trim()) errors.jobDescription = 'Job description is required'
-        if (!form.materialsCost || parseFloat(form.materialsCost) < 0)
-          errors.materialsCost = 'Materials cost is required'
-        if (!form.laborCost || parseFloat(form.laborCost) < 0)
-          errors.laborCost = 'Labor cost is required'
+        if (useDetailedItems) {
+          if (lineItems.length === 0) errors.lineItems = 'At least one line item is required when using detailed pricing'
+        } else {
+          if (!form.materialsCost || parseFloat(form.materialsCost) < 0)
+            errors.materialsCost = 'Materials cost is required'
+          if (!form.laborCost || parseFloat(form.laborCost) < 0)
+            errors.laborCost = 'Labor cost is required'
+        }
       }
 
       setStepErrors(errors)
       return Object.keys(errors).length === 0
     },
-    [form]
+    [form, useDetailedItems, lineItems]
   )
 
   const goToStep = (step: number) => {
@@ -249,7 +298,14 @@ export function NewProposal() {
   }
 
   const simulateStreaming = useCallback(async () => {
-    const text = getDemoProposalText(form.tradeType, form.clientName, form.jobDescription, products)
+    const text = getDemoProposalText(
+      form.tradeType,
+      form.clientName,
+      form.jobDescription,
+      products,
+      useDetailedItems && lineItems.length > 0 ? lineItems : undefined,
+      tierMode && tiers.length > 0 ? tiers : undefined
+    )
     const words = text.split(/(\s+)/)
     let accumulated = ''
 
@@ -262,7 +318,7 @@ export function NewProposal() {
     }
 
     setGenerationDone(true)
-  }, [form.tradeType, form.clientName, form.jobDescription, products])
+  }, [form.tradeType, form.clientName, form.jobDescription, products, useDetailedItems, lineItems, tierMode, tiers])
 
   const handleGenerate = async () => {
     setError('')

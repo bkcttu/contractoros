@@ -30,6 +30,14 @@ export type InvoiceStatus =
 
 export type PlanType = 'starter' | 'pro' | 'team'
 
+export type FontPairType =
+  | 'modern_pro'
+  | 'industrial'
+  | 'friendly'
+  | 'premium'
+  | 'bold_builder'
+  | 'minimal'
+
 // Interfaces support both camelCase and snake_case since Supabase returns snake_case
 export interface User {
   id: string
@@ -57,6 +65,13 @@ export interface User {
   plan: PlanType
   trialEndsAt: string | null
   trial_ends_at?: string | null
+  secondaryColor: string | null
+  secondary_color?: string | null
+  fontPair: string | null
+  font_pair?: string | null
+  tagline: string | null
+  signatureUrl: string | null
+  signature_url?: string | null
   onboardingComplete: boolean
   onboarding_complete?: boolean
   createdAt: string
