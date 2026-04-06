@@ -1,0 +1,535 @@
+{
+  "slug": "landscaping",
+  "tradeName": "Landscaping",
+  "tradeNameEs": "Jardineria y Paisajismo",
+  "icon": "Trees",
+  "aiPersona": "You are an expert landscaping contractor and landscape designer with 20 years of experience in residential and commercial landscape installation and maintenance. You hold relevant state and local licenses, including pesticide applicator certification and irrigation contractor licensing. You speak the language of the trade naturally, referencing plant zones, soil amendments, irrigation scheduling, and hardscape construction techniques without hesitation.\n\nYou understand the difference between a sod install and a hydroseeding job, know when a drip system is more appropriate than rotary sprinklers, and can explain why proper grading and drainage are the foundation of any successful landscape project. You are comfortable discussing plant selection by sun exposure and water needs, turf grass varieties by climate zone, soil composition and pH, and the engineering behind retaining walls and paver patios.\n\nWhen estimating jobs, you think in terms of square footage for turf and planting areas, linear footage for borders and edging, cubic yards for mulch, soil, and gravel, and per-unit pricing for trees, shrubs, and perennials. You factor in site prep (clearing, grading, soil amendment), material delivery, equipment rental (skid steer, mini excavator, plate compactor), and the seasonal availability of plant material.\n\nYou know that a simple weekly mow-and-blow is a completely different business model from a full landscape renovation. You price maintenance contracts on a per-visit basis with seasonal adjustments, and you price installation jobs by the scope of work with clear material and labor breakdowns.\n\nYou are familiar with water conservation requirements, local watering restrictions, and the growing demand for drought-tolerant and native plant landscapes. You understand HOA requirements and can work within architectural review guidelines.\n\nYour communication style is enthusiastic but professional. You help homeowners envision the finished product, explain the importance of proper installation techniques for long-term plant health, and set realistic expectations about establishment periods and maintenance requirements. You take pride in creating outdoor spaces that are both beautiful and sustainable.",
+  "jobTypes": [
+    {
+      "id": "weekly_maintenance",
+      "name": "Weekly Maintenance",
+      "nameEs": "Mantenimiento Semanal",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Mowing",
+          "description": "Weekly lawn mowing, edging along walks and beds, blowing debris",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hedge and Shrub Trimming",
+          "description": "Monthly hedge and shrub trimming and shaping",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Weed Control (Beds)",
+          "description": "Bi-weekly hand weeding of planting beds",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fertilizer Application",
+          "description": "Quarterly turf fertilizer application, slow-release granular",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "application",
+          "defaultPrice": 85,
+          "isOptional": true,
+          "brands": ["Scotts", "Lesco"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Irrigation Check",
+          "description": "Monthly irrigation system inspection and adjustment",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "visit",
+          "defaultPrice": 45,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "full_landscape_install",
+      "name": "Full Landscape Install",
+      "nameEs": "Instalacion Completa de Paisaje",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Site Preparation and Grading",
+          "description": "Clear existing vegetation, rough grade, and establish drainage slopes",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 1500,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Topsoil / Soil Amendment",
+          "description": "Screened topsoil or compost blend, delivered and spread",
+          "category": "materials",
+          "quantity": 10,
+          "unit": "cubic yard",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Sod (Bermuda / Fescue / St. Augustine)",
+          "description": "Premium sod, delivered and installed, variety by region",
+          "category": "materials",
+          "quantity": 2000,
+          "unit": "sq ft",
+          "defaultPrice": 0.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Trees (15-Gallon)",
+          "description": "Shade or ornamental trees, 15-gallon container, installed with staking",
+          "category": "materials",
+          "quantity": 3,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shrubs (5-Gallon)",
+          "description": "Foundation shrubs and accent plantings, 5-gallon container",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Perennials and Groundcover (1-Gallon)",
+          "description": "Flowering perennials and groundcover plants",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "each",
+          "defaultPrice": 12,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Mulch (Hardwood or Cedar)",
+          "description": "3-inch layer of premium mulch in all planting beds",
+          "category": "materials",
+          "quantity": 8,
+          "unit": "cubic yard",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Landscape Edging",
+          "description": "Aluminum or steel landscape edging at bed borders",
+          "category": "materials",
+          "quantity": 100,
+          "unit": "ft",
+          "defaultPrice": 4,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Planting Labor",
+          "description": "Crew of 3-4, planting, mulching, and cleanup",
+          "category": "labor",
+          "quantity": 24,
+          "unit": "hour",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Equipment Rental",
+          "description": "Skid steer or mini excavator for site prep and grading",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "day",
+          "defaultPrice": 450,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "irrigation_install",
+      "name": "Irrigation Install",
+      "nameEs": "Instalacion de Riego",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Irrigation Controller",
+          "description": "Wi-Fi smart irrigation controller, weather-based scheduling",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 225,
+          "isOptional": false,
+          "brands": ["Rain Bird", "Hunter", "Rachio", "Orbit"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Backflow Preventer",
+          "description": "Double-check or PVB backflow preventer, per local code",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": ["Watts", "Febco"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Valve Boxes and Zone Valves",
+          "description": "Electric solenoid valves with valve boxes, one per zone",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": ["Rain Bird", "Hunter"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "PVC Pipe and Fittings (Mainline)",
+          "description": "Schedule 40 PVC mainline pipe, fittings, and primer/cement",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "ft",
+          "defaultPrice": 2,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Poly Pipe and Fittings (Lateral Lines)",
+          "description": "Polyethylene lateral/funny pipe and barb fittings",
+          "category": "materials",
+          "quantity": 500,
+          "unit": "ft",
+          "defaultPrice": 0.75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Spray Heads and Rotors",
+          "description": "Pop-up spray heads for small areas, rotors for large areas",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "each",
+          "defaultPrice": 15,
+          "isOptional": false,
+          "brands": ["Rain Bird", "Hunter"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drip Irrigation Components",
+          "description": "Drip tubing, emitters, pressure regulators for planting beds",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 250,
+          "isOptional": true,
+          "brands": ["Rain Bird", "Netafim"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Trenching and Installation",
+          "description": "Trench, install pipe, heads, and valves — 2-3 crew members",
+          "category": "labor",
+          "quantity": 20,
+          "unit": "hour",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "System Programming and Adjustment",
+          "description": "Program controller, adjust heads for coverage, test all zones",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "hour",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "hardscape_patio",
+      "name": "Hardscape / Patio",
+      "nameEs": "Patio / Hardscape",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Excavation and Grading",
+          "description": "Excavate to depth, establish grade and drainage slope",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 1200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Crushed Stone Base (Class II)",
+          "description": "Compacted crushed stone base, 4-6 inch depth",
+          "category": "materials",
+          "quantity": 8,
+          "unit": "cubic yard",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Bedding Sand",
+          "description": "Screeded 1-inch concrete sand bedding layer",
+          "category": "materials",
+          "quantity": 3,
+          "unit": "cubic yard",
+          "defaultPrice": 50,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pavers",
+          "description": "Interlocking concrete pavers, standard pattern",
+          "category": "materials",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 5,
+          "isOptional": false,
+          "brands": ["Belgard", "Tremron", "Pavestone", "Techo-Bloc"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Edge Restraint",
+          "description": "Paver edge restraint with spikes",
+          "category": "materials",
+          "quantity": 80,
+          "unit": "ft",
+          "defaultPrice": 3,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Polymeric Sand",
+          "description": "Polymeric jointing sand to lock pavers and prevent weeds",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "bag",
+          "defaultPrice": 28,
+          "isOptional": false,
+          "brands": ["Techniseal", "Alliance"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Paver Installation Labor",
+          "description": "Layout, cut, install, and compact pavers — crew of 3",
+          "category": "labor",
+          "quantity": 400,
+          "unit": "sq ft",
+          "defaultPrice": 8,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Seating Wall / Fire Pit",
+          "description": "Segmental block seating wall or fire pit feature",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 2500,
+          "isOptional": true,
+          "brands": ["Belgard", "Pavestone"]
+        }
+      ]
+    },
+    {
+      "id": "tree_trimming",
+      "name": "Tree Trimming",
+      "nameEs": "Poda de Arboles",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Tree Trimming (Medium Tree, 20-40 ft)",
+          "description": "Crown cleaning, deadwood removal, shaping — per tree",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Tree Trimming (Large Tree, 40-60 ft)",
+          "description": "Large tree pruning with bucket truck or climbing — per tree",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 750,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Debris Hauling and Cleanup",
+          "description": "Chip branches, haul debris, clean up work area",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Stump Grinding",
+          "description": "Stump grinding 6 inches below grade, per stump",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "seasonal_cleanup",
+      "name": "Seasonal Cleanup",
+      "nameEs": "Limpieza Estacional",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Bed Cleanup and Edging",
+          "description": "Clean out planting beds, redefine edges, remove dead plants",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "hour",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Leaf Removal",
+          "description": "Blow, rake, and haul away fallen leaves from property",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "hour",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fresh Mulch",
+          "description": "Replenish mulch in all beds to 3-inch depth",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "cubic yard",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Shrub Pruning",
+          "description": "Prune and shape all shrubs and ornamental grasses",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "hour",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Pre-Emergent Application",
+          "description": "Apply pre-emergent herbicide to beds and turf to prevent weeds",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "application",
+          "defaultPrice": 125,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": ["Hunter", "Rain Bird", "Toro", "Honda", "Husqvarna", "Stihl", "Belgard", "Rachio"],
+  "terminologyGlossary": {
+    "hardscape": "The non-living elements of a landscape — patios, walkways, retaining walls, driveways",
+    "softscape": "The living plant elements — turf, trees, shrubs, flowers, and groundcover",
+    "sod": "Pre-grown grass cut into rolls or slabs for instant lawn installation",
+    "hydroseeding": "A method of spraying a seed, mulch, and fertilizer slurry for large-area grass establishment",
+    "drip irrigation": "A low-volume watering system that delivers water directly to plant root zones through emitters",
+    "rotor": "A sprinkler head that rotates to cover large turf areas with a single stream",
+    "spray head": "A pop-up sprinkler with a fixed spray pattern for small turf and bed areas",
+    "zone": "A section of the irrigation system controlled by a single valve, designed for similar plant water needs",
+    "backflow preventer": "A device required by code that prevents irrigation water from flowing back into the potable supply",
+    "compaction": "The process of mechanically compressing base material to create a stable foundation for hardscape",
+    "polymeric sand": "A special jointing sand for pavers that hardens when activated with water to prevent weeds and shifting",
+    "retaining wall": "A wall structure that holds back soil to create level changes or prevent erosion",
+    "grading": "Shaping the ground surface to direct water flow away from structures and prevent pooling",
+    "cubic yard": "A volume measurement (3ft x 3ft x 3ft) used for bulk materials like mulch, soil, and gravel",
+    "crown cleaning": "Tree trimming technique that removes dead, diseased, and crossing branches from the canopy",
+    "root zone": "The area of soil around a plant where the roots grow and absorb water and nutrients",
+    "amendment": "Material mixed into soil to improve its structure, drainage, or nutrient content (e.g., compost, peat)",
+    "turf": "Managed lawn grass — varieties include Bermuda, Fescue, St. Augustine, Zoysia, and Kentucky Bluegrass",
+    "xeriscape": "A landscaping approach that reduces or eliminates the need for supplemental irrigation",
+    "GPM": "Gallons Per Minute — the flow rate used to design and size irrigation systems"
+  },
+  "unitsOfMeasure": ["sq ft", "cubic yard", "ft", "each", "hour", "visit", "day", "application", "bag"],
+  "seasonalTips": [
+    { "month": 2, "tip": "Pre-spring push — sell spring cleanup packages and irrigation startups before the rush" },
+    { "month": 4, "tip": "Peak planting season — schedule landscape installs and sod jobs while nursery stock is fresh" },
+    { "month": 6, "tip": "Summer maintenance peak — mowing crews running full capacity, upsell irrigation repairs" },
+    { "month": 9, "tip": "Fall planting is ideal for trees and shrubs — promote fall landscape installations" },
+    { "month": 10, "tip": "Fall cleanup season — leaf removal, bed cutback, and winterization packages" },
+    { "month": 11, "tip": "Irrigation winterization (blow-out) season in cold climates — schedule early" }
+  ],
+  "followUpToneNotes": "Emphasize curb appeal, property value, and enjoyment of outdoor living spaces. Reference seasonal timing for best planting results. Mention water savings from smart irrigation and drought-tolerant design. Highlight low-maintenance options for busy homeowners."
+}

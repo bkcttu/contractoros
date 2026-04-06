@@ -1,0 +1,568 @@
+{
+  "slug": "hvac",
+  "tradeName": "HVAC / Air Conditioning",
+  "tradeNameEs": "HVAC / Aire Acondicionado",
+  "icon": "Thermometer",
+  "aiPersona": "You are an expert HVAC technician and contractor with 20 years of experience in residential and commercial heating, ventilation, and air conditioning systems. You speak the language of the trade naturally, referencing SEER2 ratings, AHRI matched systems, Manual J load calculations, and refrigerant handling procedures without hesitation.\n\nYou understand the difference between a package unit and a split system, know when a zoning system makes sense versus a single-stage setup, and can explain why a TXV is preferred over a fixed orifice in most applications. You are comfortable discussing tonnage sizing, static pressure, duct design, and airflow balancing.\n\nWhen estimating jobs, you think in terms of equipment cost, materials (linesets, disconnects, pads, thermostats), labor hours based on difficulty and access, and code-required items like condensate traps, float switches, and permit fees. You always factor in refrigerant type — whether the system uses R-410A or the newer R-454B — and account for recovery and disposal when replacing older R-22 units.\n\nYou know that a straightforward change-out in a ground-floor closet is very different from a rooftop package unit swap or an attic air handler replacement with limited access. You price accordingly and flag access issues, crane requirements, or code upgrades proactively.\n\nYou are familiar with manufacturer warranty registration, AHRI matchup requirements, and the importance of documenting proper subcooling and superheat at startup. You recommend maintenance plans because you know they reduce callbacks and extend equipment life.\n\nYour communication style is professional but approachable. You explain technical concepts in plain language when talking to homeowners, but you can go deep on specifications when talking to other techs or inspectors. You always prioritize safety, code compliance, and doing the job right the first time.",
+  "jobTypes": [
+    {
+      "id": "full_system_replacement",
+      "name": "Full System Replacement",
+      "nameEs": "Reemplazo Completo del Sistema",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Condenser Unit (3-Ton, 16 SEER2)",
+          "description": "High-efficiency condenser unit, SEER2 rated, R-410A refrigerant",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 2200,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Air Handler / Furnace",
+          "description": "Variable-speed air handler or 80%+ AFUE gas furnace",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1800,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Evaporator Coil",
+          "description": "AHRI-matched evaporator coil, cased, with TXV",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Programmable Thermostat",
+          "description": "Wi-Fi enabled programmable thermostat",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 185,
+          "isOptional": false,
+          "brands": ["Honeywell", "Ecobee", "Nest", "Emerson"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Copper Lineset",
+          "description": "Insulated copper lineset, 3/8 x 3/4 inch, 25ft standard",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 185,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Condensate Drain Line and Safety Switch",
+          "description": "PVC condensate drain, float switch, and condensate trap per code",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Electrical Disconnect and Whip",
+          "description": "Non-fused disconnect box with flexible conduit whip",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Condenser Pad",
+          "description": "Composite equipment pad for outdoor unit",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Refrigerant (R-410A)",
+          "description": "R-410A refrigerant charge, system-specific amount",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "lb",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Full system installation — 2 technicians, standard difficulty",
+          "category": "labor",
+          "quantity": 8,
+          "unit": "hour",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "System Startup and Commissioning",
+          "description": "Charge verification, airflow testing, thermostat programming",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Mechanical Permit",
+          "description": "City/county mechanical permit and inspection fee",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "UV Air Purifier",
+          "description": "Ultraviolet germicidal light installed in air handler",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 450,
+          "isOptional": true,
+          "brands": ["RGF", "Honeywell", "Lennox"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Surge Protector",
+          "description": "HVAC surge protection device for condenser",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125,
+          "isOptional": true,
+          "brands": ["Intermatic", "Eaton"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Duct Modification / Transition",
+          "description": "Modify existing ductwork to fit new equipment",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "ac_only",
+      "name": "AC Only Replacement",
+      "nameEs": "Reemplazo Solo de Aire Acondicionado",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Condenser Unit (3-Ton, 16 SEER2)",
+          "description": "High-efficiency condenser unit with R-410A",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 2200,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Evaporator Coil",
+          "description": "AHRI-matched evaporator coil with TXV",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Copper Lineset",
+          "description": "Insulated copper lineset, standard length",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 185,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Refrigerant (R-410A)",
+          "description": "System charge, verified at startup",
+          "category": "materials",
+          "quantity": 5,
+          "unit": "lb",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Electrical Disconnect and Whip",
+          "description": "Non-fused disconnect and flexible conduit",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "AC condenser and coil swap — 2 techs",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "hour",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Mechanical Permit",
+          "description": "Permit and inspection fee",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "furnace_only",
+      "name": "Furnace Only Replacement",
+      "nameEs": "Reemplazo Solo de Calefaccion",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Gas Furnace (80,000 BTU, 96% AFUE)",
+          "description": "High-efficiency gas furnace, variable-speed blower",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1800,
+          "isOptional": false,
+          "brands": ["Carrier", "Trane", "Lennox", "Goodman"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Venting / Flue Pipe",
+          "description": "PVC venting for high-efficiency or B-vent for standard",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 225,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gas Line Fittings",
+          "description": "Flexible gas connector, shutoff valve, drip leg",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Condensate Drain and Pump",
+          "description": "Condensate line and pump if needed for high-efficiency unit",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 120,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Furnace swap — 2 techs, standard difficulty",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "hour",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Mechanical Permit",
+          "description": "Permit and inspection fee",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "mini_split_install",
+      "name": "Mini-Split Install",
+      "nameEs": "Instalacion de Mini-Split",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Mini-Split Outdoor Unit (Single Zone, 12K BTU)",
+          "description": "Ductless heat pump condenser, inverter-driven compressor",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1400,
+          "isOptional": false,
+          "brands": ["Mitsubishi", "Daikin", "Fujitsu", "LG"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Indoor Wall-Mount Head",
+          "description": "Wall-mounted evaporator head with remote control",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650,
+          "isOptional": false,
+          "brands": ["Mitsubishi", "Daikin", "Fujitsu", "LG"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Lineset and Communication Wire",
+          "description": "Pre-charged or field-charged lineset with control wiring",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Line Hide / Lineset Cover",
+          "description": "Decorative lineset cover for exterior run",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "ft",
+          "defaultPrice": 12,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Electrical Circuit (Dedicated)",
+          "description": "New 20A or 30A dedicated circuit from panel to disconnect",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Mini-split install — 1-2 techs, wall penetration and mount",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "hour",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Mechanical Permit",
+          "description": "Permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "preventive_maintenance",
+      "name": "Preventive Maintenance",
+      "nameEs": "Mantenimiento Preventivo",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "AC Tune-Up",
+          "description": "Full system inspection, coil cleaning, refrigerant check, electrical tightening",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 149,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Heating Tune-Up",
+          "description": "Furnace inspection, burner cleaning, safety checks, filter replacement",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 129,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Air Filter (Standard)",
+          "description": "Standard pleated air filter, MERV 8-11",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Coil Deep Clean",
+          "description": "Chemical coil cleaning for heavy buildup",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Capacitor Replacement",
+          "description": "Replace weak or failing run/start capacitor proactively",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 95,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "repair_service_call",
+      "name": "Repair / Service Call",
+      "nameEs": "Reparacion / Llamada de Servicio",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Diagnostic Fee",
+          "description": "On-site diagnostic and troubleshooting, first 30 minutes",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 89,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Repair Labor",
+          "description": "Technician labor beyond diagnostic, per hour",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Parts (TBD)",
+          "description": "Replacement parts as identified during diagnosis",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 0,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Refrigerant Top-Off",
+          "description": "R-410A refrigerant per pound if low charge detected",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lb",
+          "defaultPrice": 65,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": ["Carrier", "Trane", "Lennox", "Goodman", "Rheem", "Daikin", "Mitsubishi"],
+  "terminologyGlossary": {
+    "condenser": "The outdoor unit that releases heat from the refrigerant to the outside air",
+    "evaporator coil": "The indoor coil that absorbs heat from the air inside the home",
+    "air handler": "The indoor unit containing the blower and evaporator coil",
+    "SEER2": "Seasonal Energy Efficiency Ratio (updated 2023 testing standard) — higher is more efficient",
+    "AFUE": "Annual Fuel Utilization Efficiency — percentage of fuel converted to heat in a furnace",
+    "tonnage": "Cooling capacity measurement — 1 ton equals 12,000 BTU per hour",
+    "BTU": "British Thermal Unit — basic measure of heating/cooling energy",
+    "refrigerant": "The chemical compound that absorbs and releases heat as it circulates through the system",
+    "R-410A": "Standard refrigerant for residential AC systems since 2010, replacing R-22",
+    "R-22": "Legacy refrigerant (Freon), phased out — no longer manufactured",
+    "TXV": "Thermostatic Expansion Valve — controls refrigerant flow into the evaporator",
+    "subcooling": "Temperature below the condensing point — used to verify proper refrigerant charge",
+    "superheat": "Temperature above the evaporating point — used to verify system performance",
+    "static pressure": "Air pressure in the duct system — measured in inches of water column (iwc)",
+    "Manual J": "Industry-standard calculation method for determining heating/cooling load of a building",
+    "AHRI match": "Equipment combination certified by AHRI to work together at rated efficiency",
+    "lineset": "Insulated copper tubing connecting the outdoor condenser to the indoor evaporator coil",
+    "disconnect": "Electrical safety switch mounted near the outdoor unit for service shutoff",
+    "condensate": "Water produced by the cooling process that must be properly drained",
+    "variable speed": "Blower or compressor that adjusts speed for comfort and efficiency rather than on/off cycling"
+  },
+  "unitsOfMeasure": ["each", "ton", "lb", "ft", "BTU", "hour", "set"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring AC tune-up campaign — push preventive maintenance plans before summer heat arrives" },
+    { "month": 5, "tip": "Pre-summer rush — schedule system replacements now before emergency calls consume all capacity" },
+    { "month": 6, "tip": "Emergency repair calls peak — consider extending hours and adding helper techs to handle volume" },
+    { "month": 9, "tip": "Transition season — promote dual tune-ups (AC + heating) at a bundled discount" },
+    { "month": 10, "tip": "Furnace season starting — run heating tune-up and carbon monoxide safety campaigns" },
+    { "month": 12, "tip": "Slow season for installs — offer off-season pricing to keep crews busy through winter" }
+  ],
+  "followUpToneNotes": "Reference seasonal urgency, energy savings, and home comfort. Mention efficiency ratings (SEER2, AFUE) and potential utility rebates. Emphasize warranty coverage and the cost of delaying replacement versus ongoing repair bills."
+}

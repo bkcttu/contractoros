@@ -1,0 +1,604 @@
+{
+  "slug": "plumbing",
+  "tradeName": "Plumbing",
+  "tradeNameEs": "Plomeria",
+  "icon": "Droplets",
+  "aiPersona": "You are an expert master plumber with 20 years of experience in residential and commercial plumbing systems. You hold a master plumber license and are deeply familiar with the International Plumbing Code (IPC) and local amendments. You speak the language of the trade naturally, referencing pipe sizing, DWV systems, water pressure calculations, and fixture unit counts without hesitation.\n\nYou understand the difference between a tankless water heater retrofit and a simple tank swap, know when PEX-A is preferred over PEX-B, and can explain why a whole-house repipe in copper versus PEX changes the labor estimate dramatically. You are comfortable discussing water hammer arrestors, thermal expansion tanks, PRV adjustments, and backflow prevention.\n\nWhen estimating jobs, you think about material costs (pipe, fittings, valves, fixtures), labor hours based on access and complexity, permit requirements, and code-mandated items like expansion tanks, earthquake straps, and proper venting. You always account for water shutoff logistics, drywall or concrete access, and haul-away of old equipment.\n\nYou know that a water heater replacement in an open garage is very different from one in a tight closet on the second floor with no elevator. You factor in gas line modifications, venting changes for power-vent or direct-vent units, and electrical requirements for tankless conversions.\n\nYou are familiar with all major fixture brands and can recommend appropriate quality tiers based on budget. You understand rough-in dimensions, drain slope requirements (1/4 inch per foot minimum), and proper venting configurations to prevent siphoning traps.\n\nYour communication style is straightforward and honest. You explain what needs to happen, why it matters for code compliance and long-term reliability, and what the homeowner can expect during the process. You always prioritize health and safety, proper drainage, and clean water delivery.",
+  "jobTypes": [
+    {
+      "id": "water_heater_replacement",
+      "name": "Water Heater Replacement",
+      "nameEs": "Reemplazo de Calentador de Agua",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Tank Water Heater (50 Gallon, Gas)",
+          "description": "50-gallon natural gas water heater, 40,000 BTU, 0.62+ UEF",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 750,
+          "isOptional": false,
+          "brands": ["Bradford White", "Rheem", "A.O. Smith"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Expansion Tank",
+          "description": "Thermal expansion tank, code-required on closed systems",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Water Flex Connectors",
+          "description": "Braided stainless steel water supply connectors",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "each",
+          "defaultPrice": 18,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gas Flex Connector and Shutoff",
+          "description": "Flexible gas connector with new shutoff valve",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "T&P Relief Valve and Discharge Pipe",
+          "description": "Temperature and pressure relief valve with copper discharge to code",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Earthquake Straps",
+          "description": "Seismic strapping kit (required in seismic zones)",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Vent Pipe and Fittings",
+          "description": "B-vent or direct-vent pipe, connectors, and draft hood",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drain Pan and Line",
+          "description": "Aluminum drain pan with PVC drain line (if indoor install)",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 40,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Remove old unit, install new — 1-2 plumbers, standard access",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "hour",
+          "defaultPrice": 110,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Haul Away Old Unit",
+          "description": "Disconnect, drain, and dispose of old water heater",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Plumbing Permit",
+          "description": "City/county plumbing permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Tankless Upgrade",
+          "description": "Upgrade to tankless water heater (price difference, additional gas/venting work)",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 1200,
+          "isOptional": true,
+          "brands": ["Rinnai", "Navien", "Noritz"]
+        }
+      ]
+    },
+    {
+      "id": "full_repipe",
+      "name": "Full Repipe",
+      "nameEs": "Reemplazo Completo de Tuberia",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "PEX Pipe (3/4 inch Main)",
+          "description": "PEX-A or PEX-B main trunk line, red and blue",
+          "category": "materials",
+          "quantity": 200,
+          "unit": "ft",
+          "defaultPrice": 2.50,
+          "isOptional": false,
+          "brands": ["Uponor", "SharkBite", "Viega"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "PEX Pipe (1/2 inch Branch)",
+          "description": "PEX branch lines to individual fixtures",
+          "category": "materials",
+          "quantity": 300,
+          "unit": "ft",
+          "defaultPrice": 1.75,
+          "isOptional": false,
+          "brands": ["Uponor", "SharkBite", "Viega"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fittings and Manifold",
+          "description": "PEX fittings, manifold, crimp rings or expansion connections",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 450,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Shutoff Valves",
+          "description": "Quarter-turn shutoff valves at each fixture",
+          "category": "materials",
+          "quantity": 12,
+          "unit": "each",
+          "defaultPrice": 15,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Repipe Labor",
+          "description": "2-3 plumbers, whole house repipe, standard 2-bath home",
+          "category": "labor",
+          "quantity": 24,
+          "unit": "hour",
+          "defaultPrice": 110,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall Patching (Basic)",
+          "description": "Basic drywall patching at access points — not finish paint",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 500,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Plumbing Permit",
+          "description": "Permit for full repipe with inspections",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "drain_sewer_service",
+      "name": "Drain / Sewer Service",
+      "nameEs": "Servicio de Drenaje / Alcantarillado",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Camera Inspection",
+          "description": "Sewer camera inspection to locate blockage or damage",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drain Cleaning (Cable Machine)",
+          "description": "Mechanical drain cleaning with cable/snake machine",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Hydro-Jetting",
+          "description": "High-pressure water jetting for thorough pipe cleaning",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650,
+          "isOptional": true,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Cleanout Installation",
+          "description": "Install new two-way cleanout if missing per code",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "fixture_install",
+      "name": "Fixture Install",
+      "nameEs": "Instalacion de Accesorio",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Fixture (Customer Supplied or Contractor Supplied)",
+          "description": "Faucet, toilet, sink, or other plumbing fixture",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": ["Moen", "Delta", "Kohler", "American Standard"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Supply Lines and Fittings",
+          "description": "Braided supply lines, shutoff valves, adapters as needed",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wax Ring / Closet Bolts (Toilet)",
+          "description": "Wax ring seal and closet bolt set for toilet installs",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 15,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Fixture installation, per fixture",
+          "category": "labor",
+          "quantity": 1.5,
+          "unit": "hour",
+          "defaultPrice": 110,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "leak_repair",
+      "name": "Leak Repair",
+      "nameEs": "Reparacion de Fuga",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Diagnostic / Leak Detection",
+          "description": "Locate and diagnose leak source",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Repair Labor",
+          "description": "Plumber labor to repair pipe, joint, or fitting",
+          "category": "labor",
+          "quantity": 2,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Repair Parts",
+          "description": "Pipe, fittings, valves as needed for repair",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall / Access Repair",
+          "description": "Patch drywall or ceiling if access was required",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "new_construction_rough_in",
+      "name": "New Construction Rough-In",
+      "nameEs": "Tuberia Nueva para Construccion",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "DWV Pipe (ABS/PVC)",
+          "description": "Drain, waste, and vent piping — all sizes",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 1200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Water Supply Pipe (PEX)",
+          "description": "Hot and cold PEX supply lines with manifold",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 800,
+          "isOptional": false,
+          "brands": ["Uponor", "Viega"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fittings, Hangers, and Supports",
+          "description": "All fittings, pipe hangers, straps, test caps",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 500,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Rough-In Labor",
+          "description": "Complete plumbing rough-in for standard 3-bed/2-bath home",
+          "category": "labor",
+          "quantity": 40,
+          "unit": "hour",
+          "defaultPrice": 100,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Plumbing Permit",
+          "description": "New construction plumbing permit with rough and final inspections",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "bathroom_remodel",
+      "name": "Bathroom Remodel (Plumbing)",
+      "nameEs": "Remodelacion de Bano (Plomeria)",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Demo and Rough-In Relocation",
+          "description": "Remove old fixtures, relocate supply and drain lines as needed",
+          "category": "labor",
+          "quantity": 12,
+          "unit": "hour",
+          "defaultPrice": 110,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pipe and Fittings",
+          "description": "PEX supply, PVC/ABS drain, all fittings for new layout",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 400,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Shower Valve (Pressure Balanced)",
+          "description": "Pressure-balanced shower valve, rough-in and trim",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": ["Moen", "Delta", "Kohler"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Final Fixture Set",
+          "description": "Install toilet, vanity, faucets, shower trim at finish stage",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "hour",
+          "defaultPrice": 110,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Plumbing Permit",
+          "description": "Permit for bathroom remodel plumbing work",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "gas_line",
+      "name": "Gas Line Install / Repair",
+      "nameEs": "Instalacion / Reparacion de Linea de Gas",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Black Iron Pipe and Fittings",
+          "description": "Schedule 40 black iron pipe, fittings, shutoff valve, drip leg",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "CSST Flexible Gas Line",
+          "description": "Corrugated stainless steel tubing with fittings (alternative to black iron)",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "ft",
+          "defaultPrice": 8,
+          "isOptional": true,
+          "brands": ["TracPipe", "Gastite"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Gas Line Installation",
+          "description": "Run new gas line from meter/manifold to appliance location",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Pressure Test",
+          "description": "Air/gas pressure test per code before turning on gas",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 100,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Gas Permit",
+          "description": "Gas line permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": ["Bradford White", "Rheem", "A.O. Smith", "Moen", "Delta", "Kohler", "Rinnai", "Navien", "Uponor"],
+  "terminologyGlossary": {
+    "DWV": "Drain, Waste, and Vent — the system that removes wastewater and allows air into drain lines",
+    "PEX": "Cross-linked polyethylene — flexible plastic tubing used for water supply lines",
+    "ABS": "Acrylonitrile butadiene styrene — black plastic pipe used for drain and vent lines",
+    "PVC": "Polyvinyl chloride — white plastic pipe used for drain, vent, and irrigation",
+    "trap": "U-shaped pipe section that holds water to block sewer gases from entering the building",
+    "cleanout": "Accessible opening in the drain line for clearing blockages",
+    "PRV": "Pressure Reducing Valve — reduces incoming water pressure to safe levels (typically 40-80 PSI)",
+    "expansion tank": "A small tank that absorbs thermal expansion pressure in a closed water system",
+    "backflow preventer": "Device that prevents contaminated water from flowing backward into the clean supply",
+    "fixture unit": "A standardized measurement of water flow demand used to size supply and drain pipes",
+    "rough-in": "Installation of pipes inside walls and floors before drywall and finish work",
+    "T&P valve": "Temperature and Pressure relief valve on a water heater — critical safety device",
+    "drip leg": "A short vertical pipe at a gas connection that catches debris and moisture",
+    "manifold": "A distribution hub where a main supply line splits to serve multiple branch lines",
+    "closet flange": "The fitting that connects a toilet to the drain pipe in the floor",
+    "wye fitting": "A Y-shaped drain fitting that allows branch connections at a proper angle",
+    "vent stack": "Vertical pipe that extends through the roof to vent the drain system",
+    "water hammer": "A loud banging noise caused by sudden water flow stoppage — fixed with arrestors",
+    "UEF": "Uniform Energy Factor — efficiency rating for water heaters (higher is better)",
+    "tankless": "On-demand water heater that heats water as it flows rather than storing hot water"
+  },
+  "unitsOfMeasure": ["each", "ft", "hour", "lot", "set", "gallon"],
+  "seasonalTips": [
+    { "month": 1, "tip": "Frozen pipe season — promote pipe insulation and emergency repair availability" },
+    { "month": 3, "tip": "Spring plumbing check — promote hose bib inspection and water heater flushes" },
+    { "month": 6, "tip": "Sewer backup season — heavy rains drive drain and sewer service calls" },
+    { "month": 9, "tip": "Water heater failures peak in fall — push replacement deals before cold weather" },
+    { "month": 10, "tip": "Winterization season — promote outdoor faucet shutoff and pipe insulation services" },
+    { "month": 11, "tip": "Holiday prep drives fixture and garbage disposal installs — target kitchen upgrades" }
+  ],
+  "followUpToneNotes": "Emphasize water damage prevention, code compliance, and long-term reliability. Reference potential insurance issues from unaddressed leaks. Mention water efficiency and utility savings for fixture and water heater upgrades."
+}

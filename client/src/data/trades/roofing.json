@@ -1,0 +1,517 @@
+{
+  "slug": "roofing",
+  "tradeName": "Roofing",
+  "tradeNameEs": "Techado",
+  "icon": "Home",
+  "aiPersona": "You are an expert roofing contractor with 20 years of experience in residential and commercial roofing systems. You hold the appropriate state licensing and have completed manufacturer certifications with GAF, Owens Corning, and CertainTeed. You speak the language of the trade naturally, referencing squares, pitch, underlayment types, and flashing details without hesitation.\n\nYou understand the difference between a tear-off and an overlay, know when a second layer is code-compliant versus when a full tear-off is required, and can explain how roof pitch affects material and labor costs. You are comfortable discussing ice and water shield requirements, drip edge codes, ventilation calculations (1:150 or 1:300 ratio), and the importance of proper starter strip and hip/ridge cap installation.\n\nWhen estimating jobs, you think in terms of squares (100 sq ft each), accounting for waste factor based on roof complexity, number of valleys and hips, penetrations (pipes, vents, skylights), and step/counter flashing at walls. You calculate material needs precisely and factor in dump fees, delivery charges, and equipment like tear-off tools, air compressors, and safety harnesses.\n\nYou know that a simple gable roof is a completely different job from a multi-hip, multi-valley roof with dormers and skylights. You price accordingly — a 6/12 pitch is walkable, but a 10/12 or steeper requires specialized equipment and safety measures that add significant labor cost.\n\nYou are familiar with manufacturer warranty programs, know the difference between a system warranty and a standard shingle warranty, and understand that proper installation documentation is essential for warranty claims. You photograph every job thoroughly.\n\nYour communication style is direct and transparent. You walk homeowners through the scope of work, explain why certain code items are non-negotiable (like ice and water shield in eave areas), and provide clear line-item pricing so they understand exactly what they are paying for. You never cut corners on safety or code compliance.",
+  "jobTypes": [
+    {
+      "id": "full_replacement",
+      "name": "Full Roof Replacement",
+      "nameEs": "Reemplazo Completo de Techo",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Tear-Off (Existing Shingles)",
+          "description": "Remove existing roofing material down to decking, 1 layer",
+          "category": "labor",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Decking Repair Allowance",
+          "description": "Replace damaged OSB/plywood decking as discovered during tear-off",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "sheet",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Ice and Water Shield",
+          "description": "Self-adhering membrane at eaves, valleys, and penetrations per code",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "roll",
+          "defaultPrice": 115,
+          "isOptional": false,
+          "brands": ["GAF", "Owens Corning", "CertainTeed"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Synthetic Underlayment",
+          "description": "Synthetic roof underlayment, full coverage over decking",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "roll",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": ["GAF", "Owens Corning", "CertainTeed"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Drip Edge",
+          "description": "Aluminum drip edge at eaves and rakes per code",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "piece",
+          "defaultPrice": 8,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Starter Strip Shingles",
+          "description": "Pre-cut starter strip at eaves and rakes",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "bundle",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": ["GAF", "Owens Corning", "CertainTeed"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Architectural Shingles",
+          "description": "Lifetime architectural/dimensional shingles, Class A fire rated",
+          "category": "materials",
+          "quantity": 78,
+          "unit": "bundle",
+          "defaultPrice": 42,
+          "isOptional": false,
+          "brands": ["GAF Timberline HDZ", "Owens Corning Duration", "CertainTeed Landmark"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Hip and Ridge Cap Shingles",
+          "description": "Pre-formed hip and ridge cap shingles",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "bundle",
+          "defaultPrice": 55,
+          "isOptional": false,
+          "brands": ["GAF", "Owens Corning", "CertainTeed"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Step Flashing",
+          "description": "Aluminum step flashing at walls, chimneys, and dormers",
+          "category": "materials",
+          "quantity": 2,
+          "unit": "pack",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Pipe Boot Flashings",
+          "description": "Neoprene/lead pipe boot flashings for plumbing vents",
+          "category": "materials",
+          "quantity": 4,
+          "unit": "each",
+          "defaultPrice": 18,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Ridge Vent",
+          "description": "Continuous ridge vent for attic ventilation",
+          "category": "materials",
+          "quantity": 40,
+          "unit": "ft",
+          "defaultPrice": 5,
+          "isOptional": false,
+          "brands": ["GAF Cobra", "Air Vent"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Roofing Nails and Accessories",
+          "description": "Coil nails, caulk, roofing cement, miscellaneous fasteners",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Crew of 4-6, full install including flashing, ventilation, and cleanup",
+          "category": "labor",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Dumpster and Debris Removal",
+          "description": "Roll-off dumpster, dump fees, and jobsite cleanup",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 550,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Roofing Permit",
+          "description": "Building permit and inspection fee",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Skylight Replacement",
+          "description": "Replace existing skylight during re-roof with new flashing kit",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 650,
+          "isOptional": true,
+          "brands": ["Velux", "Fakro"]
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Gutter Replacement",
+          "description": "Seamless aluminum gutters and downspouts",
+          "category": "materials",
+          "quantity": 150,
+          "unit": "ft",
+          "defaultPrice": 9,
+          "isOptional": true,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "repair",
+      "name": "Roof Repair",
+      "nameEs": "Reparacion de Techo",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Inspection and Diagnosis",
+          "description": "On-roof inspection to identify leak source or damage",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Repair Materials",
+          "description": "Shingles, flashing, sealant, decking as needed for repair area",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Repair Labor",
+          "description": "Targeted repair work — 1-2 roofers",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "overlay",
+      "name": "Roof Overlay",
+      "nameEs": "Sobrecapa de Techo",
+      "defaultLineItems": [
+        {
+          "groupName": "Materials",
+          "itemName": "Architectural Shingles",
+          "description": "Shingles installed over existing layer (where code allows)",
+          "category": "materials",
+          "quantity": 78,
+          "unit": "bundle",
+          "defaultPrice": 42,
+          "isOptional": false,
+          "brands": ["GAF Timberline HDZ", "Owens Corning Duration", "CertainTeed Landmark"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Starter Strip and Ridge Cap",
+          "description": "Starter strip and hip/ridge cap shingles",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Flashing and Accessories",
+          "description": "New pipe boots, step flashing, drip edge as needed",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 275,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Overlay installation — faster than tear-off, crew of 3-4",
+          "category": "labor",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Roofing Permit",
+          "description": "Building permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "metal_roof_install",
+      "name": "Metal Roof Install",
+      "nameEs": "Instalacion de Techo de Metal",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Tear-Off Existing Roofing",
+          "description": "Remove existing shingles down to decking",
+          "category": "labor",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 75,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Synthetic Underlayment (High-Temp)",
+          "description": "High-temperature synthetic underlayment rated for metal roofing",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "roll",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Standing Seam Metal Panels",
+          "description": "26-gauge standing seam steel panels, factory painted",
+          "category": "materials",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": ["Metal Sales", "ATAS", "Fabral", "McElroy"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Trim and Flashing (Metal)",
+          "description": "Ridge cap, eave trim, gable trim, valley flashing — color matched",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 1200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Fasteners and Sealant",
+          "description": "Concealed clips, screws, butyl tape, sealant",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Metal roof install — skilled crew of 3-4, precision work",
+          "category": "labor",
+          "quantity": 25,
+          "unit": "square",
+          "defaultPrice": 225,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Dumpster and Cleanup",
+          "description": "Dumpster, dump fees, and debris removal",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 550,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Roofing Permit",
+          "description": "Building permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 200,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "flat_roof_tpo",
+      "name": "Flat Roof / TPO",
+      "nameEs": "Techo Plano / TPO",
+      "defaultLineItems": [
+        {
+          "groupName": "Labor",
+          "itemName": "Remove Existing Membrane",
+          "description": "Tear off existing flat roof membrane and insulation if needed",
+          "category": "labor",
+          "quantity": 15,
+          "unit": "square",
+          "defaultPrice": 65,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "ISO Board Insulation",
+          "description": "Polyisocyanurate rigid insulation board, tapered for drainage",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "square",
+          "defaultPrice": 95,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "TPO Membrane (60 mil)",
+          "description": "60-mil TPO single-ply roofing membrane, white",
+          "category": "materials",
+          "quantity": 15,
+          "unit": "square",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": ["Carlisle", "Firestone", "GAF", "Versico"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Edge Metal and Termination Bar",
+          "description": "Gravel stop, drip edge, and termination bar at walls",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 600,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Adhesive and Sealant",
+          "description": "Bonding adhesive, seam primer, caulk, and detail accessories",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 400,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "TPO install and heat-welded seams — experienced flat roof crew",
+          "category": "labor",
+          "quantity": 15,
+          "unit": "square",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Roofing Permit",
+          "description": "Commercial/flat roof permit and inspection",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 225,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": ["GAF", "Owens Corning", "CertainTeed", "IKO", "Atlas", "Carlisle", "Firestone"],
+  "terminologyGlossary": {
+    "square": "100 square feet of roof area — the standard unit for measuring and pricing roofing",
+    "pitch": "The slope of the roof expressed as rise over run (e.g., 6/12 means 6 inches rise per 12 inches horizontal)",
+    "architectural shingle": "Dimensional/laminated asphalt shingle with a layered appearance — the modern standard",
+    "three-tab shingle": "Flat, single-layer asphalt shingle — older style, less wind resistant",
+    "underlayment": "A water-resistant barrier installed over the decking before shingles go on",
+    "ice and water shield": "Self-adhering waterproof membrane applied at vulnerable areas like eaves and valleys",
+    "drip edge": "Metal flashing installed at the edges of the roof to direct water away from the fascia",
+    "starter strip": "Pre-cut shingle strip installed at the eave edge to seal the first course",
+    "ridge vent": "Continuous ventilation along the roof ridge that allows hot air to escape the attic",
+    "soffit vent": "Intake ventilation under the roof overhang that draws fresh air into the attic",
+    "flashing": "Metal pieces that waterproof intersections and penetrations — valleys, walls, chimneys, pipes",
+    "step flashing": "L-shaped metal pieces woven into shingle courses where the roof meets a vertical wall",
+    "counter flashing": "Metal flashing that overlaps step flashing, typically embedded into masonry or siding",
+    "decking": "The plywood or OSB sheathing that shingles are nailed to — the structural roof surface",
+    "fascia": "The vertical board at the edge of the roof where gutters are typically mounted",
+    "soffit": "The underside of the roof overhang/eave",
+    "valley": "The internal angle where two roof planes meet — a critical waterproofing area",
+    "TPO": "Thermoplastic Polyolefin — a single-ply white membrane used on flat/low-slope roofs",
+    "standing seam": "Metal roofing with raised interlocking seams and concealed fasteners",
+    "wind uplift": "The force of wind pulling roofing material away from the deck — rated by ASTM D7158"
+  },
+  "unitsOfMeasure": ["square", "bundle", "roll", "ft", "piece", "each", "sheet", "lot"],
+  "seasonalTips": [
+    { "month": 3, "tip": "Spring storm season — promote post-storm inspections and insurance claim assistance" },
+    { "month": 5, "tip": "Peak roofing season begins — book crews full and manage material delivery schedules" },
+    { "month": 7, "tip": "Extreme heat slows production — start crews earlier in the day, watch for heat illness" },
+    { "month": 9, "tip": "Pre-winter push — homeowners want roofs done before rain/snow season" },
+    { "month": 10, "tip": "Gutter season — bundle gutter replacement with roof jobs for upsell opportunities" },
+    { "month": 11, "tip": "Off-season approaching — offer winter pricing incentives to maintain crew utilization" }
+  ],
+  "followUpToneNotes": "Emphasize protection of the home, weather urgency, and manufacturer warranty coverage. Reference storm damage timelines for insurance claims. Mention energy efficiency of cool roofing options and curb appeal improvements."
+}

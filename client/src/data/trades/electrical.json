@@ -1,0 +1,535 @@
+{
+  "slug": "electrical",
+  "tradeName": "Electrical",
+  "tradeNameEs": "Electricidad",
+  "icon": "Zap",
+  "aiPersona": "You are an expert licensed electrician with 20 years of experience in residential and commercial electrical work. You hold a journeyman or master electrician license and are deeply familiar with the National Electrical Code (NEC) and local amendments. You speak the language of the trade naturally, referencing wire gauges, breaker ratings, load calculations, and code articles without hesitation.\n\nYou understand the difference between a 100-amp and a 200-amp service, know when a subpanel makes more sense than a main panel upgrade, and can explain why aluminum wiring requires special handling and approved connectors. You are comfortable discussing AFCI and GFCI protection requirements, grounding and bonding, voltage drop calculations, and the specific code requirements for kitchens, bathrooms, garages, and outdoor circuits.\n\nWhen estimating jobs, you think in terms of wire runs (measured in feet, considering the home run back to the panel), device counts, box fill calculations, and labor hours based on access difficulty. You always factor in permit costs, inspection requirements, and the reality that fishing wire through finished walls takes significantly longer than new construction rough-in.\n\nYou know that a panel upgrade in a home with easy access is a 4-6 hour job, but the same job with a meter relocation, underground lateral, or utility coordination can take multiple days. You account for utility disconnection/reconnection coordination, trenching for underground feeds, and the need for temporary power in some situations.\n\nYou are familiar with EV charger installation requirements (dedicated circuit, wire sizing for continuous load at 125%, proper outlet or hardwired connection), whole-house generator transfer switch installations, and the increasing demand for smart home electrical infrastructure.\n\nYour communication style is safety-first and code-focused. You explain why electrical work must be done to code, the real dangers of DIY electrical work, and the importance of proper permitting. You are patient with homeowner questions but firm on safety requirements. You never recommend cutting corners on electrical safety.",
+  "jobTypes": [
+    {
+      "id": "panel_upgrade",
+      "name": "Panel Upgrade",
+      "nameEs": "Actualizacion de Panel Electrico",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Main Breaker Panel (200A, 40-Space)",
+          "description": "200-amp main breaker panel with 40 spaces/40 circuits",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Main Breaker (200A)",
+          "description": "200-amp main circuit breaker (if not included with panel)",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Circuit Breakers (Assorted)",
+          "description": "Single and double-pole breakers, AFCI and standard as required",
+          "category": "equipment",
+          "quantity": 20,
+          "unit": "each",
+          "defaultPrice": 22,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Meter Socket (200A)",
+          "description": "200-amp meter socket — required if upgrading from 100A service",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 175,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Service Entrance Cable (SER)",
+          "description": "4/0-4/0-2/0 aluminum SER cable, panel to meter",
+          "category": "materials",
+          "quantity": 20,
+          "unit": "ft",
+          "defaultPrice": 8,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Grounding Electrode System",
+          "description": "Ground rods, clamps, bare copper wire, bonding jumpers per NEC 250",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Conduit and Fittings",
+          "description": "Rigid or PVC conduit for service entrance, weather head, and fittings",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Miscellaneous Supplies",
+          "description": "Wire nuts, cable clamps, staples, labels, panel schedule",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 60,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Panel Swap and Circuit Transfer",
+          "description": "Remove old panel, mount new panel, transfer all existing circuits",
+          "category": "labor",
+          "quantity": 8,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Utility Coordination",
+          "description": "Schedule meter pull and reconnection with utility company",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 150,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Electrical Permit",
+          "description": "Electrical permit with inspection for service upgrade",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 200,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Optional Add-Ons",
+          "itemName": "Whole-House Surge Protector",
+          "description": "Type 2 SPD surge protector installed at main panel",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 275,
+          "isOptional": true,
+          "brands": ["Eaton", "Leviton", "Square D"]
+        }
+      ]
+    },
+    {
+      "id": "new_circuit",
+      "name": "New Circuit",
+      "nameEs": "Circuito Nuevo",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Circuit Breaker",
+          "description": "Single or double-pole breaker, AFCI/GFCI as code requires",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Romex Wire",
+          "description": "NM-B cable (12/2 or 14/2 for 20A/15A circuits), home run to panel",
+          "category": "materials",
+          "quantity": 75,
+          "unit": "ft",
+          "defaultPrice": 1.25,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Boxes, Devices, and Covers",
+          "description": "Junction boxes, receptacles or switches, cover plates",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "set",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": ["Leviton"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Circuit Installation",
+          "description": "Run wire, install devices, connect at panel — existing home (fishing wire)",
+          "category": "labor",
+          "quantity": 3,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "lighting_install",
+      "name": "Lighting Install",
+      "nameEs": "Instalacion de Iluminacion",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Recessed Light Fixture (LED)",
+          "description": "6-inch LED recessed canless downlight, IC-rated",
+          "category": "equipment",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 35,
+          "isOptional": false,
+          "brands": ["Halo", "Lithonia", "WAC", "Juno"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Dimmer Switch",
+          "description": "LED-compatible dimmer switch, single-pole or 3-way",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": ["Lutron", "Leviton"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wire and Boxes",
+          "description": "14/2 or 12/2 NM-B wire, junction boxes, and connectors",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Cut holes, run wire, mount fixtures, connect switch — per fixture",
+          "category": "labor",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 85,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "ev_charger",
+      "name": "EV Charger Installation",
+      "nameEs": "Instalacion de Cargador de Vehiculo Electrico",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Level 2 EV Charger (48A)",
+          "description": "240V Level 2 EVSE, 48-amp, hardwired or NEMA 14-50 plug",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 550,
+          "isOptional": false,
+          "brands": ["ChargePoint", "JuiceBox", "Grizzl-E", "Tesla"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Double-Pole Breaker (60A)",
+          "description": "60-amp double-pole breaker for 48A continuous load (125% rule)",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Wire (6/3 NM-B or THHN in Conduit)",
+          "description": "6-gauge copper wire, panel to charger location",
+          "category": "materials",
+          "quantity": 50,
+          "unit": "ft",
+          "defaultPrice": 6,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Conduit and Fittings",
+          "description": "EMT or PVC conduit for exposed runs (garage, exterior)",
+          "category": "materials",
+          "quantity": 30,
+          "unit": "ft",
+          "defaultPrice": 4,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Run circuit, mount charger, connect and test",
+          "category": "labor",
+          "quantity": 4,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Electrical Permit",
+          "description": "Permit for new 240V circuit",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "whole_house_rewire",
+      "name": "Whole House Rewire",
+      "nameEs": "Recableado Completo de Casa",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "New Main Panel (200A, 40-Space)",
+          "description": "200-amp main panel with all new breakers",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 750,
+          "isOptional": false,
+          "brands": ["Square D", "Eaton", "Siemens"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "NM-B Wire (Assorted Gauges)",
+          "description": "14/2, 12/2, 10/2, 10/3, 6/3 Romex for all circuits",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 2500,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Receptacles and Switches",
+          "description": "New tamper-resistant receptacles, switches, and GFCI outlets throughout",
+          "category": "materials",
+          "quantity": 60,
+          "unit": "each",
+          "defaultPrice": 8,
+          "isOptional": false,
+          "brands": ["Leviton", "Eaton"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Boxes, Covers, and Plates",
+          "description": "New work or old work boxes, cover plates throughout",
+          "category": "materials",
+          "quantity": 60,
+          "unit": "each",
+          "defaultPrice": 5,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Smoke and CO Detectors",
+          "description": "Hardwired interconnected smoke/CO detectors per code",
+          "category": "materials",
+          "quantity": 6,
+          "unit": "each",
+          "defaultPrice": 45,
+          "isOptional": false,
+          "brands": ["Kidde", "First Alert"]
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Rewire Labor",
+          "description": "Full rewire — 2-3 electricians, standard 3-bed/2-bath home",
+          "category": "labor",
+          "quantity": 60,
+          "unit": "hour",
+          "defaultPrice": 115,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Drywall Patching",
+          "description": "Basic drywall patching at access points — not finish paint",
+          "category": "labor",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 750,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Electrical Permit",
+          "description": "Full rewire permit with rough and final inspections",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    },
+    {
+      "id": "generator_install",
+      "name": "Generator Install",
+      "nameEs": "Instalacion de Generador",
+      "defaultLineItems": [
+        {
+          "groupName": "Equipment",
+          "itemName": "Standby Generator (22kW)",
+          "description": "Automatic standby generator, air-cooled, natural gas or propane",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 5500,
+          "isOptional": false,
+          "brands": ["Generac", "Kohler", "Briggs & Stratton"]
+        },
+        {
+          "groupName": "Equipment",
+          "itemName": "Automatic Transfer Switch (200A)",
+          "description": "Automatic transfer switch, whole-house or load-managed",
+          "category": "equipment",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 850,
+          "isOptional": false,
+          "brands": ["Generac", "Kohler", "Eaton"]
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Concrete Pad",
+          "description": "Pre-cast or poured concrete pad for generator placement",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 250,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Electrical Wiring",
+          "description": "Feeder cable from transfer switch to generator, conduit, and fittings",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 450,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Materials",
+          "itemName": "Gas Line Extension",
+          "description": "Gas line from meter to generator location, properly sized for demand",
+          "category": "materials",
+          "quantity": 1,
+          "unit": "lot",
+          "defaultPrice": 500,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Labor",
+          "itemName": "Installation Labor",
+          "description": "Set generator, install transfer switch, run gas and electrical",
+          "category": "labor",
+          "quantity": 12,
+          "unit": "hour",
+          "defaultPrice": 125,
+          "isOptional": false,
+          "brands": []
+        },
+        {
+          "groupName": "Permits and Fees",
+          "itemName": "Electrical and Gas Permits",
+          "description": "Electrical permit, gas permit, and inspections",
+          "category": "permit",
+          "quantity": 1,
+          "unit": "each",
+          "defaultPrice": 350,
+          "isOptional": false,
+          "brands": []
+        }
+      ]
+    }
+  ],
+  "commonBrands": ["Square D", "Eaton", "Leviton", "Siemens", "Lutron", "Generac", "Kohler"],
+  "terminologyGlossary": {
+    "NEC": "National Electrical Code — the standard for safe electrical installation in the United States",
+    "panel": "The main electrical distribution panel (breaker box) that distributes power to all circuits",
+    "breaker": "A circuit breaker — an automatic safety switch that trips to prevent overload or short circuit",
+    "AFCI": "Arc-Fault Circuit Interrupter — a breaker that detects dangerous arcing and trips to prevent fires",
+    "GFCI": "Ground-Fault Circuit Interrupter — protects against electric shock by detecting ground faults",
+    "service": "The electrical supply from the utility to the main panel — rated in amps (100A, 200A, 400A)",
+    "Romex": "Brand name commonly used for NM-B (non-metallic sheathed) cable used in residential wiring",
+    "wire gauge": "The thickness of electrical wire measured in AWG — lower numbers are thicker (e.g., 6 AWG is thicker than 14 AWG)",
+    "home run": "A wire run from a device or junction box all the way back to the electrical panel",
+    "conduit": "A protective tube (EMT, PVC, or rigid) that encloses electrical wires in exposed locations",
+    "load calculation": "A mathematical assessment of total electrical demand to size the service and panel properly",
+    "continuous load": "A load that runs for 3 hours or more — conductors and breakers must be sized at 125% per NEC",
+    "grounding": "Connecting the electrical system to the earth to safely dissipate fault currents",
+    "bonding": "Connecting all metal parts of the electrical system together to ensure a low-impedance fault path",
+    "voltage drop": "The loss of voltage over distance in a wire run — must stay within acceptable limits (3-5%)",
+    "transfer switch": "A device that safely switches between utility power and generator power",
+    "subpanel": "A secondary panel fed from the main panel — used to extend circuit capacity to another area",
+    "fish tape": "A flat steel or fiberglass tool used to pull wire through finished walls and conduit",
+    "box fill": "NEC calculation ensuring electrical boxes are not overfilled with wires and devices",
+    "tamper resistant": "Receptacles with built-in shutters that prevent foreign object insertion — required by code since 2008"
+  },
+  "unitsOfMeasure": ["each", "ft", "hour", "lot", "set"],
+  "seasonalTips": [
+    { "month": 2, "tip": "Tax refund season — homeowners invest in panel upgrades and home improvements" },
+    { "month": 4, "tip": "Spring remodel season starting — lighting installs and kitchen circuit upgrades peak" },
+    { "month": 6, "tip": "Storm season drives generator demand — promote standby generator installations" },
+    { "month": 8, "tip": "Back-to-school and EV purchases drive charger installation demand" },
+    { "month": 10, "tip": "Holiday lighting season — commercial and residential exterior lighting projects" },
+    { "month": 11, "tip": "Power outage awareness peaks in winter — push generator installs and whole-house surge protection" }
+  ],
+  "followUpToneNotes": "Emphasize safety, code compliance, and the real dangers of outdated or DIY electrical work. Reference fire prevention, insurance requirements, and the convenience of modern electrical upgrades. Mention available tax credits for EV chargers and energy-efficient upgrades."
+}
