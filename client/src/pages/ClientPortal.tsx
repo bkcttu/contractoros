@@ -105,13 +105,15 @@ export function ClientPortal() {
   }, [id])
 
   useEffect(() => {
+    if (loading) return
     const timer = setTimeout(() => {
       pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
         el.classList.add('visible')
       })
+      pageRef.current?.classList.add('visible')
     }, 50)
     return () => clearTimeout(timer)
-  }, [])
+  }, [loading])
 
   const handleSign = async () => {
     if (!id || !signatureName.trim()) return

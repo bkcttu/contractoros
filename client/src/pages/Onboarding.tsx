@@ -104,6 +104,7 @@ export function Onboarding() {
       pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
         el.classList.add('visible')
       })
+      pageRef.current?.classList.add('visible')
     }, 50)
     return () => clearTimeout(timer)
   }, [])
