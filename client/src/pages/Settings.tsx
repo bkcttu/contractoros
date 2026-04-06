@@ -59,7 +59,9 @@ export function SettingsPage() {
         })
         setPlan(u.plan || 'starter')
       })
-      .catch(console.error)
+      .catch(() => {
+        // Demo mode — use defaults
+      })
       .finally(() => setLoading(false))
   }, [])
 
