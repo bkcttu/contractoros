@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   XCircle,
   LayoutList,
+  TrendingUp,
+  Users,
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -25,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import { api } from '@/lib/api'
 import type { Proposal, ProposalStatus } from '@/types'
 import { formatCurrency, formatDate, cn } from '@/lib/utils'
@@ -141,6 +144,13 @@ export function ProposalList() {
     return counts
   }, [proposals])
 
+  const stats = useMemo(() => {
+    const accepted = proposals.filter((p) => p.status === 'accepted')
+    const totalValue = accepted.reduce((sum, p) => sum + Number(p.total), 0)
+    const pending = proposals.filter((p) => p.status === 'sent' || p.status === 'viewed')
+    return { totalValue, acceptedCount: accepted.length, pendingCount: pending.length }
+  }, [proposals])
+
   const handleDelete = async (e: React.MouseEvent, id: string) => {
     e.preventDefault()
     e.stopPropagation()
@@ -163,27 +173,54 @@ export function ProposalList() {
             Proposals
           </h1>
           <p className="text-gray-500 mt-1">
-            {proposals.length} total proposal{proposals.length !== 1 ? 's' : ''}
+            Manage and track all your client proposals
           </p>
         </div>
         <Link to="/proposals/new">
-          <Button variant="accent" size="lg" className="w-full sm:w-auto btn-press">
+          <Button variant="accent" size="lg" className="w-full sm:w-auto btn-press shadow-lg shadow-accent/20">
             <Plus className="h-5 w-5 mr-2" />
             New Proposal
           </Button>
         </Link>
       </div>
 
+      {/* Quick Stats */}
+      {!loading && proposals.length > 0 && (
+        <div className="grid grid-cols-3 gap-3">
+          <div className="glass rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-1">
+              <FileText className="h-4 w-4 text-accent" />
+              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Total</span>
+            </div>
+            <p className="text-2xl font-bold font-mono text-navy">{proposals.length}</p>
+          </div>
+          <div className="glass rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-1">
+              <TrendingUp className="h-4 w-4 text-emerald-500" />
+              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Won</span>
+            </div>
+            <p className="text-2xl font-bold font-mono text-navy">{formatCurrency(stats.totalValue)}</p>
+          </div>
+          <div className="glass rounded-xl p-4">
+            <div className="flex items-center gap-2 mb-1">
+              <Users className="h-4 w-4 text-amber-500" />
+              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Pending</span>
+            </div>
+            <p className="text-2xl font-bold font-mono text-navy">{stats.pendingCount}</p>
+          </div>
+        </div>
+      )}
+
       {/* Tab Filters */}
-      <div className="flex items-center gap-1 overflow-x-auto pb-1 -mb-1">
+      <div className="flex items-center gap-1 overflow-x-auto pb-1 -mb-1 scrollbar-hide">
         {TAB_FILTERS.map((tab) => (
           <button
             key={tab.value}
             onClick={() => setActiveTab(tab.value)}
             className={cn(
-              'inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap',
+              'inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap btn-press',
               activeTab === tab.value
-                ? 'bg-navy text-white shadow-md'
+                ? 'bg-navy text-white shadow-md shadow-navy/20'
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
             )}
           >
@@ -258,31 +295,41 @@ export function ProposalList() {
           </CardContent>
         </Card>
       ) : filtered.length === 0 ? (
-        <Card>
-          <CardContent className="py-20 text-center">
-            <div className="relative mx-auto w-24 h-24 mb-6">
+        <Card className="overflow-hidden">
+          <CardContent className="py-20 text-center relative">
+            {/* Decorative background */}
+            <div className="absolute inset-0 bg-gradient-to-b from-accent/[0.02] to-transparent pointer-events-none" />
+
+            <div className="relative mx-auto w-28 h-28 mb-8">
+              {/* Layered illustration */}
+              <div className="absolute -top-1 -right-2 w-10 h-10 rounded-lg bg-accent/10 rotate-12 flex items-center justify-center">
+                <Send className="h-4 w-4 text-accent/50" />
+              </div>
+              <div className="absolute -bottom-1 -left-2 w-10 h-10 rounded-lg bg-emerald-500/10 -rotate-12 flex items-center justify-center">
+                <DollarSign className="h-4 w-4 text-emerald-500/50" />
+              </div>
               <div className="absolute inset-0 rounded-2xl bg-accent/5 rotate-6" />
               <div className="absolute inset-0 rounded-2xl bg-navy/5 -rotate-3" />
-              <div className="relative h-full w-full rounded-2xl bg-white border-2 border-dashed border-gray-200 flex items-center justify-center">
-                <FileText className="h-10 w-10 text-gray-300" />
+              <div className="relative h-full w-full rounded-2xl bg-white border-2 border-dashed border-gray-200 flex items-center justify-center shadow-sm">
+                <FileText className="h-12 w-12 text-gray-300" />
               </div>
             </div>
-            <h3 className="text-lg font-heading font-semibold text-navy mb-2">
+            <h3 className="text-xl font-heading font-semibold text-navy mb-2">
               {search
                 ? 'No matching proposals'
                 : activeTab !== 'all'
                   ? `No ${activeTab} proposals`
                   : 'No proposals yet'}
             </h3>
-            <p className="text-gray-500 mb-6 max-w-sm mx-auto">
+            <p className="text-gray-500 mb-8 max-w-sm mx-auto leading-relaxed">
               {search
                 ? 'Try adjusting your search or filter to find what you need.'
                 : 'Create your first proposal and impress your clients with professional estimates.'}
             </p>
             {!search && activeTab === 'all' && (
               <Link to="/proposals/new">
-                <Button variant="accent" className="btn-press">
-                  <Plus className="h-4 w-4 mr-2" />
+                <Button variant="accent" size="lg" className="btn-press shadow-lg shadow-accent/20">
+                  <Plus className="h-5 w-5 mr-2" />
                   Create Your First Proposal
                 </Button>
               </Link>
@@ -290,64 +337,76 @@ export function ProposalList() {
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-2">
-          {filtered.map((proposal) => {
-            const config = statusConfig[proposal.status] || statusConfig.draft
-            const clientName = proposal.client?.name || 'Unknown Client'
-            return (
-              <Link key={proposal.id} to={`/proposals/${proposal.id}`}>
-                <Card className="card-hover transition-all duration-200">
-                  <CardContent className="p-0">
-                    <div className="flex items-center gap-4 p-4">
-                      {/* Client Avatar */}
-                      <div
-                        className={cn(
-                          'h-11 w-11 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm',
-                          getAvatarColor(clientName)
-                        )}
-                      >
-                        {getInitials(clientName)}
-                      </div>
+        <Card className="overflow-hidden">
+          <div className="divide-y divide-gray-100">
+            {filtered.map((proposal, idx) => {
+              const config = statusConfig[proposal.status] || statusConfig.draft
+              const clientName = proposal.client?.name || 'Unknown Client'
+              return (
+                <Link key={proposal.id} to={`/proposals/${proposal.id}`}>
+                  <div
+                    className={cn(
+                      'flex items-center gap-4 p-4 hover:bg-gray-50/80 transition-all duration-200 group',
+                      idx === 0 && 'rounded-t-xl'
+                    )}
+                  >
+                    {/* Client Avatar */}
+                    <div
+                      className={cn(
+                        'h-11 w-11 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm ring-2 ring-white transition-transform duration-200 group-hover:scale-105',
+                        getAvatarColor(clientName)
+                      )}
+                    >
+                      {getInitials(clientName)}
+                    </div>
 
-                      {/* Details */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="font-semibold text-navy truncate">{clientName}</p>
-                          <Badge variant={config.variant} className="shrink-0">
-                            {config.label}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-gray-500 truncate mt-0.5">
-                          {proposal.proposalNumber || proposal.proposal_number}
-                          {' · '}
-                          {proposal.jobDescription || proposal.job_description || 'No description'}
+                    {/* Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="font-semibold text-navy truncate group-hover:text-accent transition-colors">
+                          {clientName}
+                        </p>
+                        <Badge variant={config.variant} className="shrink-0">
+                          {config.label}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-gray-500 truncate mt-0.5">
+                        {proposal.proposalNumber || proposal.proposal_number}
+                        {' · '}
+                        {proposal.jobDescription || proposal.job_description || 'No description'}
+                      </p>
+                    </div>
+
+                    {/* Amount + Date + Delete */}
+                    <div className="flex items-center gap-3 shrink-0">
+                      <div className="text-right hidden sm:block">
+                        <p className="font-mono font-bold text-navy">
+                          {formatCurrency(Number(proposal.total))}
+                        </p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {formatDate(proposal.createdAt || proposal.created_at)}
                         </p>
                       </div>
-
-                      {/* Amount + Date + Delete */}
-                      <div className="flex items-center gap-3 shrink-0">
-                        <div className="text-right hidden sm:block">
-                          <p className="font-mono font-bold text-navy">
-                            {formatCurrency(Number(proposal.total))}
-                          </p>
-                          <p className="text-xs text-gray-400 mt-0.5">
-                            {formatDate(proposal.createdAt || proposal.created_at)}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => handleDelete(e, proposal.id)}
-                          className="p-2 text-gray-300 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
+                      <button
+                        onClick={(e) => handleDelete(e, proposal.id)}
+                        className="p-2 text-gray-300 hover:text-red-500 transition-colors rounded-lg hover:bg-red-50 opacity-0 group-hover:opacity-100"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
                     </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            )
-          })}
-        </div>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        </Card>
+      )}
+
+      {/* Footer count */}
+      {!loading && filtered.length > 0 && (
+        <p className="text-center text-sm text-gray-400">
+          Showing {filtered.length} of {proposals.length} proposal{proposals.length !== 1 ? 's' : ''}
+        </p>
       )}
     </div>
   )
