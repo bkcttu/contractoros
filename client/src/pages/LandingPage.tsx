@@ -17,10 +17,6 @@ import {
   Menu,
   X,
   ChevronRight,
-  BarChart3,
-  Bell,
-  Search,
-  Plus,
 } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
@@ -148,234 +144,121 @@ function Navbar() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#F8F9FA] via-white to-white">
-      {/* Decorative blobs */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-accent/5 blur-3xl" />
-      <div className="pointer-events-none absolute -right-40 top-20 h-72 w-72 rounded-full bg-navy/5 blur-3xl" />
+    <section className="relative overflow-hidden bg-navy">
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80&auto=format"
+          alt=""
+          className="h-full w-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/95 to-navy/80" />
+      </div>
+      {/* Decorative accent glow */}
+      <div className="pointer-events-none absolute -right-40 top-20 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
 
-      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28 lg:px-8 lg:pt-32">
-        <div className="mx-auto max-w-3xl text-center">
+      <div className="relative mx-auto max-w-7xl px-4 pb-20 pt-20 sm:px-6 sm:pt-28 lg:flex lg:items-center lg:gap-16 lg:px-8 lg:pt-32 lg:pb-28">
+        {/* Left: Copy */}
+        <div className="max-w-2xl lg:flex-1">
           {/* Pill */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent-200 bg-accent-50 px-4 py-1.5">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-sm">
             <Zap className="h-4 w-4 text-accent" />
-            <span className="font-body text-xs font-semibold tracking-wide text-accent-700">
+            <span className="font-body text-xs font-semibold tracking-wide text-white/80">
               AI-POWERED CONTRACTOR PLATFORM
             </span>
           </div>
 
-          <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-6xl">
-            The Only Business Tool a Contractor Will Ever Need
+          <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            The Only Business Tool a Contractor Will{' '}
+            <span className="text-accent">Ever Need</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl font-body text-lg leading-relaxed text-gray-600 sm:text-xl">
+          <p className="mt-6 max-w-xl font-body text-lg leading-relaxed text-white/70 sm:text-xl">
             AI-powered proposals, smart scheduling, one-click invoicing, and
             automated follow-ups.{' '}
-            <span className="font-semibold text-navy">
+            <span className="font-semibold text-white">
               From first call to five-star review — on autopilot.
             </span>
           </p>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               to="/sign-up"
-              className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 font-heading text-base font-bold text-white shadow-lg shadow-accent/25 transition hover:bg-accent-600 hover:shadow-xl hover:shadow-accent/30"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-8 py-4 font-heading text-base font-bold text-white shadow-lg shadow-accent/25 transition hover:bg-accent-600 hover:shadow-xl hover:shadow-accent/30"
             >
               Start Your Free Trial
               <ArrowRight className="h-5 w-5" />
             </Link>
             <a
               href="#how-it-works"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-navy-200 px-8 py-4 font-heading text-base font-bold text-navy transition hover:border-navy hover:bg-navy-50"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-white/20 px-8 py-4 font-heading text-base font-bold text-white transition hover:border-white/40 hover:bg-white/5"
             >
               See How It Works
             </a>
           </div>
-        </div>
 
-        {/* Dashboard mockup */}
-        <div className="relative mx-auto mt-16 max-w-5xl sm:mt-20">
-          <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl shadow-navy/10">
-            {/* Title bar */}
-            <div className="flex items-center gap-2 border-b border-gray-100 bg-gray-50 px-4 py-3">
-              <span className="h-3 w-3 rounded-full bg-red-400" />
-              <span className="h-3 w-3 rounded-full bg-yellow-400" />
-              <span className="h-3 w-3 rounded-full bg-green-400" />
-              <span className="ml-4 font-mono text-xs text-gray-400">
-                app.contractoros.com/dashboard
-              </span>
+          <p className="mt-4 font-body text-sm text-white/40">14 days free. No credit card required.</p>
+
+          {/* Trust badges */}
+          <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-6">
+            <div className="flex -space-x-2">
+              {[
+                'https://randomuser.me/api/portraits/men/32.jpg',
+                'https://randomuser.me/api/portraits/women/44.jpg',
+                'https://randomuser.me/api/portraits/men/67.jpg',
+                'https://randomuser.me/api/portraits/women/17.jpg',
+                'https://randomuser.me/api/portraits/men/52.jpg',
+              ].map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  className="h-8 w-8 rounded-full border-2 border-navy object-cover"
+                />
+              ))}
             </div>
-
-            <div className="flex min-h-[340px] sm:min-h-[400px]">
-              {/* Sidebar */}
-              <div className="hidden w-52 shrink-0 border-r border-gray-100 bg-navy p-4 sm:block">
-                <div className="mb-6 flex items-center gap-2">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent">
-                    <Zap className="h-4 w-4 text-white" />
-                  </div>
-                  <span className="font-heading text-sm font-bold text-white">
-                    ContractorOS
-                  </span>
-                </div>
-                {[
-                  { icon: BarChart3, label: 'Dashboard', active: true },
-                  { icon: FileText, label: 'Proposals' },
-                  { icon: Calendar, label: 'Schedule' },
-                  { icon: DollarSign, label: 'Invoices' },
-                  { icon: Users, label: 'Clients' },
-                  { icon: Star, label: 'Reviews' },
-                ].map(({ icon: Icon, label, active }) => (
-                  <div
-                    key={label}
-                    className={cn(
-                      'mb-1 flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm',
-                      active
-                        ? 'bg-white/10 font-semibold text-white'
-                        : 'text-navy-200'
-                    )}
-                  >
-                    <Icon className="h-4 w-4" />
-                    <span className="font-body">{label}</span>
-                  </div>
+            <div>
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => (
+                  <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
+              <p className="font-body text-xs text-white/50">Loved by 2,000+ contractors</p>
+            </div>
+          </div>
+        </div>
 
-              {/* Main content */}
-              <div className="flex-1 p-4 sm:p-6">
-                {/* Top bar */}
-                <div className="mb-6 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-heading text-lg font-bold text-navy">
-                      Dashboard
-                    </h3>
-                    <p className="font-body text-xs text-gray-400">
-                      Welcome back, Mike
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <div className="hidden items-center gap-2 rounded-lg bg-gray-50 px-3 py-2 sm:flex">
-                      <Search className="h-4 w-4 text-gray-400" />
-                      <span className="font-body text-xs text-gray-400">
-                        Search...
-                      </span>
-                    </div>
-                    <div className="relative">
-                      <Bell className="h-5 w-5 text-gray-400" />
-                      <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-accent text-[9px] font-bold text-white">
-                        3
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stats row */}
-                <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
-                  {[
-                    {
-                      label: 'Active Proposals',
-                      value: '12',
-                      change: '+3 this week',
-                    },
-                    {
-                      label: 'Revenue (MTD)',
-                      value: '$24,850',
-                      change: '+18%',
-                    },
-                    {
-                      label: 'Win Rate',
-                      value: '68%',
-                      change: '+5%',
-                    },
-                    {
-                      label: 'Avg. Rating',
-                      value: '4.9',
-                      change: '142 reviews',
-                    },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-lg border border-gray-100 bg-white p-3"
-                    >
-                      <p className="font-body text-[10px] font-medium text-gray-400">
-                        {stat.label}
-                      </p>
-                      <p className="font-heading text-xl font-bold text-navy">
-                        {stat.value}
-                      </p>
-                      <p className="font-body text-[10px] text-emerald-500">
-                        {stat.change}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Recent proposals */}
-                <div className="rounded-lg border border-gray-100 p-3">
-                  <div className="mb-3 flex items-center justify-between">
-                    <h4 className="font-heading text-sm font-semibold text-navy">
-                      Recent Proposals
-                    </h4>
-                    <div className="flex items-center gap-1 rounded-md bg-accent px-2.5 py-1 text-[10px] font-semibold text-white">
-                      <Plus className="h-3 w-3" /> New
-                    </div>
-                  </div>
-                  {[
-                    {
-                      client: 'Johnson Residence',
-                      type: 'HVAC Install',
-                      amount: '$4,200',
-                      status: 'Sent',
-                    },
-                    {
-                      client: 'Oak Street Office',
-                      type: 'Roof Repair',
-                      amount: '$8,750',
-                      status: 'Viewed',
-                    },
-                    {
-                      client: 'Pine Valley HOA',
-                      type: 'Landscaping',
-                      amount: '$3,100',
-                      status: 'Signed',
-                    },
-                  ].map((row) => (
-                    <div
-                      key={row.client}
-                      className="flex items-center justify-between border-t border-gray-50 py-2"
-                    >
-                      <div>
-                        <p className="font-body text-xs font-medium text-navy">
-                          {row.client}
-                        </p>
-                        <p className="font-body text-[10px] text-gray-400">
-                          {row.type}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs font-semibold text-navy">
-                          {row.amount}
-                        </span>
-                        <span
-                          className={cn(
-                            'rounded-full px-2 py-0.5 text-[10px] font-semibold',
-                            row.status === 'Signed'
-                              ? 'bg-emerald-50 text-emerald-600'
-                              : row.status === 'Viewed'
-                                ? 'bg-blue-50 text-blue-600'
-                                : 'bg-gray-100 text-gray-500'
-                          )}
-                        >
-                          {row.status}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+        {/* Right: Contractor photo + floating cards */}
+        <div className="relative mt-12 hidden lg:block lg:flex-1">
+          <img
+            src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80&auto=format"
+            alt="Contractor reviewing proposal on tablet"
+            className="relative z-10 rounded-2xl shadow-2xl shadow-black/30"
+          />
+          {/* Floating proposal card */}
+          <div className="absolute -left-8 top-8 z-20 rounded-xl border border-white/20 bg-white p-4 shadow-xl animate-bounce" style={{ animationDuration: '3s' }}>
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100">
+                <Check className="h-5 w-5 text-emerald-600" />
+              </div>
+              <div>
+                <p className="font-heading text-sm font-bold text-navy">Proposal Accepted!</p>
+                <p className="font-mono text-xs text-emerald-600">+$8,750</p>
               </div>
             </div>
           </div>
-
-          {/* Glow under mockup */}
-          <div className="pointer-events-none absolute -bottom-8 left-1/2 h-32 w-3/4 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
+          {/* Floating rating card */}
+          <div className="absolute -right-4 bottom-12 z-20 rounded-xl border border-white/20 bg-white p-4 shadow-xl animate-bounce" style={{ animationDuration: '4s', animationDelay: '1s' }}>
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {[1,2,3,4,5].map(i => (
+                  <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                ))}
+              </div>
+              <span className="font-heading text-sm font-bold text-navy">New Review!</span>
+            </div>
+            <p className="mt-1 font-body text-xs text-gray-500">"Excellent work, highly recommend!"</p>
+          </div>
         </div>
       </div>
     </section>
@@ -493,6 +376,115 @@ function Features() {
               </p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/*  Visual showcase — side-by-side photo + app                        */
+/* ------------------------------------------------------------------ */
+
+function Showcase() {
+  return (
+    <section className="overflow-hidden bg-white py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Image */}
+          <div className="relative">
+            <img
+              src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80&auto=format"
+              alt="Contractor on job site using tablet"
+              className="rounded-2xl shadow-xl"
+            />
+            {/* Floating stat */}
+            <div className="absolute -bottom-6 -right-6 rounded-xl bg-navy p-5 shadow-xl sm:-right-8">
+              <p className="font-mono text-3xl font-bold text-accent">60s</p>
+              <p className="font-body text-xs text-white/60">Avg. proposal time</p>
+            </div>
+          </div>
+
+          {/* Copy */}
+          <div>
+            <p className="font-body text-sm font-semibold tracking-wide text-accent">
+              BUILT FOR THE FIELD
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+              Write proposals from your truck. Close deals from the job site.
+            </h2>
+            <p className="mt-4 font-body text-lg leading-relaxed text-gray-500">
+              ContractorOS is built mobile-first for contractors who work with their hands, not behind a desk.
+              Fill out a quick form, and AI writes a professional proposal your clients will love.
+            </p>
+            <ul className="mt-8 space-y-4">
+              {[
+                { title: '10x faster than writing by hand', desc: 'AI generates polished proposals in under 60 seconds' },
+                { title: '40% higher close rate', desc: 'Professional proposals get signed faster' },
+                { title: 'Works on any device', desc: 'Phone, tablet, or desktop — looks great everywhere' },
+              ].map((item) => (
+                <li key={item.title} className="flex gap-4">
+                  <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10">
+                    <Check className="h-3.5 w-3.5 text-accent" />
+                  </div>
+                  <div>
+                    <p className="font-heading text-sm font-bold text-navy">{item.title}</p>
+                    <p className="font-body text-sm text-gray-500">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Second row — reversed */}
+        <div className="mt-20 grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Copy */}
+          <div className="order-2 lg:order-1">
+            <p className="font-body text-sm font-semibold tracking-wide text-accent">
+              GET PAID FASTER
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+              From proposal to payment in one seamless flow
+            </h2>
+            <p className="mt-4 font-body text-lg leading-relaxed text-gray-500">
+              Clients receive a beautiful proposal link — no login required. They review, e-sign, and pay
+              the deposit all in one place. You get notified instantly.
+            </p>
+            <div className="mt-8 grid grid-cols-3 gap-6">
+              {[
+                { value: '$2.1M+', label: 'Proposals sent' },
+                { value: '68%', label: 'Avg. close rate' },
+                { value: '4.9/5', label: 'User rating' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-heading text-2xl font-extrabold text-navy sm:text-3xl">{stat.value}</p>
+                  <p className="font-body text-xs text-gray-400">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Image */}
+          <div className="relative order-1 lg:order-2">
+            <img
+              src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format"
+              alt="Homeowner reviewing proposal"
+              className="rounded-2xl shadow-xl"
+            />
+            {/* Floating payment card */}
+            <div className="absolute -bottom-6 -left-6 rounded-xl bg-white p-4 shadow-xl border border-gray-100 sm:-left-8">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100">
+                  <DollarSign className="h-5 w-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="font-heading text-sm font-bold text-navy">Payment Received</p>
+                  <p className="font-mono text-xs text-emerald-600">+$4,250.00</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -709,6 +701,7 @@ const testimonials = [
     name: 'Mike R.',
     trade: 'HVAC Contractor, Phoenix AZ',
     stars: 5,
+    photo: 'https://randomuser.me/api/portraits/men/45.jpg',
   },
   {
     quote:
@@ -716,6 +709,7 @@ const testimonials = [
     name: 'Sarah T.',
     trade: 'Roofing Contractor, Dallas TX',
     stars: 5,
+    photo: 'https://randomuser.me/api/portraits/women/32.jpg',
   },
   {
     quote:
@@ -723,6 +717,7 @@ const testimonials = [
     name: 'Carlos M.',
     trade: 'General Contractor, Miami FL',
     stars: 5,
+    photo: 'https://randomuser.me/api/portraits/men/67.jpg',
   },
 ]
 
@@ -757,11 +752,18 @@ function Testimonials() {
               <blockquote className="flex-1 font-body leading-relaxed text-gray-600">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <div className="mt-6 border-t border-gray-200 pt-4">
-                <p className="font-heading text-sm font-bold text-navy">
-                  {t.name}
-                </p>
-                <p className="font-body text-xs text-gray-400">{t.trade}</p>
+              <div className="mt-6 flex items-center gap-3 border-t border-gray-200 pt-4">
+                <img
+                  src={t.photo}
+                  alt={t.name}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
+                <div>
+                  <p className="font-heading text-sm font-bold text-navy">
+                    {t.name}
+                  </p>
+                  <p className="font-body text-xs text-gray-400">{t.trade}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -904,6 +906,7 @@ export function LandingPage() {
       <Hero />
       <SocialProof />
       <Features />
+      <Showcase />
       <HowItWorks />
       <Pricing />
       <Testimonials />
