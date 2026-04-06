@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import {
   FileText,
@@ -84,6 +84,7 @@ function getAvatarColor(name: string): string {
 }
 
 export function ProposalList() {
+  const pageRef = useRef<HTMLDivElement>(null)
   const [proposals, setProposals] = useState<Proposal[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -98,6 +99,15 @@ export function ProposalList() {
         setProposals([])
       })
       .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
+        el.classList.add('visible')
+      })
+    }, 50)
+    return () => clearTimeout(timer)
   }, [])
 
   const filtered = useMemo(() => {
@@ -165,7 +175,7 @@ export function ProposalList() {
   }
 
   return (
-    <div className="space-y-6 fade-in-up">
+    <div ref={pageRef} className="space-y-6 fade-in-up">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft,
@@ -65,6 +65,7 @@ const DEMO_PROPOSAL: Proposal = {
 }
 
 export function ProposalPreview() {
+  const pageRef = useRef<HTMLDivElement>(null)
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [proposal, setProposal] = useState<Proposal | null>(null)
@@ -86,6 +87,15 @@ export function ProposalPreview() {
       })
       .finally(() => setLoading(false))
   }, [id])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
+        el.classList.add('visible')
+      })
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleSend = async () => {
     if (!proposal || isDemo) return
@@ -177,7 +187,7 @@ export function ProposalPreview() {
   const config = statusConfig[proposal.status] || statusConfig.draft
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 fade-in-up">
+    <div ref={pageRef} className="max-w-4xl mx-auto space-y-6 fade-in-up">
       {/* Demo Banner */}
       {isDemo && (
         <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-700 flex items-center gap-2">

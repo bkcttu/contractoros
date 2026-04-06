@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Plus,
@@ -495,6 +495,18 @@ export function Dashboard() {
   const [proposals, setProposals] = useState<Proposal[]>([])
   const [loading, setLoading] = useState(true)
   const [isDemo, setIsDemo] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Make all fade-in elements visible on mount
+  useEffect(() => {
+    if (loading) return
+    const timer = setTimeout(() => {
+      containerRef.current?.querySelectorAll('.fade-in-up, .fade-in, .scale-in, .stagger-children').forEach(el => {
+        el.classList.add('visible')
+      })
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [loading])
 
   useEffect(() => {
     api
@@ -543,7 +555,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="space-y-8 p-1">
+    <div ref={containerRef} className="space-y-8 p-1">
       {/* ================================================================= */}
       {/* Welcome Header                                                    */}
       {/* ================================================================= */}

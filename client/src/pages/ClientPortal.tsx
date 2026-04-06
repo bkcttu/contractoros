@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import {
   Loader2,
@@ -72,6 +72,7 @@ const PAYMENT_LABELS: Record<string, string> = {
 }
 
 export function ClientPortal() {
+  const pageRef = useRef<HTMLDivElement>(null)
   const { id } = useParams<{ id: string }>()
   const [proposal, setProposal] = useState<Proposal | null>(null)
   const [contractor, setContractor] = useState<Partial<User> | null>(null)
@@ -102,6 +103,15 @@ export function ClientPortal() {
       })
       .finally(() => setLoading(false))
   }, [id])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
+        el.classList.add('visible')
+      })
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleSign = async () => {
     if (!id || !signatureName.trim()) return
@@ -153,7 +163,7 @@ export function ClientPortal() {
   const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div ref={pageRef} className="min-h-screen bg-gray-50">
       {/* Colored top bar */}
       <div className="h-1" style={{ backgroundColor: brandColor }} />
 

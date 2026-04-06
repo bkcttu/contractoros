@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   ChevronRight,
@@ -79,6 +79,7 @@ const STEPS = [
 const TOTAL_STEPS = STEPS.length
 
 export function Onboarding() {
+  const pageRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
   const [step, setStep] = useState(1)
   const [saving, setSaving] = useState(false)
@@ -97,6 +98,15 @@ export function Onboarding() {
   const updateField = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
+        el.classList.add('visible')
+      })
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [])
 
   const handleNext = () => {
     if (step < TOTAL_STEPS) {
@@ -133,7 +143,7 @@ export function Onboarding() {
   const StepIcon = currentStep.icon
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-white to-gray-50">
+    <div ref={pageRef} className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-xl w-full fade-in-up">
         {/* Header */}
         <div className="text-center mb-8">
