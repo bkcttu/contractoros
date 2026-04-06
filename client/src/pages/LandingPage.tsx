@@ -390,9 +390,9 @@ function Features() {
           {FEATURES.map((f) => {
             const Icon = f.icon
             return (
-              <Link
+              <a
                 key={f.title}
-                to="/sign-up"
+                href="#pricing"
                 className="card-hover group rounded-2xl border border-gray-100 bg-white p-8 shadow-sm transition block"
               >
                 <div className={cn('mb-5 flex h-12 w-12 items-center justify-center rounded-xl', f.color)}>
@@ -401,9 +401,9 @@ function Features() {
                 <h3 className="font-heading text-lg font-bold text-navy">{f.title}</h3>
                 <p className="mt-2 font-body text-sm leading-relaxed text-gray-500">{f.description}</p>
                 <div className="mt-5 flex items-center gap-1 text-sm font-medium text-accent opacity-0 transition group-hover:opacity-100">
-                  Try it free <ChevronRight className="h-4 w-4" />
+                  Get started <ChevronRight className="h-4 w-4" />
                 </div>
-              </Link>
+              </a>
             )
           })}
         </div>
