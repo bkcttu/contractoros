@@ -272,7 +272,7 @@ export function Reviews() {
                     <div className="flex items-center gap-3 mb-1">
                       <StarRating rating={review.rating} />
                       <Badge
-                        variant={review.responded ? 'default' : 'destructive'}
+                        variant={review.responded ? 'default' : 'danger'}
                         className={cn(
                           review.responded
                             ? 'bg-green-100 text-green-700 hover:bg-green-100'

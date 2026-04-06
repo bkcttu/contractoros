@@ -9,6 +9,8 @@ import {
   Zap,
   GitBranch,
   Bell,
+  Star,
+  QrCode,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -19,6 +21,8 @@ const navItems = [
   { icon: FileText, label: 'Proposals', path: '/proposals' },
   { icon: GitBranch, label: 'Pipeline', path: '/pipeline' },
   { icon: Bell, label: 'Follow-ups', path: '/follow-ups' },
+  { icon: Star, label: 'Reviews', path: '/reviews' },
+  { icon: QrCode, label: 'QR Codes', path: '/qr-codes' },
   { icon: Settings, label: 'Settings', path: '/settings' },
 ]
 
