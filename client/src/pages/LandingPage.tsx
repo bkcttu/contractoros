@@ -897,7 +897,7 @@ export function LandingPage() {
       <Navbar />
       <Hero />
       <SocialProofBar />
-      <VideoSection />
+      {/* VideoSection — add back when a real demo video is recorded */}
       <Features />
       <Showcase />
       <HowItWorks />
