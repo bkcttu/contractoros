@@ -24,7 +24,7 @@ export function useScrollReveal() {
 
     // Observe the container and all animated children
     const targets = el.querySelectorAll(
-      '.fade-in-up, .fade-in-left, .fade-in-right, .fade-in, .scale-in, .stagger-children'
+      '.fade-in-up, .fade-in-left, .fade-in-right, .reveal-fade, .scale-in, .stagger-children'
     )
     targets.forEach((t) => observer.observe(t))
 

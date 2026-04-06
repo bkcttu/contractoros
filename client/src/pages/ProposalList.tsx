@@ -104,7 +104,7 @@ export function ProposalList() {
   useEffect(() => {
     if (loading) return
     const timer = setTimeout(() => {
-      pageRef.current?.querySelectorAll('.fade-in-up, .fade-in, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
+      pageRef.current?.querySelectorAll('.fade-in-up, .reveal-fade, .fade-in-left, .fade-in-right, .scale-in, .stagger-children').forEach(el => {
         el.classList.add('visible')
       })
       pageRef.current?.classList.add('visible')

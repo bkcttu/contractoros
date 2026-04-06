@@ -501,7 +501,7 @@ export function Dashboard() {
   useEffect(() => {
     if (loading) return
     const timer = setTimeout(() => {
-      containerRef.current?.querySelectorAll('.fade-in-up, .fade-in, .scale-in, .stagger-children').forEach(el => {
+      containerRef.current?.querySelectorAll('.fade-in-up, .reveal-fade, .scale-in, .stagger-children').forEach(el => {
         el.classList.add('visible')
       })
     }, 50)
