@@ -1,4 +1,4 @@
--- ContractorOS Schema Upgrade v2
+-- Hecho Ai Schema Upgrade v2
 -- Run this in Supabase SQL Editor AFTER the original schema
 
 -- ============================================================

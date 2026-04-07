@@ -18,6 +18,7 @@ import { Reviews } from '@/pages/Reviews'
 import { Invoices } from '@/pages/Invoices'
 import { Schedule } from '@/pages/Schedule'
 import { Pricing } from '@/pages/Pricing'
+import { APP_NAME } from '@/lib/branding'
 
 function AuthenticatedRoutes() {
   return (
@@ -59,7 +60,7 @@ export default function App() {
             <div className="min-h-screen bg-navy flex items-center justify-center p-4">
               <div className="w-full max-w-md">
                 <div className="text-center mb-8">
-                  <h1 className="text-3xl font-heading font-bold text-white">ContractorOS</h1>
+                  <h1 className="text-3xl font-heading font-bold text-white">{APP_NAME}</h1>
                   <p className="text-white/60 mt-2">The only business tool you'll ever need</p>
                 </div>
                 <SignIn routing="path" path="/sign-in" signUpUrl="/sign-up" afterSignInUrl="/dashboard" />
@@ -73,7 +74,7 @@ export default function App() {
             <div className="min-h-screen bg-navy flex items-center justify-center p-4">
               <div className="w-full max-w-md">
                 <div className="text-center mb-8">
-                  <h1 className="text-3xl font-heading font-bold text-white">ContractorOS</h1>
+                  <h1 className="text-3xl font-heading font-bold text-white">{APP_NAME}</h1>
                   <p className="text-white/60 mt-2">Start your 14-day free trial</p>
                 </div>
                 <SignUp routing="path" path="/sign-up" signInUrl="/sign-in" afterSignUpUrl="/onboarding" />

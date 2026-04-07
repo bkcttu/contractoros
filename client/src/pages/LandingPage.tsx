@@ -29,6 +29,7 @@ import {
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { APP_NAME } from '@/lib/branding'
 
 /* ------------------------------------------------------------------ */
 /*  Navbar                                                             */
@@ -45,7 +46,7 @@ function Navbar() {
             <Zap className="h-5 w-5" />
           </div>
           <span className="font-heading text-xl font-bold text-navy">
-            ContractorOS
+            {APP_NAME}
           </span>
         </Link>
 
@@ -178,7 +179,7 @@ function Hero() {
             <div className="fade-in-up relative overflow-hidden rounded-2xl shadow-2xl">
               <img
                 src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80&auto=format"
-                alt="Contractor using ContractorOS"
+                alt={`Contractor using ${APP_NAME}`}
                 className="h-[520px] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
@@ -277,7 +278,7 @@ function VideoSection() {
     <section ref={scrollRef} id="demo" className="bg-[#F8F9FA] py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="fade-in-up font-heading text-3xl font-extrabold text-navy sm:text-4xl">
-          See ContractorOS <span className="gradient-text">in Action</span>
+          See {APP_NAME} <span className="gradient-text">in Action</span>
         </h2>
         <p className="fade-in-up mx-auto mt-4 max-w-2xl font-body text-lg text-gray-500">
           Watch how real contractors are closing more jobs and spending less time on paperwork.
@@ -289,7 +290,7 @@ function VideoSection() {
             {playing ? (
               <iframe
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&modestbranding=1"
-                title="ContractorOS Demo"
+                title={`${APP_NAME} Demo`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 h-full w-full"
@@ -318,7 +319,7 @@ function VideoSection() {
         </div>
 
         <p className="fade-in-up mt-6 font-body text-sm text-gray-500">
-          Watch how Mike closes <span className="font-semibold text-navy">$40K/month</span> using ContractorOS
+          Watch how Mike closes <span className="font-semibold text-navy">$40K/month</span> using {APP_NAME}
         </p>
       </div>
     </section>
@@ -843,7 +844,7 @@ function Footer() {
               <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-white">
                 <Zap className="h-5 w-5" />
               </div>
-              <span className="font-heading text-xl font-bold text-navy">ContractorOS</span>
+              <span className="font-heading text-xl font-bold text-navy">{APP_NAME}</span>
             </Link>
             <p className="mt-4 max-w-xs font-body text-sm text-gray-400">
               The AI-powered business platform built exclusively for trade contractors.
@@ -880,7 +881,7 @@ function Footer() {
 
         <div className="mt-16 border-t border-gray-100 pt-8 text-center">
           <p className="font-body text-sm text-gray-400">
-            Built with &#10084;&#65039; for contractors &middot; &copy; {new Date().getFullYear()} ContractorOS. All rights reserved.
+            Built with &#10084;&#65039; for contractors &middot; &copy; {new Date().getFullYear()} {APP_NAME}. All rights reserved.
           </p>
         </div>
       </div>

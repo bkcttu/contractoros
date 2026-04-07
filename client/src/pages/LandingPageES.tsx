@@ -3,6 +3,7 @@ import { Zap, FileText, Calendar, DollarSign, Users, MessageSquare, Star, Check,
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { APP_NAME } from '@/lib/branding'
 
 export function LandingPageES() {
   const scrollRef = useScrollReveal()
@@ -17,7 +18,7 @@ export function LandingPageES() {
             <div className="h-9 w-9 rounded-lg bg-accent flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-heading font-bold text-navy">ContractorOS</span>
+            <span className="text-xl font-heading font-bold text-navy">{APP_NAME}</span>
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
             <a href="#caracteristicas" className="hover:text-navy transition-colors">Características</a>
@@ -104,7 +105,7 @@ export function LandingPageES() {
               Una plataforma para todo tu negocio
             </h2>
             <p className="fade-in-up mt-4 text-lg text-gray-500">
-              Deja de usar 5 apps diferentes. ContractorOS las reemplaza todas.
+              Deja de usar 5 apps diferentes. {APP_NAME} las reemplaza todas.
             </p>
           </div>
           <div className="stagger-children grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -218,7 +219,7 @@ export function LandingPageES() {
             {[
               { quote: 'Hablé en español, la propuesta salió en inglés perfecto. Mi cliente pensó que tenía una empresa grande. Ya no pierdo trabajos por el idioma.', name: 'Carlos R.', trade: 'Contratista HVAC, Houston TX', photo: 'https://randomuser.me/api/portraits/men/45.jpg' },
               { quote: 'Antes me tardaba 2 horas escribiendo propuestas después del trabajo. Ahora lo hago en 60 segundos desde mi troca. Mi tasa de cierre subió 40%.', name: 'Juan M.', trade: 'Techador, Dallas TX', photo: 'https://randomuser.me/api/portraits/men/67.jpg' },
-              { quote: 'ContractorOS se pagó solo la primera semana. Una propuesta que envié se firmó en una hora. El cliente dijo que era la cotización más profesional que había visto.', name: 'María S.', trade: 'Contratista General, Phoenix AZ', photo: 'https://randomuser.me/api/portraits/women/32.jpg' },
+              { quote: `${APP_NAME} se pagó solo la primera semana. Una propuesta que envié se firmó en una hora. El cliente dijo que era la cotización más profesional que había visto.`, name: 'María S.', trade: 'Contratista General, Phoenix AZ', photo: 'https://randomuser.me/api/portraits/women/32.jpg' },
             ].map((t) => (
               <div key={t.name} className="card-hover bg-[#F8F9FA] rounded-2xl p-8 border border-gray-100">
                 <div className="flex gap-1 mb-4">
@@ -264,7 +265,7 @@ export function LandingPageES() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <Zap className="h-6 w-6 text-accent" />
-              <span className="text-lg font-heading font-bold text-navy">ContractorOS</span>
+              <span className="text-lg font-heading font-bold text-navy">{APP_NAME}</span>
             </div>
             <p className="text-sm text-gray-400">
               La única herramienta de negocio que un contratista necesitará.
@@ -276,7 +277,7 @@ export function LandingPageES() {
             </div>
           </div>
           <div className="mt-8 text-center text-sm text-gray-400">
-            © {new Date().getFullYear()} ContractorOS. Todos los derechos reservados.
+            © {new Date().getFullYear()} {APP_NAME}. Todos los derechos reservados.
           </div>
         </div>
       </footer>

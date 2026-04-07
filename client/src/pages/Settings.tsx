@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator'
 import { api } from '@/lib/api'
 import { showToast } from '@/components/Toaster'
 import type { TradeType, PaymentTerms, FontPairType, User } from '@/types'
+import { APP_NAME } from '@/lib/branding'
 
 const FONT_PAIRS: { value: FontPairType; name: string; heading: string; body: string; vibe: string }[] = [
   { value: 'modern_pro', name: 'Modern Pro', heading: 'DM Sans', body: 'Inter', vibe: 'Clean, corporate' },
@@ -633,7 +634,7 @@ export function SettingsPage() {
                         color: '#94a3b8',
                       }}
                     >
-                      Powered by ContractorOS
+                      Powered by {APP_NAME}
                     </div>
                   </td>
                 </tr>
@@ -647,7 +648,7 @@ export function SettingsPage() {
               const logoHtml = form.logoUrl
                 ? `<td style="padding-right:16px;vertical-align:top"><img src="${form.logoUrl}" alt="Logo" style="width:60px;height:60px;object-fit:contain;border-radius:6px"/></td>`
                 : ''
-              const html = `<table cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;font-size:14px;color:#1e293b"><tbody><tr>${logoHtml}<td style="vertical-align:top">${form.businessName ? `<div style="font-weight:700;font-size:15px;color:${form.brandColor};margin-bottom:2px">${form.businessName}</div>` : ''}${form.name ? `<div style="font-weight:600;margin-bottom:4px">${form.name}</div>` : ''}<div style="font-size:12px;color:#64748b;line-height:1.6">${form.phone ? `<div>${form.phone}</div>` : ''}${form.email ? `<div>${form.email}</div>` : ''}${form.licenseNumber ? `<div>License: ${form.licenseNumber}</div>` : ''}</div><div style="margin-top:8px;border-top:2px solid ${form.brandColor};padding-top:4px;font-size:10px;color:#94a3b8">Powered by ContractorOS</div></td></tr></tbody></table>`
+              const html = `<table cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;font-size:14px;color:#1e293b"><tbody><tr>${logoHtml}<td style="vertical-align:top">${form.businessName ? `<div style="font-weight:700;font-size:15px;color:${form.brandColor};margin-bottom:2px">${form.businessName}</div>` : ''}${form.name ? `<div style="font-weight:600;margin-bottom:4px">${form.name}</div>` : ''}<div style="font-size:12px;color:#64748b;line-height:1.6">${form.phone ? `<div>${form.phone}</div>` : ''}${form.email ? `<div>${form.email}</div>` : ''}${form.licenseNumber ? `<div>License: ${form.licenseNumber}</div>` : ''}</div><div style="margin-top:8px;border-top:2px solid ${form.brandColor};padding-top:4px;font-size:10px;color:#94a3b8">Powered by {APP_NAME}</div></td></tr></tbody></table>`
               navigator.clipboard.writeText(html).then(() => {
                 showToast({ title: 'Signature HTML copied to clipboard!' })
               }).catch(() => {

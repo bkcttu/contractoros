@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import './lib/i18n'
+import { APP_NAME } from './lib/branding'
 
 const CLERK_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -14,7 +15,7 @@ function Loading() {
     <div className="min-h-screen bg-navy flex items-center justify-center">
       <div className="text-center">
         <div className="h-10 w-10 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-white/60 mt-4 font-body text-sm">Loading ContractorOS...</p>
+        <p className="text-white/60 mt-4 font-body text-sm">Loading {APP_NAME}...</p>
       </div>
     </div>
   )

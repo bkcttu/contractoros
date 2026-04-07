@@ -17,6 +17,7 @@ import {
 import { cn } from '@/lib/utils'
 import { PLANS, COMPARISON_DATA, FAQ_DATA, calculateROI } from '@/lib/pricing'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { APP_NAME } from '@/lib/branding'
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -47,7 +48,7 @@ const T = {
     roiCalloutJob: '1 extra job',
     roiCalloutCost: 'Your cost',
     roiCalloutReturn: 'Return',
-    roiCalcHeadline: 'How fast does ContractorOS pay for itself?',
+    roiCalcHeadline: `How fast does ${APP_NAME} pay for itself?`,
     roiCalcSubhead: 'Move the sliders. Watch your numbers change in real time.',
     sliderJobValue: 'Average job value',
     sliderProposals: 'Proposals sent per month',
@@ -55,11 +56,11 @@ const T = {
     resultNewWinRate: 'New win rate',
     resultExtraJobs: 'Extra jobs/month',
     resultExtraRevenue: 'Extra revenue/month',
-    resultCost: 'ContractorOS cost',
+    resultCost: `${APP_NAME} cost`,
     resultNetGain: 'Net gain/month',
     resultROI: 'Return on investment',
     roiCta: 'Start Free Trial — See It For Yourself',
-    comparisonTitle: 'How ContractorOS stacks up',
+    comparisonTitle: `How ${APP_NAME} stacks up`,
     comparisonSubtitle: 'Feature-for-feature, dollar-for-dollar.',
     comparisonFeature: 'Feature',
     comparisonCallout: '14 features your competitors don\'t offer. Half the price.',
@@ -89,7 +90,7 @@ const T = {
     roiCalloutJob: '1 trabajo extra',
     roiCalloutCost: 'Tu costo',
     roiCalloutReturn: 'Retorno',
-    roiCalcHeadline: '¿Qué tan rápido se paga solo ContractorOS?',
+    roiCalcHeadline: `¿Qué tan rápido se paga solo ${APP_NAME}?`,
     roiCalcSubhead: 'Mueve los controles. Mira tus números cambiar en tiempo real.',
     sliderJobValue: 'Valor promedio del trabajo',
     sliderProposals: 'Propuestas enviadas al mes',
@@ -97,11 +98,11 @@ const T = {
     resultNewWinRate: 'Nueva tasa de cierre',
     resultExtraJobs: 'Trabajos extra/mes',
     resultExtraRevenue: 'Ingreso extra/mes',
-    resultCost: 'Costo de ContractorOS',
+    resultCost: `Costo de ${APP_NAME}`,
     resultNetGain: 'Ganancia neta/mes',
     resultROI: 'Retorno de inversión',
     roiCta: 'Prueba Gratis — Compruébalo Tú Mismo',
-    comparisonTitle: 'Cómo se compara ContractorOS',
+    comparisonTitle: `Cómo se compara ${APP_NAME}`,
     comparisonSubtitle: 'Función por función, dólar por dólar.',
     comparisonFeature: 'Función',
     comparisonCallout: '14 funciones que tu competencia no ofrece. La mitad del precio.',
@@ -461,7 +462,7 @@ export function Pricing({ lang = 'en' }: PricingPageProps) {
                     {t.comparisonFeature}
                   </th>
                   <th className="border-b-2 border-orange-500 pb-4 text-center font-heading text-sm font-bold text-orange-600">
-                    ContractorOS
+                    {APP_NAME}
                   </th>
                   <th className="border-b border-gray-200 pb-4 text-center font-heading text-sm font-semibold text-gray-500">
                     Jobber

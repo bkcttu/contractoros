@@ -13,21 +13,28 @@ import {
   QrCode,
   CreditCard,
   Calendar,
+  Lock,
+  Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { APP_NAME } from '@/lib/branding'
 
-const navItems = [
+const coreNavItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Plus, label: 'New Proposal', path: '/proposals/new' },
   { icon: FileText, label: 'Proposals', path: '/proposals' },
-  { icon: GitBranch, label: 'Pipeline', path: '/pipeline' },
-  { icon: Bell, label: 'Follow-ups', path: '/follow-ups' },
-  { icon: Star, label: 'Reviews', path: '/reviews' },
-  { icon: CreditCard, label: 'Invoices', path: '/invoices' },
-  { icon: Calendar, label: 'Schedule', path: '/schedule' },
-  { icon: QrCode, label: 'QR Codes', path: '/qr-codes' },
   { icon: Settings, label: 'Settings', path: '/settings' },
+]
+
+const comingSoonItems = [
+  { icon: GitBranch, label: 'Pipeline' },
+  { icon: Bell, label: 'Follow-ups' },
+  { icon: CreditCard, label: 'Invoices' },
+  { icon: Calendar, label: 'Schedule' },
+  { icon: Star, label: 'Reviews' },
+  { icon: QrCode, label: 'QR Codes' },
+  { icon: Sparkles, label: 'AI Coach' },
 ]
 
 export function DemoLayout({ children }: { children: React.ReactNode }) {
@@ -40,7 +47,7 @@ export function DemoLayout({ children }: { children: React.ReactNode }) {
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-navy h-14 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <Zap className="h-6 w-6 text-accent" />
-          <span className="text-white font-heading font-bold text-lg">ContractorOS</span>
+          <span className="text-white font-heading font-bold text-lg">{APP_NAME}</span>
         </div>
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -69,7 +76,7 @@ export function DemoLayout({ children }: { children: React.ReactNode }) {
         {/* Logo */}
         <div className="h-16 flex items-center gap-2 px-6 border-b border-white/10">
           <Zap className="h-7 w-7 text-accent" />
-          <span className="text-white font-heading font-bold text-xl">ContractorOS</span>
+          <span className="text-white font-heading font-bold text-xl">{APP_NAME}</span>
         </div>
 
         {/* Demo badge */}
@@ -77,9 +84,9 @@ export function DemoLayout({ children }: { children: React.ReactNode }) {
           <p className="text-accent text-xs font-medium text-center">DEMO MODE</p>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 px-3 py-4 space-y-1">
-          {navItems.map((item) => {
+        {/* Core Navigation */}
+        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+          {coreNavItems.map((item) => {
             const isActive = location.pathname === item.path ||
               (item.path !== '/dashboard' && location.pathname.startsWith(item.path))
             return (
@@ -99,6 +106,22 @@ export function DemoLayout({ children }: { children: React.ReactNode }) {
               </Link>
             )
           })}
+
+          {/* Coming Soon divider */}
+          <div className="pt-4 pb-2 px-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/30">Coming Soon</p>
+          </div>
+
+          {comingSoonItems.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-white/30 cursor-not-allowed"
+            >
+              <item.icon className="h-5 w-5" />
+              <span className="flex-1">{item.label}</span>
+              <Lock className="h-3 w-3" />
+            </div>
+          ))}
         </nav>
 
         {/* User section */}
@@ -109,7 +132,7 @@ export function DemoLayout({ children }: { children: React.ReactNode }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white text-sm font-medium truncate">Demo Contractor</p>
-              <p className="text-white/50 text-xs truncate">demo@contractoros.com</p>
+              <p className="text-white/50 text-xs truncate">demo@hechoai.com</p>
             </div>
           </div>
         </div>

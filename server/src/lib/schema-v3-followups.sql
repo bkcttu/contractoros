@@ -1,4 +1,4 @@
--- ContractorOS Schema v3 — Follow-Up & Deal Closing System
+-- Hecho Ai Schema v3 — Follow-Up & Deal Closing System
 -- Run this in Supabase SQL Editor
 
 -- ============================================================
