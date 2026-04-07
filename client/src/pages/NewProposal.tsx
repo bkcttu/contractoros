@@ -1,1465 +1,625 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Sparkles,
   ChevronRight,
-  User,
-  Briefcase,
-  FileCheck,
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  DollarSign,
-  Wand2,
-  Eye,
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  Clock,
-  Shield,
-  FileText,
-  CreditCard,
-  Package,
-  ExternalLink,
-  X,
+  ChevronLeft,
+  Wrench,
+  Thermometer,
+  Home,
+  Zap as ZapIcon,
+  Leaf,
+  Paintbrush,
+  Hammer,
+  TreePine,
+  Paintbrush2,
   Plus,
+  Loader2,
   Download,
   Send,
   Copy,
-  Share2,
-  Save,
-  Link2,
-  ToggleLeft,
-  ToggleRight,
-  List,
-  Layers,
+  MessageCircle,
+  Mail,
+  Check,
+  Mic,
+  DollarSign,
 } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { cn, formatCurrency } from '@/lib/utils'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
-import { cn } from '@/lib/utils'
 import { api } from '@/lib/api'
-import { showToast } from '@/components/Toaster'
-import type { PaymentTerms, TradeType } from '@/types'
-import { LineItemBuilder, type LineItem } from '@/components/LineItemBuilder'
-import { PricingTiers, DEFAULT_TIERS, type PricingTier } from '@/components/PricingTiers'
+import { APP_NAME } from '@/lib/branding'
 
-const STEPS = [
-  { id: 1, label: 'Client Info', icon: User },
-  { id: 2, label: 'Job Details', icon: Briefcase },
-  { id: 3, label: 'Review & Generate', icon: FileCheck },
-] as const
+// ---------------------------------------------------------------------------
+// Trade options
+// ---------------------------------------------------------------------------
+const TRADES = [
+  { id: 'landscaping', label: 'Jardinería', labelEn: 'Landscaping', icon: Leaf },
+  { id: 'plumbing', label: 'Plomería', labelEn: 'Plumbing', icon: Wrench },
+  { id: 'roofing', label: 'Techos', labelEn: 'Roofing', icon: Home },
+  { id: 'painting', label: 'Pintura', labelEn: 'Painting', icon: Paintbrush },
+  { id: 'hvac', label: 'Aire Acondicionado', labelEn: 'HVAC', icon: Thermometer },
+  { id: 'tree_service', label: 'Árboles', labelEn: 'Tree Service', icon: TreePine },
+  { id: 'cleaning', label: 'Limpieza', labelEn: 'Cleaning', icon: Paintbrush2 },
+  { id: 'electrical', label: 'Electricidad', labelEn: 'Electrical', icon: ZapIcon },
+  { id: 'handyman', label: 'Reparaciones', labelEn: 'Handyman', icon: Hammer },
+  { id: 'other', label: 'Otro', labelEn: 'Other', icon: Plus },
+]
 
-const TRADE_LABELS: Record<TradeType, string> = {
-  hvac: 'HVAC',
-  roofing: 'Roofing',
-  plumbing: 'Plumbing',
-  electrical: 'Electrical',
-  painting: 'Painting',
-  landscaping: 'Landscaping',
-  general: 'General Contracting',
+// ---------------------------------------------------------------------------
+// Demo fallback
+// ---------------------------------------------------------------------------
+function getDemoProposal(
+  trade: string,
+  description: string,
+  materials: number,
+  labor: number,
+  clientName: string,
+): string {
+  const total = materials + labor
+  return `# Professional ${trade} Proposal
+
+**Prepared for:** ${clientName}
+**Date:** ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+
+---
+
+## Scope of Work
+
+${description || 'Complete the described work according to industry standards and best practices.'}
+
+## Investment
+
+| Item | Amount |
+|------|--------|
+| Materials | $${materials.toLocaleString()} |
+| Labor | $${labor.toLocaleString()} |
+| **Total** | **$${total.toLocaleString()}** |
+
+## Terms
+
+- 50% deposit due upon acceptance
+- Balance due upon completion
+- Work to begin within 5 business days of acceptance
+
+---
+
+We look forward to working with you. Please sign below to accept this proposal.`
 }
 
-const PAYMENT_LABELS: Record<PaymentTerms, string> = {
-  '50_upfront': '50% Upfront / 50% on Completion',
-  net_30: 'Net 30',
-  due_on_completion: 'Due on Completion',
-  custom: 'Custom',
+// ---------------------------------------------------------------------------
+// Simple markdown renderer (no external deps)
+// ---------------------------------------------------------------------------
+function renderMarkdown(text: string) {
+  const lines = text.split('\n')
+  const elements: React.ReactNode[] = []
+  let key = 0
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i]
+    if (line.startsWith('# ')) {
+      elements.push(<h1 key={key++} className="text-2xl font-bold mt-4 mb-2">{line.slice(2)}</h1>)
+    } else if (line.startsWith('## ')) {
+      elements.push(<h2 key={key++} className="text-xl font-semibold mt-4 mb-1">{line.slice(3)}</h2>)
+    } else if (line.startsWith('---')) {
+      elements.push(<hr key={key++} className="my-3 border-border" />)
+    } else if (line.startsWith('- ')) {
+      elements.push(<li key={key++} className="ml-5 list-disc text-sm">{line.slice(2)}</li>)
+    } else if (line.startsWith('| ')) {
+      const cells = line.split('|').filter(c => c.trim() !== '')
+      if (cells.every(c => /^[-\s]+$/.test(c))) continue
+      elements.push(
+        <div key={key++} className="grid gap-1 text-sm" style={{ gridTemplateColumns: `repeat(${cells.length}, 1fr)` }}>
+          {cells.map((c, ci) => (
+            <span key={ci} className={cn('px-2 py-1 border-b border-border', c.includes('**') && 'font-semibold')}>
+              {c.replace(/\*\*/g, '').trim()}
+            </span>
+          ))}
+        </div>,
+      )
+    } else if (line.trim() === '') {
+      elements.push(<div key={key++} className="h-2" />)
+    } else {
+      const rendered = line
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      elements.push(
+        <p key={key++} className="text-sm leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: rendered }} />,
+      )
+    }
+  }
+  return elements
 }
 
-function getDefaultExpiration() {
-  const d = new Date()
-  d.setDate(d.getDate() + 30)
-  return d.toISOString().split('T')[0]
-}
-
-function formatCurrency(value: number): string {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value)
-}
-
-function getDemoProposalText(trade: TradeType, clientName: string, description: string, products?: Array<{ name: string; url: string; imageUrl: string; price: string; description: string }>, detailedLineItems?: LineItem[], pricingTiers?: PricingTier[]): string {
-  const tradeName = TRADE_LABELS[trade] || 'General Contracting'
-  return `PROFESSIONAL ${tradeName.toUpperCase()} PROPOSAL
-
-Prepared for: ${clientName || 'Valued Client'}
-
-Dear ${clientName || 'Valued Client'},
-
-Thank you for the opportunity to provide this proposal for your ${tradeName.toLowerCase()} project. We are pleased to present the following scope of work for your review and approval.
-
-SCOPE OF WORK
-
-${description || `Based on our thorough on-site assessment, we propose a comprehensive ${tradeName.toLowerCase()} solution tailored to meet your specific needs. Our team of licensed professionals will deliver high-quality workmanship using industry-leading materials and best practices.`}
-
-Our approach includes:
-- Complete site preparation and protection of surrounding areas
-- Professional-grade materials sourced from trusted suppliers
-- Expert installation by our certified technicians
-- Thorough cleanup and final inspection upon completion
-- Post-project walkthrough to ensure your complete satisfaction
-
-${products && products.length > 0 ? `MATERIALS & PRODUCTS
-
-The following materials and products will be used for this project:
-
-${products.map((p) => `- ${p.name}${p.price ? ` — $${parseFloat(p.price).toFixed(2)}` : ''}${p.description ? ` (${p.description})` : ''}${p.url ? `\n  Product link: ${p.url}` : ''}`).join('\n')}
-
-` : ''}${detailedLineItems && detailedLineItems.length > 0 ? `DETAILED LINE ITEMS
-
-${(() => {
-  const groups = detailedLineItems.reduce<Record<string, LineItem[]>>((acc, item) => {
-    const group = item.groupName || 'Ungrouped'
-    if (!acc[group]) acc[group] = []
-    acc[group].push(item)
-    return acc
-  }, {})
-  return Object.entries(groups).map(([groupName, items]) => {
-    const groupLines = items.map(item =>
-      `  - ${item.itemName}: ${item.quantity} ${item.unit} x $${item.unitPrice.toFixed(2)} = $${item.lineTotal.toFixed(2)}${item.isOptional ? ' (Optional)' : ''}`
-    ).join('\n')
-    const groupTotal = items.reduce((s, i) => s + i.lineTotal, 0)
-    return `${groupName}:\n${groupLines}\n  Subtotal: $${groupTotal.toFixed(2)}`
-  }).join('\n\n')
-})()}
-
-Total: $${detailedLineItems.reduce((s, i) => s + i.lineTotal, 0).toFixed(2)}
-
-` : ''}${pricingTiers && pricingTiers.length > 0 ? `PRICING OPTIONS
-
-${pricingTiers.map(tier => {
-  const features = tier.features.filter(f => f.included).map(f => `    - ${f.text}`).join('\n')
-  return `${tier.label} — ${tier.name}: $${tier.price.toFixed(2)}${tier.isHighlighted ? ' (Recommended)' : ''}\n${features}`
-}).join('\n\n')}
-
-` : ''}QUALITY ASSURANCE
-
-All work will be performed in accordance with local building codes and industry standards. Our team maintains current licenses and certifications, and we carry comprehensive liability insurance for your protection.
-
-We stand behind our work with confidence. Should any issues arise related to our workmanship, we will address them promptly and professionally at no additional cost during the warranty period.
-
-PROJECT TIMELINE
-
-Work will commence within 5 business days of proposal acceptance, weather and material availability permitting. We will maintain clear communication throughout the project and provide daily progress updates.
-
-We look forward to working with you on this project. Please do not hesitate to reach out with any questions.
-
-Respectfully submitted,
-Your Professional ${tradeName} Team`
-}
-
+// ---------------------------------------------------------------------------
+// Main component
+// ---------------------------------------------------------------------------
 export function NewProposal() {
   const navigate = useNavigate()
+
+  // Step
   const [currentStep, setCurrentStep] = useState(1)
-  const [generating, setGenerating] = useState(false)
-  const [generationDone, setGenerationDone] = useState(false)
-  const [streamText, setStreamText] = useState('')
-  const [error, setError] = useState('')
-  const [stepErrors, setStepErrors] = useState<Record<string, string>>({})
-  const [generatedId, setGeneratedId] = useState<string | null>(null)
-  const [showSendModal, setShowSendModal] = useState(false)
 
-  const [form, setForm] = useState({
-    clientName: '',
-    clientEmail: '',
-    clientPhone: '',
-    jobAddress: '',
-    tradeType: 'hvac' as TradeType,
-    jobDescription: '',
-    materialsCost: '',
-    laborCost: '',
-    projectDuration: '',
-    paymentTerms: '50_upfront' as PaymentTerms,
-    warranty: '',
-    specialNotes: '',
-    expirationDate: getDefaultExpiration(),
-  })
+  // Step 1
+  const [selectedTrade, setSelectedTrade] = useState('')
 
-  const [lineItems, setLineItems] = useState<LineItem[]>([])
-  const [useDetailedItems, setUseDetailedItems] = useState(false)
-  const [tierMode, setTierMode] = useState(false)
-  const [tiers, setTiers] = useState<PricingTier[]>(DEFAULT_TIERS)
+  // Step 2
+  const [description, setDescription] = useState('')
+  const [clientName, setClientName] = useState('')
+  const [clientContact, setClientContact] = useState('')
 
-  const [products, setProducts] = useState<Array<{
-    id: string
-    name: string
-    url: string
-    imageUrl: string
-    price: string
-    description: string
-  }>>([])
-  const [showProductForm, setShowProductForm] = useState(false)
-  const [productForm, setProductForm] = useState({
-    name: '',
-    url: '',
-    imageUrl: '',
-    price: '',
-    description: '',
-  })
+  // Step 3
+  const [materials, setMaterials] = useState('')
+  const [labor, setLabor] = useState('')
 
-  const addProduct = () => {
-    if (!productForm.name.trim()) return
-    setProducts((prev) => [
-      ...prev,
-      { ...productForm, id: Date.now().toString() },
-    ])
-    setProductForm({ name: '', url: '', imageUrl: '', price: '', description: '' })
-    setShowProductForm(false)
-  }
+  // Step 4 / 5
+  const [proposalText, setProposalText] = useState('')
+  const [proposalId, setProposalId] = useState<string | null>(null)
+  const [showSendOptions, setShowSendOptions] = useState(false)
+  const [copied, setCopied] = useState(false)
 
-  const removeProduct = (id: string) => {
-    setProducts((prev) => prev.filter((p) => p.id !== id))
-  }
+  const materialsNum = parseFloat(materials) || 0
+  const laborNum = parseFloat(labor) || 0
+  const total = materialsNum + laborNum
 
-  const updateField = (field: string, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }))
-    // Clear field-level error when user types
-    if (stepErrors[field]) {
-      setStepErrors((prev) => {
-        const next = { ...prev }
-        delete next[field]
-        return next
-      })
-    }
-  }
+  const selectedTradeObj = TRADES.find(t => t.id === selectedTrade)
 
-  const lineItemsTotal = useMemo(() => {
-    return lineItems.reduce((sum, item) => sum + item.lineTotal, 0)
-  }, [lineItems])
-
-  const totalCost = useMemo(() => {
-    if (useDetailedItems && lineItems.length > 0) {
-      return lineItemsTotal
-    }
-    const m = parseFloat(form.materialsCost) || 0
-    const l = parseFloat(form.laborCost) || 0
-    return m + l
-  }, [form.materialsCost, form.laborCost, useDetailedItems, lineItems, lineItemsTotal])
-
-  const validateStep = useCallback(
-    (step: number): boolean => {
-      const errors: Record<string, string> = {}
-
-      if (step === 1) {
-        if (!form.clientName.trim()) errors.clientName = 'Client name is required'
-        if (!form.clientEmail.trim()) errors.clientEmail = 'Client email is required'
-        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.clientEmail))
-          errors.clientEmail = 'Please enter a valid email'
-      }
-
-      if (step === 2) {
-        if (!form.jobDescription.trim()) errors.jobDescription = 'Job description is required'
-        if (useDetailedItems) {
-          if (lineItems.length === 0) errors.lineItems = 'At least one line item is required when using detailed pricing'
-        } else {
-          if (!form.materialsCost || parseFloat(form.materialsCost) < 0)
-            errors.materialsCost = 'Materials cost is required'
-          if (!form.laborCost || parseFloat(form.laborCost) < 0)
-            errors.laborCost = 'Labor cost is required'
-        }
-      }
-
-      setStepErrors(errors)
-      return Object.keys(errors).length === 0
-    },
-    [form, useDetailedItems, lineItems]
-  )
-
-  const goToStep = (step: number) => {
-    if (step < currentStep) {
-      setCurrentStep(step)
-      setError('')
-      setStepErrors({})
-      return
-    }
-    // Validate all steps up to the target
-    for (let s = currentStep; s < step; s++) {
-      if (!validateStep(s)) return
-    }
-    setCurrentStep(step)
-    setError('')
-  }
-
-  const handleNext = () => {
-    if (validateStep(currentStep)) {
-      setCurrentStep((prev) => Math.min(prev + 1, 3))
-      setError('')
-    }
-  }
-
-  const handleBack = () => {
-    setCurrentStep((prev) => Math.max(prev - 1, 1))
-    setError('')
-    setStepErrors({})
-  }
-
-  const simulateStreaming = useCallback(async () => {
-    const text = getDemoProposalText(
-      form.tradeType,
-      form.clientName,
-      form.jobDescription,
-      products,
-      useDetailedItems && lineItems.length > 0 ? lineItems : undefined,
-      tierMode && tiers.length > 0 ? tiers : undefined
-    )
-    const words = text.split(/(\s+)/)
-    let accumulated = ''
-
-    for (let i = 0; i < words.length; i++) {
-      accumulated += words[i]
-      setStreamText(accumulated)
-      // Variable speed for realism
-      const delay = words[i].trim() === '' ? 5 : Math.random() * 30 + 15
-      await new Promise((r) => setTimeout(r, delay))
-    }
-
-    setGenerationDone(true)
-  }, [form.tradeType, form.clientName, form.jobDescription, products, useDetailedItems, lineItems, tierMode, tiers])
-
-  const handleGenerate = async () => {
-    setError('')
-    setGenerating(true)
-    setStreamText('')
-    setGenerationDone(false)
+  // -------------------------------------------------------------------------
+  // Generate proposal
+  // -------------------------------------------------------------------------
+  async function handleGenerate() {
+    setCurrentStep(4)
+    setProposalText('')
 
     try {
-      const { proposal } = await api.createProposal({
-        clientName: form.clientName,
-        clientEmail: form.clientEmail,
-        clientPhone: form.clientPhone,
-        jobAddress: form.jobAddress,
-        jobDescription: form.jobDescription + (products.length > 0 ? '\n\nSpecified Products/Materials:\n' + products.map(p => `- ${p.name}${p.price ? ` ($${p.price})` : ''}${p.url ? ` - ${p.url}` : ''}${p.description ? ` — ${p.description}` : ''}`).join('\n') : ''),
-        materialsCost: Number(form.materialsCost),
-        laborCost: Number(form.laborCost),
-        projectDuration: form.projectDuration,
-        paymentTerms: form.paymentTerms,
-        warranty: form.warranty,
-        specialNotes: form.specialNotes,
-        expirationDate: form.expirationDate,
-      })
+      const isEmail = clientContact.includes('@')
+      const expiry = new Date()
+      expiry.setDate(expiry.getDate() + 30)
 
-      setGeneratedId(proposal.id)
-      setStreamText('')
-
-      for await (const chunk of api.generateProposal(proposal.id)) {
-        setStreamText((prev) => prev + chunk)
+      const formData = {
+        clientName,
+        clientEmail: isEmail ? clientContact : '',
+        clientPhone: !isEmail ? clientContact : '',
+        jobAddress: '',
+        jobDescription: `[${selectedTradeObj?.labelEn ?? selectedTrade}] ${description}`,
+        materialsCost: materialsNum,
+        laborCost: laborNum,
+        projectDuration: '1-3 days',
+        paymentTerms: '50_upfront' as const,
+        warranty: '1 year',
+        specialNotes: '',
+        expirationDate: expiry.toISOString().split('T')[0],
       }
 
-      navigate(`/proposals/${proposal.id}`)
+      const result = await api.createProposal(formData)
+      const id = result.proposal.id
+      setProposalId(id)
+
+      let fullText = ''
+      for await (const chunk of api.generateProposal(id)) {
+        fullText += chunk
+        setProposalText(fullText)
+      }
+
+      setCurrentStep(5)
     } catch {
-      // Demo/fallback mode: simulate streaming
-      setGeneratedId(null)
-      await new Promise((r) => setTimeout(r, 2000))
-      await simulateStreaming()
+      const demo = getDemoProposal(
+        selectedTradeObj?.labelEn ?? selectedTrade,
+        description,
+        materialsNum,
+        laborNum,
+        clientName,
+      )
+      setProposalText(demo)
+      setCurrentStep(5)
     }
   }
 
-  return (
-    <div className="max-w-3xl mx-auto pb-12">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-sm text-gray-400 mb-4">
-        <Link to="/" className="hover:text-accent transition-colors">
-          Dashboard
-        </Link>
-        <ChevronRight className="h-3.5 w-3.5" />
-        <Link to="/proposals" className="hover:text-accent transition-colors">
-          Proposals
-        </Link>
-        <ChevronRight className="h-3.5 w-3.5" />
-        <span className="text-navy font-medium">New</span>
-      </nav>
+  // -------------------------------------------------------------------------
+  // Copy link
+  // -------------------------------------------------------------------------
+  function handleCopyLink() {
+    const url = proposalId
+      ? `${window.location.origin}/p/${proposalId}`
+      : window.location.href
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
 
+  // -------------------------------------------------------------------------
+  // WhatsApp
+  // -------------------------------------------------------------------------
+  function handleWhatsApp() {
+    const url = proposalId ? `${window.location.origin}/p/${proposalId}` : window.location.href
+    const msg = encodeURIComponent(`Hola ${clientName}, aquí está tu propuesta: ${url}`)
+    window.open(`https://wa.me/?text=${msg}`, '_blank')
+  }
+
+  // -------------------------------------------------------------------------
+  // Email
+  // -------------------------------------------------------------------------
+  async function handleEmail() {
+    if (!proposalId) return
+    try {
+      await api.sendProposal(proposalId)
+    } catch {
+      // ignore
+    }
+    setShowSendOptions(false)
+  }
+
+  // -------------------------------------------------------------------------
+  // Render
+  // -------------------------------------------------------------------------
+  return (
+    <div className="min-h-screen bg-background pb-24">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-heading font-bold text-navy">Create New Proposal</h1>
-        <p className="text-gray-500 mt-1.5 font-body">
-          Fill in the details and let AI write a professional proposal for you.
-        </p>
+      <div className="sticky top-0 z-10 bg-background border-b border-border px-4 py-3 flex items-center gap-3">
+        {currentStep > 1 && currentStep < 4 && (
+          <button
+            onClick={() => setCurrentStep(s => s - 1)}
+            className="p-2 rounded-full hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+        )}
+        {(currentStep === 1 || currentStep >= 4) && (
+          <Link to="/dashboard" className="p-2 rounded-full hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+            <ChevronLeft className="w-5 h-5" />
+          </Link>
+        )}
+        <div className="flex-1">
+          <p className="text-xs text-muted-foreground">{APP_NAME}</p>
+          <p className="text-base font-semibold leading-tight">
+            {currentStep === 1 && 'Nueva Propuesta'}
+            {currentStep === 2 && 'El Trabajo'}
+            {currentStep === 3 && 'El Precio'}
+            {currentStep === 4 && 'Generando...'}
+            {currentStep === 5 && 'Tu Propuesta'}
+          </p>
+        </div>
+        {currentStep <= 3 && (
+          <div className="flex gap-1.5">
+            {[1, 2, 3].map(s => (
+              <div
+                key={s}
+                className={cn(
+                  'w-2 h-2 rounded-full transition-colors',
+                  s === currentStep ? 'bg-primary' : s < currentStep ? 'bg-primary/50' : 'bg-muted',
+                )}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Step Indicator */}
-      <div className="flex items-center justify-center mb-8">
-        {STEPS.map((step, idx) => {
-          const isActive = currentStep === step.id
-          const isComplete = currentStep > step.id
-          const Icon = step.icon
+      {/* ------------------------------------------------------------------ */}
+      {/* STEP 1 — Trade Selection                                            */}
+      {/* ------------------------------------------------------------------ */}
+      {currentStep === 1 && (
+        <div className="px-4 pt-6 max-w-2xl mx-auto">
+          <h1 className="text-2xl font-bold mb-1">¿Qué tipo de trabajo?</h1>
+          <p className="text-muted-foreground text-sm mb-6">What type of work?</p>
 
-          return (
-            <div key={step.id} className="flex items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-8">
+            {TRADES.map(trade => {
+              const Icon = trade.icon
+              const selected = selectedTrade === trade.id
+              return (
+                <button
+                  key={trade.id}
+                  onClick={() => setSelectedTrade(trade.id)}
+                  className={cn(
+                    'flex flex-col items-center justify-center gap-2 rounded-2xl border-2 p-4 min-h-[90px] transition-all',
+                    selected
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-border bg-card hover:border-primary/50 hover:bg-muted',
+                  )}
+                >
+                  <Icon className={cn('w-7 h-7', selected && 'text-primary')} />
+                  <div className="text-center">
+                    <p className="text-sm font-semibold leading-tight">{trade.label}</p>
+                    <p className="text-[10px] text-muted-foreground leading-tight">{trade.labelEn}</p>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+          <Button
+            size="lg"
+            className="w-full text-base min-h-[52px]"
+            disabled={!selectedTrade}
+            onClick={() => setCurrentStep(2)}
+          >
+            Siguiente <ChevronRight className="w-5 h-5 ml-1" />
+          </Button>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* STEP 2 — Job Description                                            */}
+      {/* ------------------------------------------------------------------ */}
+      {currentStep === 2 && (
+        <div className="px-4 pt-6 max-w-2xl mx-auto space-y-5">
+          <div>
+            <h1 className="text-2xl font-bold mb-1">Describe el trabajo</h1>
+            <p className="text-muted-foreground text-sm">Describe the job</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-base font-semibold">
+              ¿Qué hiciste? <span className="text-muted-foreground font-normal text-sm">/ What did you do?</span>
+            </Label>
+            <div className="relative">
+              <Textarea
+                rows={6}
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                placeholder={"Describe el trabajo con tus palabras...\nEj: limpié 5 árboles de palma y corté el pasto en una casa en Odessa"}
+                className="text-base resize-none pr-12"
+              />
               <button
                 type="button"
-                onClick={() => goToStep(step.id)}
-                className={cn(
-                  'flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 group',
-                  isActive && 'bg-accent/10',
-                  !isActive && !isComplete && 'opacity-50 hover:opacity-75',
-                  isComplete && 'hover:bg-accent/5 cursor-pointer'
-                )}
+                className="absolute right-3 bottom-3 p-2 rounded-full bg-muted hover:bg-muted/80 transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
+                title="Dictar (próximamente)"
               >
-                <div
-                  className={cn(
-                    'w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0',
-                    isActive && 'bg-accent text-white shadow-md shadow-accent/30',
-                    isComplete && 'bg-accent/20 text-accent',
-                    !isActive && !isComplete && 'bg-gray-200 text-gray-400'
-                  )}
-                >
-                  {isComplete ? <Check className="h-4 w-4" /> : <Icon className="h-4 w-4" />}
-                </div>
-                <span
-                  className={cn(
-                    'text-sm font-medium hidden sm:block transition-colors duration-300',
-                    isActive && 'text-accent',
-                    isComplete && 'text-navy',
-                    !isActive && !isComplete && 'text-gray-400'
-                  )}
-                >
-                  {step.label}
-                </span>
+                <Mic className="w-4 h-4 text-muted-foreground" />
               </button>
-              {idx < STEPS.length - 1 && (
-                <div className="w-8 sm:w-16 mx-1">
-                  <div
-                    className={cn(
-                      'h-0.5 rounded-full transition-all duration-500',
-                      currentStep > step.id ? 'bg-accent' : 'bg-gray-200'
-                    )}
-                  />
-                </div>
-              )}
             </div>
-          )
-        })}
-      </div>
-
-      {/* Global Error */}
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm animate-in fade-in slide-in-from-top-2">
-          {error}
-        </div>
-      )}
-
-      {/* Step 1: Client Information */}
-      {currentStep === 1 && (
-        <div className="animate-in fade-in slide-in-from-right-4 duration-300">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <User className="h-5 w-5 text-accent" />
-                </div>
-                <div>
-                  <CardTitle>Client Information</CardTitle>
-                  <CardDescription>Who is this proposal for?</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <Label htmlFor="clientName" className="flex items-center gap-1.5">
-                    <User className="h-3.5 w-3.5 text-gray-400" />
-                    Client Name <span className="text-red-400">*</span>
-                  </Label>
-                  <Input
-                    id="clientName"
-                    placeholder="John Smith"
-                    value={form.clientName}
-                    onChange={(e) => updateField('clientName', e.target.value)}
-                    className={cn(stepErrors.clientName && 'border-red-300 focus-visible:ring-red-300')}
-                  />
-                  {stepErrors.clientName && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.clientName}</p>}
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="clientEmail" className="flex items-center gap-1.5">
-                    <Mail className="h-3.5 w-3.5 text-gray-400" />
-                    Client Email <span className="text-red-400">*</span>
-                  </Label>
-                  <Input
-                    id="clientEmail"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={form.clientEmail}
-                    onChange={(e) => updateField('clientEmail', e.target.value)}
-                    className={cn(stepErrors.clientEmail && 'border-red-300 focus-visible:ring-red-300')}
-                  />
-                  {stepErrors.clientEmail && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.clientEmail}</p>}
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <Label htmlFor="clientPhone" className="flex items-center gap-1.5">
-                    <Phone className="h-3.5 w-3.5 text-gray-400" />
-                    Phone Number
-                  </Label>
-                  <Input
-                    id="clientPhone"
-                    type="tel"
-                    placeholder="(555) 123-4567"
-                    value={form.clientPhone}
-                    onChange={(e) => updateField('clientPhone', e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="jobAddress" className="flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5 text-gray-400" />
-                    Job Site Address
-                  </Label>
-                  <Input
-                    id="jobAddress"
-                    placeholder="123 Main St, City, State"
-                    value={form.jobAddress}
-                    onChange={(e) => updateField('jobAddress', e.target.value)}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Step 2: Job Details */}
-      {currentStep === 2 && (
-        <div className="animate-in fade-in slide-in-from-right-4 duration-300">
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <Briefcase className="h-5 w-5 text-accent" />
-                </div>
-                <div>
-                  <CardTitle>Job Details</CardTitle>
-                  <CardDescription>
-                    Describe the work. Don't worry about being perfect — AI will polish it up.
-                  </CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              {/* Trade Type */}
-              <div className="space-y-2">
-                <Label className="flex items-center gap-1.5">
-                  <Briefcase className="h-3.5 w-3.5 text-gray-400" />
-                  Trade Type
-                </Label>
-                <Select value={form.tradeType} onValueChange={(v) => updateField('tradeType', v)}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {(Object.entries(TRADE_LABELS) as [TradeType, string][]).map(([value, label]) => (
-                      <SelectItem key={value} value={value}>
-                        {label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Job Description */}
-              <div className="space-y-2">
-                <Label htmlFor="jobDescription" className="flex items-center gap-1.5">
-                  <FileText className="h-3.5 w-3.5 text-gray-400" />
-                  Job Description <span className="text-red-400">*</span>
-                </Label>
-                <Textarea
-                  id="jobDescription"
-                  placeholder="Describe the work to be done... Don't worry about being perfect — AI will polish it up."
-                  rows={5}
-                  value={form.jobDescription}
-                  onChange={(e) => updateField('jobDescription', e.target.value)}
-                  className={cn(stepErrors.jobDescription && 'border-red-300 focus-visible:ring-red-300')}
-                />
-                {stepErrors.jobDescription && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.jobDescription}</p>}
-              </div>
-
-              <Separator />
-
-              {/* Costs */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-heading font-semibold text-navy flex items-center gap-2">
-                  <DollarSign className="h-4 w-4 text-accent" />
-                  Pricing
-                </h4>
-
-                {!useDetailedItems && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <Label htmlFor="materialsCost">
-                        Materials Cost <span className="text-red-400">*</span>
-                      </Label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
-                        <Input
-                          id="materialsCost"
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          placeholder="2,500.00"
-                          value={form.materialsCost}
-                          onChange={(e) => updateField('materialsCost', e.target.value)}
-                          className={cn('pl-7 font-mono', stepErrors.materialsCost && 'border-red-300 focus-visible:ring-red-300')}
-                        />
-                      </div>
-                      {stepErrors.materialsCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.materialsCost}</p>}
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="laborCost">
-                        Labor Cost <span className="text-red-400">*</span>
-                      </Label>
-                      <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
-                        <Input
-                          id="laborCost"
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          placeholder="1,500.00"
-                          value={form.laborCost}
-                          onChange={(e) => updateField('laborCost', e.target.value)}
-                          className={cn('pl-7 font-mono', stepErrors.laborCost && 'border-red-300 focus-visible:ring-red-300')}
-                        />
-                      </div>
-                      {stepErrors.laborCost && <p className="text-red-500 text-xs mt-1 animate-in fade-in slide-in-from-top-1">{stepErrors.laborCost}</p>}
-                    </div>
-                  </div>
-                )}
-
-                {/* Total */}
-                <div className="bg-gradient-to-r from-accent/5 to-accent/10 border border-accent/20 rounded-lg p-4 flex items-center justify-between">
-                  <span className="text-sm font-medium text-navy">Estimated Total</span>
-                  <span className="text-2xl font-heading font-bold text-accent">
-                    {formatCurrency(totalCost)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Detailed Line Items Toggle */}
-              <div className="relative">
-                <Separator />
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Detailed Line Items (Optional)
-                </span>
-              </div>
-
-              <div className="space-y-4">
-                <label className="flex cursor-pointer items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setUseDetailedItems((prev) => !prev)}
-                    className="text-gray-400 hover:text-accent transition-colors"
-                  >
-                    {useDetailedItems ? (
-                      <ToggleRight className="h-6 w-6 text-accent" />
-                    ) : (
-                      <ToggleLeft className="h-6 w-6" />
-                    )}
-                  </button>
-                  <div>
-                    <span className="text-sm font-medium text-navy">Use detailed line items instead of simple pricing</span>
-                    <p className="text-xs text-gray-400 mt-0.5">Break down your estimate into individual items with quantities and categories</p>
-                  </div>
-                </label>
-                {stepErrors.lineItems && <p className="text-red-500 text-xs animate-in fade-in slide-in-from-top-1">{stepErrors.lineItems}</p>}
-
-                {useDetailedItems && (
-                  <LineItemBuilder
-                    items={lineItems}
-                    onChange={setLineItems}
-                    taxRate={8.25}
-                    onAiDescribe={async (name) => {
-                      return `Professional-grade ${name.toLowerCase()}. Sourced from trusted suppliers, backed by manufacturer warranty. Installed according to industry standards and local building codes.`
-                    }}
-                  />
-                )}
-              </div>
-
-              {/* Pricing Tiers Toggle */}
-              <div className="relative">
-                <Separator />
-                <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-xs font-medium text-gray-400 uppercase tracking-wider">
-                  Pricing Tiers (Optional)
-                </span>
-              </div>
-
-              <div className="space-y-4">
-                <label className="flex cursor-pointer items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setTierMode((prev) => !prev)}
-                    className="text-gray-400 hover:text-accent transition-colors"
-                  >
-                    {tierMode ? (
-                      <ToggleRight className="h-6 w-6 text-accent" />
-                    ) : (
-                      <ToggleLeft className="h-6 w-6" />
-                    )}
-                  </button>
-                  <div>
-                    <span className="text-sm font-medium text-navy">Offer multiple pricing options</span>
-                    <p className="text-xs text-gray-400 mt-0.5">Give your client Good / Better / Best tiers to choose from</p>
-                  </div>
-                </label>
-
-                {tierMode && (
-                  <PricingTiers tiers={tiers} onChange={setTiers} mode="edit" />
-                )}
-              </div>
-
-              <Separator />
-
-              {/* Timeline & Terms */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <Label htmlFor="projectDuration" className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-gray-400" />
-                    Project Duration
-                  </Label>
-                  <Input
-                    id="projectDuration"
-                    placeholder="e.g., 2-3 weeks"
-                    value={form.projectDuration}
-                    onChange={(e) => updateField('projectDuration', e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="flex items-center gap-1.5">
-                    <CreditCard className="h-3.5 w-3.5 text-gray-400" />
-                    Payment Terms
-                  </Label>
-                  <Select value={form.paymentTerms} onValueChange={(v) => updateField('paymentTerms', v)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {(Object.entries(PAYMENT_LABELS) as [PaymentTerms, string][]).map(([value, label]) => (
-                        <SelectItem key={value} value={value}>
-                          {label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-2">
-                  <Label htmlFor="warranty" className="flex items-center gap-1.5">
-                    <Shield className="h-3.5 w-3.5 text-gray-400" />
-                    Warranty <span className="text-gray-400 text-xs">(optional)</span>
-                  </Label>
-                  <Input
-                    id="warranty"
-                    placeholder="1 year parts and labor"
-                    value={form.warranty}
-                    onChange={(e) => updateField('warranty', e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="expirationDate" className="flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5 text-gray-400" />
-                    Proposal Expires
-                  </Label>
-                  <Input
-                    id="expirationDate"
-                    type="date"
-                    value={form.expirationDate}
-                    onChange={(e) => updateField('expirationDate', e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="specialNotes" className="flex items-center gap-1.5">
-                  <FileText className="h-3.5 w-3.5 text-gray-400" />
-                  Special Notes <span className="text-gray-400 text-xs">(optional)</span>
-                </Label>
-                <Textarea
-                  id="specialNotes"
-                  placeholder="Any additional notes, special conditions, or exclusions..."
-                  rows={3}
-                  value={form.specialNotes}
-                  onChange={(e) => updateField('specialNotes', e.target.value)}
-                />
-              </div>
-
-              <Separator />
-
-              {/* Products & Materials */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-heading font-semibold text-navy flex items-center gap-2">
-                  <Package className="h-4 w-4 text-accent" />
-                  Products &amp; Materials <span className="text-gray-400 text-xs font-normal">(Optional)</span>
-                </h4>
-
-                {/* Product list */}
-                {products.length > 0 && (
-                  <div className="space-y-3">
-                    {products.map((product) => (
-                      <Card key={product.id} className="border border-gray-200">
-                        <CardContent className="p-4">
-                          <div className="flex items-start gap-4">
-                            {/* Thumbnail */}
-                            {product.imageUrl ? (
-                              <img
-                                src={product.imageUrl}
-                                alt={product.name}
-                                className="w-[60px] h-[60px] rounded-lg object-cover shrink-0 bg-gray-100"
-                              />
-                            ) : (
-                              <div className="w-[60px] h-[60px] rounded-lg bg-gray-100 flex items-center justify-center shrink-0">
-                                <Package className="h-6 w-6 text-gray-400" />
-                              </div>
-                            )}
-                            {/* Details */}
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-semibold text-navy">{product.name}</p>
-                              {product.price && (
-                                <p className="text-sm font-mono text-accent mt-0.5">
-                                  ${parseFloat(product.price).toFixed(2)}
-                                </p>
-                              )}
-                              {product.description && (
-                                <p className="text-xs text-gray-500 mt-1">{product.description}</p>
-                              )}
-                              {product.url && (
-                                <a
-                                  href={product.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-xs text-accent hover:underline mt-1"
-                                >
-                                  <ExternalLink className="h-3 w-3" />
-                                  View Product
-                                </a>
-                              )}
-                            </div>
-                            {/* Remove */}
-                            <button
-                              type="button"
-                              onClick={() => removeProduct(product.id)}
-                              className="text-gray-400 hover:text-red-500 transition-colors shrink-0"
-                            >
-                              <X className="h-4 w-4" />
-                            </button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-
-                {/* Add product inline form */}
-                {showProductForm && (
-                  <div className="border border-gray-200 rounded-lg p-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="space-y-2">
-                      <Label htmlFor="productName">
-                        Product Name <span className="text-red-400">*</span>
-                      </Label>
-                      <Input
-                        id="productName"
-                        placeholder='e.g. Carrier 24ACC636A003 3-Ton AC Unit'
-                        value={productForm.name}
-                        onChange={(e) => setProductForm((prev) => ({ ...prev, name: e.target.value }))}
-                      />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="productUrl">Product URL/Link</Label>
-                        <Input
-                          id="productUrl"
-                          placeholder="https://..."
-                          value={productForm.url}
-                          onChange={(e) => setProductForm((prev) => ({ ...prev, url: e.target.value }))}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="productImageUrl">Product Image URL</Label>
-                        <Input
-                          id="productImageUrl"
-                          placeholder="https://..."
-                          value={productForm.imageUrl}
-                          onChange={(e) => setProductForm((prev) => ({ ...prev, imageUrl: e.target.value }))}
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="productPrice">Price</Label>
-                        <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-mono">$</span>
-                          <Input
-                            id="productPrice"
-                            type="number"
-                            min="0"
-                            step="0.01"
-                            placeholder="0.00"
-                            value={productForm.price}
-                            onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
-                            className="pl-7 font-mono"
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="productDescription">Brief Description</Label>
-                        <Input
-                          id="productDescription"
-                          placeholder='e.g. 16 SEER2 efficiency rating'
-                          value={productForm.description}
-                          onChange={(e) => setProductForm((prev) => ({ ...prev, description: e.target.value }))}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Button
-                        type="button"
-                        variant="accent"
-                        size="sm"
-                        onClick={addProduct}
-                        disabled={!productForm.name.trim()}
-                      >
-                        Add
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => {
-                          setShowProductForm(false)
-                          setProductForm({ name: '', url: '', imageUrl: '', price: '', description: '' })
-                        }}
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  </div>
-                )}
-
-                {/* Add Product button */}
-                {!showProductForm && (
-                  <button
-                    type="button"
-                    onClick={() => setShowProductForm(true)}
-                    className="w-full border-2 border-dashed border-gray-300 hover:border-accent/50 rounded-lg p-4 flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-accent transition-colors"
-                  >
-                    <Plus className="h-4 w-4" />
-                    Add Product
-                  </button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Step 3: Review & Generate */}
-      {currentStep === 3 && (
-        <div className="animate-in fade-in slide-in-from-right-4 duration-300 space-y-6">
-          {/* Summary Card */}
-          <Card>
-            <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                  <FileCheck className="h-5 w-5 text-accent" />
-                </div>
-                <div>
-                  <CardTitle>Review Your Proposal</CardTitle>
-                  <CardDescription>Double-check the details before generating.</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
-                {/* Left column */}
-                <div>
-                  <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                    Client Details
-                  </h4>
-                  <div className="divide-y divide-gray-100">
-                    {form.clientName && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <User className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Name</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.clientName}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.clientEmail && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Mail className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Email</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.clientEmail}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.clientPhone && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Phone className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Phone</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.clientPhone}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.jobAddress && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <MapPin className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Job Site</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.jobAddress}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Right column */}
-                <div>
-                  <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                    Job Details
-                  </h4>
-                  <div className="divide-y divide-gray-100">
-                    {TRADE_LABELS[form.tradeType] && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Briefcase className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Trade</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{TRADE_LABELS[form.tradeType]}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.projectDuration && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Clock className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Duration</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.projectDuration}</p>
-                        </div>
-                      </div>
-                    )}
-                    {PAYMENT_LABELS[form.paymentTerms] && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <CreditCard className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Payment</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{PAYMENT_LABELS[form.paymentTerms]}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.warranty && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Shield className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Warranty</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.warranty}</p>
-                        </div>
-                      </div>
-                    )}
-                    {form.expirationDate && (
-                      <div className="flex items-start gap-3 py-2.5">
-                        <Calendar className="h-4 w-4 text-accent mt-0.5 shrink-0" />
-                        <div className="min-w-0">
-                          <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Expires</p>
-                          <p className="text-sm text-navy font-body mt-0.5 break-words">{form.expirationDate}</p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Description */}
-              {form.jobDescription && (
-                <>
-                  <Separator className="my-4" />
-                  <div>
-                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                      Job Description
-                    </h4>
-                    <p className="text-sm text-gray-600 whitespace-pre-wrap bg-gray-50 rounded-lg p-4">
-                      {form.jobDescription}
-                    </p>
-                  </div>
-                </>
-              )}
-
-              {form.specialNotes && (
-                <div className="mt-4">
-                  <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                    Special Notes
-                  </h4>
-                  <p className="text-sm text-gray-600 whitespace-pre-wrap bg-gray-50 rounded-lg p-4">
-                    {form.specialNotes}
-                  </p>
-                </div>
-              )}
-
-              {products.length > 0 && (
-                <>
-                  <Separator className="my-4" />
-                  <div>
-                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Products &amp; Materials
-                    </h4>
-                    <div className="space-y-2">
-                      {products.map((product) => (
-                        <div key={product.id} className="flex items-center gap-3 bg-gray-50 rounded-lg p-3">
-                          {product.imageUrl ? (
-                            <img
-                              src={product.imageUrl}
-                              alt={product.name}
-                              className="w-[40px] h-[40px] rounded object-cover shrink-0 bg-gray-200"
-                            />
-                          ) : (
-                            <div className="w-[40px] h-[40px] rounded bg-gray-200 flex items-center justify-center shrink-0">
-                              <Package className="h-4 w-4 text-gray-400" />
-                            </div>
-                          )}
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-navy">{product.name}</p>
-                            {product.description && (
-                              <p className="text-xs text-gray-500">{product.description}</p>
-                            )}
-                          </div>
-                          {product.price && (
-                            <span className="text-sm font-mono text-accent shrink-0">
-                              ${parseFloat(product.price).toFixed(2)}
-                            </span>
-                          )}
-                          {product.url && (
-                            <a
-                              href={product.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-accent hover:underline shrink-0"
-                            >
-                              <ExternalLink className="h-3.5 w-3.5" />
-                            </a>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Line Items Summary */}
-              {useDetailedItems && lineItems.length > 0 && (
-                <>
-                  <Separator className="my-4" />
-                  <div>
-                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Line Items
-                    </h4>
-                    <div className="space-y-3">
-                      {(() => {
-                        const groups: Record<string, LineItem[]> = {}
-                        lineItems.forEach((item) => {
-                          const g = item.groupName || 'General'
-                          if (!groups[g]) groups[g] = []
-                          groups[g].push(item)
-                        })
-                        return Object.entries(groups).map(([groupName, items]) => (
-                          <div key={groupName} className="space-y-1">
-                            <p className="text-xs font-semibold text-navy uppercase tracking-wide border-l-2 border-orange-400 pl-2">
-                              {groupName}
-                            </p>
-                            {items.map((item) => (
-                              <div key={item.id} className="flex items-center justify-between bg-gray-50 rounded px-3 py-1.5 text-sm">
-                                <span className="text-gray-700">{item.itemName || 'Untitled item'}{item.isOptional ? <span className="ml-1 text-xs text-gray-400">(Optional)</span> : null}</span>
-                                <span className="font-mono text-accent shrink-0 ml-2">{formatCurrency(item.quantity * item.unitPrice)}</span>
-                              </div>
-                            ))}
-                          </div>
-                        ))
-                      })()}
-                    </div>
-                  </div>
-                </>
-              )}
-
-              {/* Pricing Tiers Preview */}
-              {tierMode && tiers.length > 0 && (
-                <>
-                  <Separator className="my-4" />
-                  <div>
-                    <h4 className="text-xs font-heading font-semibold text-gray-400 uppercase tracking-wider mb-3">
-                      Pricing Tiers
-                    </h4>
-                    <PricingTiers tiers={tiers} onChange={setTiers} mode="preview" />
-                  </div>
-                </>
-              )}
-
-              {/* Total */}
-              <div className="mt-6 bg-gradient-to-r from-navy/5 to-accent/10 border border-accent/20 rounded-lg p-5 flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-gray-400 uppercase tracking-wider font-medium">Estimated Total</p>
-                  <p className="text-xs text-gray-500 mt-0.5">
-                    {useDetailedItems && lineItems.length > 0
-                      ? `${lineItems.length} line item${lineItems.length === 1 ? '' : 's'}`
-                      : `Materials ${formatCurrency(parseFloat(form.materialsCost) || 0)} + Labor ${formatCurrency(parseFloat(form.laborCost) || 0)}`
-                    }
-                  </p>
-                </div>
-                <span className="text-3xl font-heading font-bold text-accent">{formatCurrency(totalCost)}</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Generate Button or Streaming UI */}
-          {!generating ? (
-            <Button
-              variant="accent"
-              size="lg"
-              className="w-full h-14 text-base shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 transition-all duration-300"
-              onClick={handleGenerate}
-            >
-              <Wand2 className="h-5 w-5 mr-2" />
-              Generate Proposal with AI
-              <Sparkles className="h-4 w-4 ml-2 opacity-70" />
-            </Button>
-          ) : (
-            <Card className="overflow-hidden">
-              <div className="bg-gradient-to-r from-accent/5 via-accent/10 to-accent/5 p-4 border-b border-accent/10">
-                <div className="flex items-center justify-center gap-3">
-                  {!generationDone ? (
-                    <>
-                      <div className="relative flex items-center justify-center">
-                        <div className="w-8 h-8 rounded-full border-2 border-accent/30 border-t-accent animate-spin" />
-                        <Sparkles className="h-3.5 w-3.5 text-accent absolute" />
-                      </div>
-                      <div>
-                        <p className="text-accent font-heading font-semibold">AI is writing your proposal...</p>
-                        <p className="text-xs text-gray-500">This usually takes about 10 seconds. Sit tight!</p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
-                        <Check className="h-4 w-4 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="text-green-700 font-heading font-semibold">Proposal generated successfully!</p>
-                        <p className="text-xs text-gray-500">Your professional proposal is ready to review.</p>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-              <CardContent className="p-6">
-                <div className="bg-gray-50 rounded-lg p-6 max-h-96 overflow-y-auto font-mono text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
-                  {streamText}
-                  {!generationDone && <span className="inline-block w-0.5 h-4 bg-accent animate-pulse ml-0.5 align-text-bottom" />}
-                </div>
-                {generationDone && (
-                  <div className="mt-4 flex flex-wrap justify-center gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500">
-                    <Button
-                      variant="accent"
-                      size="lg"
-                      onClick={() => {
-                        if (generatedId) {
-                          navigate(`/proposals/${generatedId}`)
-                        } else {
-                          navigate('/proposals')
-                        }
-                      }}
-                      className="shadow-lg shadow-accent/20"
-                    >
-                      <Eye className="h-4 w-4 mr-2" />
-                      View Proposal
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={() => setShowSendModal(true)}
-                    >
-                      <Send className="h-4 w-4 mr-2" />
-                      Send to Client
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="lg"
-                      onClick={() => {
-                        showToast({ title: 'PDF download coming soon!' })
-                      }}
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Download PDF
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="lg"
-                      onClick={() => {
-                        showToast({ title: 'Draft saved!' })
-                        navigate('/proposals')
-                      }}
-                    >
-                      <Save className="h-4 w-4 mr-2" />
-                      Save as Draft
-                    </Button>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      )}
-
-      {/* Navigation Buttons */}
-      {!(currentStep === 3 && generating) && (
-        <div className="flex items-center justify-between mt-8">
-          <div>
-            {currentStep > 1 && (
-              <Button variant="ghost" onClick={handleBack} className="gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back
-              </Button>
-            )}
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-gray-400">
-              Step {currentStep} of {STEPS.length}
-            </span>
-            {currentStep < 3 && (
-              <Button variant="accent" onClick={handleNext} className="gap-2">
-                Next
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            )}
+
+          <div className="space-y-2">
+            <Label htmlFor="clientName" className="text-base font-semibold">
+              Nombre del cliente <span className="text-muted-foreground font-normal text-sm">/ Client name</span>
+            </Label>
+            <Input
+              id="clientName"
+              value={clientName}
+              onChange={e => setClientName(e.target.value)}
+              placeholder="Ej: Juan García"
+              className="text-base min-h-[48px]"
+            />
           </div>
-        </div>
-      )}
 
-      {/* Send/Share Modal */}
-      {showSendModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center animate-in fade-in duration-200"
-          onClick={() => setShowSendModal(false)}
-        >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="space-y-2">
+            <Label htmlFor="clientContact" className="text-base font-semibold">
+              Email o teléfono <span className="text-muted-foreground font-normal text-sm">/ Email or phone</span>
+            </Label>
+            <Input
+              id="clientContact"
+              value={clientContact}
+              onChange={e => setClientContact(e.target.value)}
+              placeholder="Ej: juan@email.com  ó  555-123-4567"
+              className="text-base min-h-[48px]"
+              type="text"
+              inputMode="email"
+            />
+          </div>
 
-          {/* Modal */}
-          <div
-            className="glass relative w-full sm:w-[440px] sm:rounded-2xl rounded-t-2xl p-6 space-y-5 animate-in slide-in-from-bottom-4 sm:slide-in-from-bottom-2 duration-300"
-            onClick={(e) => e.stopPropagation()}
+          <Button
+            size="lg"
+            className="w-full text-base min-h-[52px]"
+            disabled={!description.trim() || !clientName.trim() || !clientContact.trim()}
+            onClick={() => setCurrentStep(3)}
           >
-            {/* Close button */}
-            <button
-              type="button"
-              onClick={() => setShowSendModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            Siguiente <ChevronRight className="w-5 h-5 ml-1" />
+          </Button>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* STEP 3 — Pricing                                                    */}
+      {/* ------------------------------------------------------------------ */}
+      {currentStep === 3 && (
+        <div className="px-4 pt-6 max-w-2xl mx-auto space-y-5">
+          <div>
+            <h1 className="text-2xl font-bold mb-1">¿Cuánto cobras?</h1>
+            <p className="text-muted-foreground text-sm">How much do you charge?</p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="materials" className="text-base font-semibold">
+              Materiales <span className="text-muted-foreground font-normal text-sm">/ Materials</span>
+            </Label>
+            <div className="relative">
+              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="materials"
+                value={materials}
+                onChange={e => setMaterials(e.target.value)}
+                placeholder="0"
+                className="pl-9 text-lg min-h-[52px]"
+                type="number"
+                inputMode="decimal"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="labor" className="text-base font-semibold">
+              Mano de obra <span className="text-muted-foreground font-normal text-sm">/ Labor</span>
+            </Label>
+            <div className="relative">
+              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="labor"
+                value={labor}
+                onChange={e => setLabor(e.target.value)}
+                placeholder="0"
+                className="pl-9 text-lg min-h-[52px]"
+                type="number"
+                inputMode="decimal"
+                min="0"
+              />
+            </div>
+          </div>
+
+          <Card className="bg-primary/5 border-primary/30">
+            <CardContent className="py-4 px-5 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-muted-foreground">Total</p>
+                <p className="text-xs text-muted-foreground">Total del proyecto</p>
+              </div>
+              <p className="text-3xl font-bold text-primary">{formatCurrency(total)}</p>
+            </CardContent>
+          </Card>
+
+          <Button
+            size="lg"
+            className="w-full text-base min-h-[56px] gap-2"
+            onClick={handleGenerate}
+          >
+            <Sparkles className="w-5 h-5" />
+            Generar Propuesta
+          </Button>
+          <p className="text-center text-xs text-muted-foreground">Generate Proposal</p>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* STEP 4 — Generating (loading)                                       */}
+      {/* ------------------------------------------------------------------ */}
+      {currentStep === 4 && (
+        <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 text-center">
+          <div className="relative mb-8">
+            <Sparkles className="w-16 h-16 text-primary animate-pulse" />
+          </div>
+          <h2 className="text-xl font-bold mb-2">Hecho AI está escribiendo tu propuesta...</h2>
+          <p className="text-muted-foreground text-sm mb-8">Hecho AI is writing your proposal...</p>
+          <div className="flex gap-2">
+            {[0, 1, 2].map(i => (
+              <div
+                key={i}
+                className="w-2.5 h-2.5 rounded-full bg-primary animate-bounce"
+                style={{ animationDelay: `${i * 0.15}s` }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* STEP 5 — Preview + Send                                             */}
+      {/* ------------------------------------------------------------------ */}
+      {currentStep === 5 && (
+        <div className="px-4 pt-6 max-w-2xl mx-auto">
+          <h1 className="text-2xl font-bold mb-1">Tu Propuesta</h1>
+          <p className="text-muted-foreground text-sm mb-4">Your Proposal</p>
+
+          <Card className="mb-6">
+            <CardContent className="p-5 prose prose-sm max-w-none">
+              {proposalText ? renderMarkdown(proposalText) : (
+                <div className="flex items-center gap-2 text-muted-foreground py-4">
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span className="text-sm">Cargando...</span>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <div className="flex flex-col gap-3 mb-4">
+            <Button
+              size="lg"
+              className="w-full text-base min-h-[52px] gap-2"
+              onClick={() => setShowSendOptions(true)}
             >
-              <X className="h-5 w-5" />
+              <Send className="w-5 h-5" />
+              Enviar / Send
+            </Button>
+
+            {proposalId && (
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full text-base min-h-[52px] gap-2"
+                onClick={() => window.open(api.getProposalPdfUrl(proposalId), '_blank')}
+              >
+                <Download className="w-5 h-5" />
+                Descargar PDF / Download PDF
+              </Button>
+            )}
+
+            <Button
+              size="lg"
+              variant="ghost"
+              className="w-full text-base min-h-[52px]"
+              onClick={() => setCurrentStep(2)}
+            >
+              ✏️ Editar / Edit
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* ------------------------------------------------------------------ */}
+      {/* Send options bottom sheet                                           */}
+      {/* ------------------------------------------------------------------ */}
+      {showSendOptions && (
+        <div className="fixed inset-0 z-50 flex items-end">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setShowSendOptions(false)}
+          />
+          <div className="relative w-full bg-background rounded-t-2xl p-6 space-y-4 max-w-2xl mx-auto">
+            <div className="flex items-center justify-between mb-2">
+              <div>
+                <h3 className="text-lg font-bold">Enviar propuesta</h3>
+                <p className="text-sm text-muted-foreground">Send proposal</p>
+              </div>
+              <button
+                onClick={() => setShowSendOptions(false)}
+                className="p-2 rounded-full hover:bg-muted min-w-[44px] min-h-[44px] flex items-center justify-center text-xl"
+              >
+                ✕
+              </button>
+            </div>
+
+            <button
+              onClick={handleWhatsApp}
+              className="w-full flex items-center gap-4 p-4 rounded-2xl bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors min-h-[64px]"
+            >
+              <MessageCircle className="w-6 h-6 text-[#25D366] flex-shrink-0" />
+              <div className="text-left">
+                <p className="font-semibold text-base">WhatsApp</p>
+                <p className="text-sm text-muted-foreground">Enviar por WhatsApp</p>
+              </div>
             </button>
 
-            {/* Title */}
-            <div>
-              <h2 className="text-lg font-heading font-bold text-navy">
-                Send Proposal to {form.clientName || 'Client'}
-              </h2>
-              <p className="text-sm text-gray-500 mt-1">Choose how to deliver this proposal.</p>
-            </div>
-
-            <Separator />
-
-            {/* Email option */}
-            <div className="space-y-3">
-              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                  <Mail className="h-5 w-5 text-accent" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-navy">Send via Email</p>
-                  <p className="text-xs text-gray-500 mt-0.5 truncate">{form.clientEmail || 'No email provided'}</p>
-                </div>
-                <Button
-                  variant="accent"
-                  size="sm"
-                  disabled={!form.clientEmail}
-                  onClick={() => {
-                    showToast({ title: `Proposal sent to ${form.clientEmail}!` })
-                    setShowSendModal(false)
-                  }}
-                >
-                  <Send className="h-3.5 w-3.5 mr-1.5" />
-                  Send
-                </Button>
+            <button
+              onClick={handleEmail}
+              className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted hover:bg-muted/80 border border-border transition-colors min-h-[64px]"
+            >
+              <Mail className="w-6 h-6 text-primary flex-shrink-0" />
+              <div className="text-left">
+                <p className="font-semibold text-base">Email</p>
+                <p className="text-sm text-muted-foreground">
+                  {clientContact.includes('@') ? clientContact : 'Enviar por email'}
+                </p>
               </div>
+            </button>
 
-              {/* Copy link option */}
-              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                  <Link2 className="h-5 w-5 text-blue-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-navy">Copy Proposal Link</p>
-                  <p className="text-xs text-gray-500 mt-0.5">Share a direct link to view the proposal</p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const url = generatedId
-                      ? `${window.location.origin}/proposals/${generatedId}`
-                      : `${window.location.origin}/proposals`
-                    navigator.clipboard.writeText(url).then(() => {
-                      showToast({ title: 'Link copied to clipboard!' })
-                    }).catch(() => {
-                      showToast({ title: 'Failed to copy link', variant: 'destructive' })
-                    })
-                  }}
-                >
-                  <Copy className="h-3.5 w-3.5 mr-1.5" />
-                  Copy
-                </Button>
+            <button
+              onClick={handleCopyLink}
+              className="w-full flex items-center gap-4 p-4 rounded-2xl bg-muted hover:bg-muted/80 border border-border transition-colors min-h-[64px]"
+            >
+              {copied ? (
+                <Check className="w-6 h-6 text-green-500 flex-shrink-0" />
+              ) : (
+                <Copy className="w-6 h-6 text-muted-foreground flex-shrink-0" />
+              )}
+              <div className="text-left">
+                <p className="font-semibold text-base">{copied ? '¡Copiado!' : 'Copiar enlace'}</p>
+                <p className="text-sm text-muted-foreground">Copy link</p>
               </div>
-
-              {/* Share option */}
-              <div className="flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-accent/30 hover:bg-accent/5 transition-colors">
-                <div className="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
-                  <Share2 className="h-5 w-5 text-green-600" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-navy">Share</p>
-                  <p className="text-xs text-gray-500 mt-0.5">Use your device&apos;s share options</p>
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const url = generatedId
-                      ? `${window.location.origin}/proposals/${generatedId}`
-                      : `${window.location.origin}/proposals`
-                    if (navigator.share) {
-                      navigator.share({
-                        title: `Proposal for ${form.clientName || 'Client'}`,
-                        text: `Professional proposal for ${form.clientName || 'your project'}`,
-                        url,
-                      }).catch(() => {
-                        // User cancelled share
-                      })
-                    } else {
-                      navigator.clipboard.writeText(url).then(() => {
-                        showToast({ title: 'Link copied (share not supported on this device)' })
-                      }).catch(() => {
-                        showToast({ title: 'Share not supported', variant: 'destructive' })
-                      })
-                    }
-                  }}
-                >
-                  <Share2 className="h-3.5 w-3.5 mr-1.5" />
-                  Share
-                </Button>
-              </div>
-            </div>
+            </button>
           </div>
         </div>
       )}
