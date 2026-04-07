@@ -424,11 +424,37 @@ proposalRoutes.get('/:id/pdf', async (req, res) => {
     }
 
     const puppeteer = await import('puppeteer-core')
-    const browser = await puppeteer.default.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      executablePath: process.env.CHROME_PATH || '/usr/bin/google-chrome-stable',
-    })
+
+    // Try common Chrome paths
+    const chromePaths = [
+      process.env.CHROME_PATH,
+      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+      '/usr/bin/google-chrome-stable',
+      '/usr/bin/google-chrome',
+      '/usr/bin/chromium-browser',
+      '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    ].filter(Boolean) as string[]
+
+    let browser
+    for (const chromePath of chromePaths) {
+      try {
+        browser = await puppeteer.default.launch({
+          headless: true,
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+          executablePath: chromePath,
+        })
+        break
+      } catch {
+        continue
+      }
+    }
+
+    if (!browser) {
+      res.status(500).json({ message: 'Chrome not found. Install Google Chrome to generate PDFs.' })
+      return
+    }
+
     const page = await browser.newPage()
 
     const brandColor = user.brand_color || '#F97316'
