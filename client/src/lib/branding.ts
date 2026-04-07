@@ -4,5 +4,5 @@
 export const APP_NAME = 'Hecho Ai'
 export const APP_TAGLINE = 'The only business tool you\'ll ever need'
 export const APP_TAGLINE_ES = 'La única herramienta de negocio que necesitarás'
-export const APP_DOMAIN = 'hechoai.com'
-export const APP_EMAIL_FROM = `Hecho Ai <noreply@hechoai.com>`
+export const APP_DOMAIN = 'gethecho.com'
+export const APP_EMAIL_FROM = `Hecho Ai <noreply@gethecho.com>`

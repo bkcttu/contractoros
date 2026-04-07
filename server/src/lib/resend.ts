@@ -25,7 +25,7 @@ export async function sendProposalEmail(
   }
 
   return resend.emails.send({
-    from: 'Hecho Ai <noreply@hechoai.com>',
+    from: 'Hecho Ai <noreply@gethecho.com>',
     replyTo: contractorEmail,
     to,
     subject: `You have a proposal from ${contractorName}`,
