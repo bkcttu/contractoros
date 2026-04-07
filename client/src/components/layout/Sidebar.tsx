@@ -14,6 +14,7 @@ import {
   Star,
   QrCode,
   CreditCard,
+  Calendar,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -26,6 +27,7 @@ const navItems = [
   { icon: Bell, label: 'Follow-ups', path: '/follow-ups' },
   { icon: Star, label: 'Reviews', path: '/reviews' },
   { icon: CreditCard, label: 'Invoices', path: '/invoices' },
+  { icon: Calendar, label: 'Schedule', path: '/schedule' },
   { icon: QrCode, label: 'QR Codes', path: '/qr-codes' },
   { icon: Settings, label: 'Settings', path: '/settings' },
 ]
