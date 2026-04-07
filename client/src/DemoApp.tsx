@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { DemoLayout } from '@/components/layout/DemoLayout'
 import { Toaster } from '@/components/Toaster'
 import { LandingPage } from '@/pages/LandingPage'
+import { LandingPageES } from '@/pages/LandingPageES'
 import { Dashboard } from '@/pages/Dashboard'
 import { ProposalList } from '@/pages/ProposalList'
 import { NewProposal } from '@/pages/NewProposal'
@@ -22,6 +23,7 @@ export function DemoApp() {
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/es" element={<LandingPageES />} />
         <Route path="/sign-in" element={<Navigate to="/dashboard" replace />} />
         <Route path="/sign-up" element={<Navigate to="/onboarding" replace />} />
         <Route path="/pricing" element={<Pricing />} />

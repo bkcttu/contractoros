@@ -3,6 +3,7 @@ import { SignedIn, SignedOut, SignIn, SignUp } from '@clerk/clerk-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Toaster } from '@/components/Toaster'
 import { LandingPage } from '@/pages/LandingPage'
+import { LandingPageES } from '@/pages/LandingPageES'
 import { Dashboard } from '@/pages/Dashboard'
 import { ProposalList } from '@/pages/ProposalList'
 import { NewProposal } from '@/pages/NewProposal'
@@ -42,6 +43,7 @@ export default function App() {
       <Routes>
         {/* Landing page — visible to everyone */}
         <Route path="/" element={<LandingPage />} />
+        <Route path="/es" element={<LandingPageES />} />
 
         {/* Public routes */}
         <Route path="/pricing" element={<Pricing />} />
