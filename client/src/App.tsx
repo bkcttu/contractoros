@@ -15,6 +15,8 @@ import { Pipeline } from '@/pages/Pipeline'
 import { FollowUpCenter } from '@/pages/FollowUpCenter'
 import { QRCodes } from '@/pages/QRCodes'
 import { Reviews } from '@/pages/Reviews'
+import { Invoices } from '@/pages/Invoices'
+import { Schedule } from '@/pages/Schedule'
 import { Pricing } from '@/pages/Pricing'
 
 function AuthenticatedRoutes() {
@@ -29,6 +31,8 @@ function AuthenticatedRoutes() {
         <Route path="/follow-ups" element={<FollowUpCenter />} />
         <Route path="/qr-codes" element={<QRCodes />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/invoices" element={<Invoices />} />
+        <Route path="/schedule" element={<Schedule />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

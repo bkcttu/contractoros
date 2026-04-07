@@ -13,6 +13,7 @@ import {
   Bell,
   Star,
   QrCode,
+  CreditCard,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -24,6 +25,7 @@ const navItems = [
   { icon: GitBranch, label: 'Pipeline', path: '/pipeline' },
   { icon: Bell, label: 'Follow-ups', path: '/follow-ups' },
   { icon: Star, label: 'Reviews', path: '/reviews' },
+  { icon: CreditCard, label: 'Invoices', path: '/invoices' },
   { icon: QrCode, label: 'QR Codes', path: '/qr-codes' },
   { icon: Settings, label: 'Settings', path: '/settings' },
 ]
