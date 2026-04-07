@@ -1,4 +1,4 @@
--- Hecho Ai Schema v3 — Follow-Up & Deal Closing System
+-- Hecho AI Schema v3 — Follow-Up & Deal Closing System
 -- Run this in Supabase SQL Editor
 
 -- ============================================================

@@ -1,4 +1,4 @@
--- Hecho Ai Schema Upgrade v2
+-- Hecho AI Schema Upgrade v2
 -- Run this in Supabase SQL Editor AFTER the original schema
 
 -- ============================================================

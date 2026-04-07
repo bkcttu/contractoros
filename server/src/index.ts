@@ -28,5 +28,5 @@ app.get('/api/health', (_req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Hecho Ai server running on port ${PORT}`)
+  console.log(`Hecho AI server running on port ${PORT}`)
 })

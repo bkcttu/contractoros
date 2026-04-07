@@ -25,14 +25,14 @@ export async function sendProposalEmail(
   }
 
   return resend.emails.send({
-    from: 'Hecho Ai <noreply@gethecho.com>',
+    from: 'Hecho AI <noreply@gethecho.com>',
     replyTo: contractorEmail,
     to,
     subject: `You have a proposal from ${contractorName}`,
     html: `
       <div style="font-family: Inter, Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <div style="background-color: #1B2A4A; padding: 24px; text-align: center;">
-          <h1 style="color: #F97316; margin: 0; font-size: 24px;">Hecho Ai</h1>
+          <h1 style="color: #F97316; margin: 0; font-size: 24px;">Hecho AI</h1>
         </div>
         <div style="padding: 32px; background: #ffffff;">
           <p style="font-size: 16px; color: #333;">Hi ${clientName},</p>
@@ -50,7 +50,7 @@ export async function sendProposalEmail(
           </p>
         </div>
         <div style="background-color: #F8F9FA; padding: 16px; text-align: center;">
-          <p style="font-size: 12px; color: #999; margin: 0;">Powered by Hecho Ai</p>
+          <p style="font-size: 12px; color: #999; margin: 0;">Powered by Hecho AI</p>
         </div>
       </div>
     `,

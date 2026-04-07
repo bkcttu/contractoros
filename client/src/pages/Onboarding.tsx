@@ -152,7 +152,7 @@ export function Onboarding() {
             <div className="h-10 w-10 rounded-xl bg-accent flex items-center justify-center shadow-lg shadow-accent/20">
               <Zap className="h-5 w-5 text-white" />
             </div>
-            <span className="text-2xl font-heading font-bold text-navy">Hecho Ai</span>
+            <span className="text-2xl font-heading font-bold text-navy">Hecho AI</span>
           </div>
           <p className="text-gray-500">
             {step < TOTAL_STEPS

@@ -1,4 +1,4 @@
--- Hecho Ai Database Schema
+-- Hecho AI Database Schema
 -- Run this in Supabase SQL Editor
 
 -- Enable UUID generation

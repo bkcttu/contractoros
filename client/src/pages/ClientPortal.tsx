@@ -394,7 +394,7 @@ export function ClientPortal() {
         {/* Footer */}
         <div className="text-center pt-8 pb-6 border-t border-gray-200">
           <p className="text-sm text-gray-400 mb-1">{businessName}</p>
-          <p className="text-xs text-gray-300">Powered by Hecho Ai</p>
+          <p className="text-xs text-gray-300">Powered by Hecho AI</p>
         </div>
       </main>
 

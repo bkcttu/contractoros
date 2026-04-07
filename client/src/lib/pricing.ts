@@ -1,4 +1,4 @@
-// Hecho Ai Pricing Constants
+// Hecho AI Pricing Constants
 // All plan data in one place for easy updates
 
 export const WIN_RATE_IMPROVEMENT = 0.22
@@ -50,7 +50,7 @@ export const PLANS: PricingPlan[] = [
       { text: 'PDF download', textEs: 'Descarga en PDF', included: true },
       { text: 'Client e-signature', textEs: 'Firma electrónica del cliente', included: true },
       { text: 'Basic dashboard', textEs: 'Panel básico', included: true },
-      { text: 'Hecho Ai watermark on proposals', textEs: 'Marca de agua de Hecho Ai', included: false },
+      { text: 'Hecho AI watermark on proposals', textEs: 'Marca de agua de Hecho AI', included: false },
       { text: 'No follow-up automation', textEs: 'Sin automatización de seguimientos', included: false },
       { text: 'No scheduling', textEs: 'Sin agenda', included: false },
       { text: 'No website', textEs: 'Sin sitio web', included: false },
@@ -216,8 +216,8 @@ export const FAQ_DATA: FAQItem[] = [
   {
     question: 'What if I primarily speak Spanish?',
     questionEs: '¿Qué pasa si hablo principalmente español?',
-    answer: 'Hecho Ai works completely in Spanish. You type or speak in Spanish — your clients receive perfect professional English. The entire app interface switches to Spanish in one click.',
-    answerEs: 'Hecho Ai funciona completamente en español. Escribes o hablas en español — tus clientes reciben inglés profesional perfecto. Toda la interfaz de la app cambia a español con un solo clic.',
+    answer: 'Hecho AI works completely in Spanish. You type or speak in Spanish — your clients receive perfect professional English. The entire app interface switches to Spanish in one click.',
+    answerEs: 'Hecho AI funciona completamente en español. Escribes o hablas en español — tus clientes reciben inglés profesional perfecto. Toda la interfaz de la app cambia a español con un solo clic.',
   },
   {
     question: 'What trades does this work for?',
@@ -228,8 +228,8 @@ export const FAQ_DATA: FAQItem[] = [
   {
     question: 'How is this different from Jobber?',
     questionEs: '¿En qué se diferencia de Jobber?',
-    answer: 'Jobber is scheduling software with basic quoting. Hecho Ai is an AI-powered proposal and closing platform with scheduling built in. We have 14 features Jobber doesn\'t offer — at half the price. The biggest difference: our AI writes your proposals, follows up with your leads, and tells you exactly when to call.',
-    answerEs: 'Jobber es un software de agenda con cotizaciones básicas. Hecho Ai es una plataforma de propuestas y cierre de ventas impulsada por IA con agenda incluida. Tenemos 14 funciones que Jobber no ofrece — a la mitad del precio.',
+    answer: 'Jobber is scheduling software with basic quoting. Hecho AI is an AI-powered proposal and closing platform with scheduling built in. We have 14 features Jobber doesn\'t offer — at half the price. The biggest difference: our AI writes your proposals, follows up with your leads, and tells you exactly when to call.',
+    answerEs: 'Jobber es un software de agenda con cotizaciones básicas. Hecho AI es una plataforma de propuestas y cierre de ventas impulsada por IA con agenda incluida. Tenemos 14 funciones que Jobber no ofrece — a la mitad del precio.',
   },
   {
     question: 'Will my proposals really look that much better?',
